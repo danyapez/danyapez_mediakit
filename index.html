@@ -65,7 +65,7 @@
     .chip:hover{background:#fff;color:#000}
     .model-card{position:relative;height:min(650px,70svh);min-height:430px;overflow:hidden;display:grid;place-items:center;background:transparent;touch-action:none;cursor:grab}
     .model-card:active{cursor:grabbing}
-    .model-card:before{content:"";position:absolute;inset:0;background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:32px 32px;mask-image:radial-gradient(circle,#000 0%,rgba(0,0,0,.75) 56%,transparent 78%);opacity:.95}
+    .model-card:before{content:none}
     #voxelCanvas{position:relative;z-index:1;width:100%;height:100%;filter:drop-shadow(0 28px 18px rgba(0,0,0,.9))}
 
     .section{padding:62px 0;border-bottom:0}
@@ -138,7 +138,7 @@
     .thanks-box button:hover{background:#fff;color:#000}
 
     .toybox{position:relative;z-index:1;padding:0 0 38px;border-bottom:0;margin-top:-4px}
-    #playfield{position:relative;height:min(560px,72svh);overflow:hidden;background:transparent;touch-action:none;user-select:none;isolation:isolate}
+    #playfield{position:relative;height:min(560px,72svh);overflow:hidden;background:transparent;touch-action:pan-y;user-select:none;isolation:isolate}
     #playfield:before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px);background-size:30px 30px;opacity:.35;pointer-events:none}
     .shake-sprite{position:absolute;left:0;top:0;z-index:30;image-rendering:pixelated;user-select:none;touch-action:none;will-change:transform;cursor:grab;filter:drop-shadow(0 7px 6px rgba(0,0,0,.62));outline:0;border:0;background:transparent}
     .shake-sprite.dragging{cursor:grabbing;filter:drop-shadow(0 12px 10px rgba(0,0,0,.82));z-index:999!important}
@@ -176,7 +176,8 @@
       h1{font-size:39px}
       .media-kit{font-size:20px}
       .lead{font-size:17px}
-      .hero-socials{font-size:8px;gap:12px;flex-wrap:wrap;margin-top:22px}
+      .hero-socials{width:100%;font-size:8px;gap:0;flex-wrap:nowrap;justify-content:space-between;margin-top:22px}
+      .hero-socials a{display:block;text-align:center}
       .hero{padding-bottom:48px}
       .model-card{height:365px;min-height:365px}
       .section{padding:48px 0}
@@ -245,8 +246,8 @@
         <h2 class="section-title">Цифры</h2>
         <div class="summary">
           <div class="summary-item"><div class="big-num count-up" data-count="10000" data-format="short-plus">0</div><div class="label">суммарно подписчиков</div></div>
-          <div class="summary-item"><div class="big-num count-up" data-count="655000" data-format="short">0</div><div class="label">просмотров TikTok за год</div></div>
-          <div class="summary-item"><div class="big-num count-up" data-count="250000" data-format="short">0</div><div class="label">просмотров YouTube за всё время</div></div>
+          <div class="summary-item"><div class="big-num count-up" data-count="900000" data-format="short-plus">0</div><div class="label">суммарно просмотров</div></div>
+          <div class="summary-item"><div class="big-num count-up" data-count="655000" data-format="short">0</div><div class="label">просмотров за год</div></div>
         </div>
         <div class="cards platform-cards">
           <article class="card platform">
