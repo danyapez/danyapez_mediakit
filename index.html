@@ -49,7 +49,7 @@
     .mobile-cta{display:none;border:1px solid #fff;background:#000;color:#fff;padding:0 12px;height:38px;align-items:center;justify-content:center;font-family:var(--pixel);font-size:7px;line-height:1;white-space:nowrap;transition:.18s}
     .mobile-cta:hover{background:#fff;color:#000}
 
-    .hero{min-height:760px;padding:70px 0 76px;border-bottom:1px solid var(--line)}
+    .hero{min-height:760px;padding:70px 0 76px;border-bottom:0}
     .hero-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(360px,540px);align-items:center;gap:46px}
     .hero-copy{padding-top:34px}
     .kicker{font-family:var(--pixel);font-size:10px;color:#bdbdbd;margin-bottom:26px;letter-spacing:.06em}
@@ -57,6 +57,10 @@
     .media-kit{font-family:var(--pixel);font-size:clamp(18px,2.8vw,35px);line-height:1.1;margin:0 0 28px}
     .lead{font-size:clamp(18px,2.1vw,24px);line-height:1.32;max-width:560px;margin:0;color:#fff;font-weight:650}
     .hero-links{display:flex;flex-wrap:wrap;gap:10px;margin-top:30px}
+
+    .hero-socials{display:flex;align-items:center;gap:18px;margin-top:24px;font-family:var(--pixel);font-size:10px;line-height:1.4;white-space:nowrap}
+    .hero-socials a{color:#fff;opacity:.92;transition:opacity .18s,color .18s}
+    .hero-socials a:hover{opacity:1;color:#cfcfcf}
     .chip{font-family:var(--pixel);font-size:9px;border:1px solid var(--line);padding:10px 12px;line-height:1.2;background:rgba(0,0,0,.5)}
     .chip:hover{background:#fff;color:#000}
     .model-card{position:relative;height:min(650px,70svh);min-height:430px;overflow:hidden;display:grid;place-items:center;background:transparent;touch-action:none;cursor:grab}
@@ -64,7 +68,7 @@
     .model-card:before{content:"";position:absolute;inset:0;background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:32px 32px;mask-image:radial-gradient(circle,#000 0%,rgba(0,0,0,.75) 56%,transparent 78%);opacity:.95}
     #voxelCanvas{position:relative;z-index:1;width:100%;height:100%;filter:drop-shadow(0 28px 18px rgba(0,0,0,.9))}
 
-    .section{padding:62px 0;border-bottom:1px solid var(--line)}
+    .section{padding:62px 0;border-bottom:0}
     .section-title{font-family:var(--pixel);font-size:clamp(22px,3vw,34px);line-height:1.25;margin:0 0 42px}
     .mini-title{font-family:var(--pixel);font-size:clamp(16px,2.1vw,22px);line-height:1.35;margin:0 0 22px}
     .hrow{display:flex;align-items:flex-end;justify-content:space-between;gap:22px;margin-bottom:22px}
@@ -172,6 +176,7 @@
       h1{font-size:39px}
       .media-kit{font-size:20px}
       .lead{font-size:17px}
+      .hero-socials{font-size:8px;gap:12px;flex-wrap:wrap;margin-top:22px}
       .hero{padding-bottom:48px}
       .model-card{height:365px;min-height:365px}
       .section{padding:48px 0}
@@ -222,6 +227,12 @@
           <h1>DANYAPEZ</h1>
           <div class="media-kit">MEDIA KIT</div>
           <p class="lead">Нишевый атмосферный контент: ретро-гейминг, коллекционирование, старые консоли и ПК.</p>
+          <div class="hero-socials" aria-label="Соцсети">
+            <a href="https://www.tiktok.com/@danyapez_old" target="_blank" rel="noreferrer">TikTok</a>
+            <a href="https://www.instagram.com/danyapez/" target="_blank" rel="noreferrer">Instagram</a>
+            <a href="https://youtube.com/@danyapez?si=tLhDjJmtQxKkkVdt" target="_blank" rel="noreferrer">YouTube</a>
+            <a href="https://t.me/danyapez" target="_blank" rel="noreferrer">Telegram</a>
+          </div>
         </div>
         <div class="model-card" id="modelCard" aria-label="3D модель персонажа. Потяните мышкой, чтобы покрутить.">
           <canvas id="voxelCanvas"></canvas>
