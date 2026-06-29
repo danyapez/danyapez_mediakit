@@ -1,4 +1,4 @@
-<!-- cache-bust-version: 20260630000100-tablet-footer-stats-density -->
+<!-- cache-bust-version: 20260630005200-menu-panel-compact -->
 <!doctype html>
 <html lang="ru">
 <head>
@@ -598,11 +598,11 @@
       z-index:140;
     }
     body.model-pressed #voxelCanvas{
-      transform:translate(-50%, -50%) scale(1.16);
+      transform:translate(-50%, -50%) scale(1);
     }
     @media (max-width:720px){
       body.model-pressed #voxelCanvas{
-        transform:translate(-50%, -50%) scale(1.20);
+        transform:translate(-50%, -50%) scale(1);
       }
     }
 
@@ -1886,9 +1886,360 @@
       }
     }
 
+
+
+    /* === FINAL 20260630 requested fixes: mobile cards, compact menu, copy, footer edge-to-edge === */
+    @media (min-width:981px){
+      .topbar .wrap{
+        width:min(var(--max),100% - var(--px)*2) !important;
+      }
+    }
+
+    body.model-pressed #voxelCanvas{
+      transform:translate(-50%, -50%) scale(1) !important;
+    }
+
+    .formats-grid,
+    .base-grid{
+      grid-template-columns:repeat(4,minmax(0,1fr)) !important;
+    }
+
+    .toybox .wrap{
+      width:100% !important;
+      max-width:100vw !important;
+    }
+
+    #playfield{
+      width:100vw !important;
+      margin-left:calc(50% - 50vw) !important;
+      margin-right:calc(50% - 50vw) !important;
+    }
+
+    @media (max-width:1180px){
+      .formats-grid,
+      .base-grid{
+        grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+      }
+    }
+
+    @media (max-width:720px){
+      .platform-cards{
+        display:grid !important;
+        grid-template-columns:1fr !important;
+        gap:18px !important;
+      }
+
+      .card.platform{
+        width:100% !important;
+        min-height:0 !important;
+        padding:22px 18px !important;
+      }
+
+      .platform h3{
+        overflow-wrap:normal !important;
+        word-break:normal !important;
+        white-space:normal !important;
+        font-size:16px !important;
+        line-height:1.35 !important;
+        margin-bottom:18px !important;
+      }
+
+      .platform-row{
+        display:grid !important;
+        grid-template-columns:minmax(0,1fr) max-content !important;
+        gap:16px !important;
+        align-items:baseline !important;
+        padding:13px 0 !important;
+      }
+
+      .platform-label{
+        white-space:normal !important;
+        word-break:normal !important;
+        overflow-wrap:normal !important;
+        font-size:14px !important;
+        line-height:1.35 !important;
+      }
+
+      .platform-value{
+        white-space:nowrap !important;
+        font-size:18px !important;
+        line-height:1 !important;
+      }
+
+      .topbar.menu-open .nav{
+        left:auto !important;
+        right:0 !important;
+        top:calc(100% + 10px) !important;
+        width:220px !important;
+        min-height:220px !important;
+        padding:22px 18px !important;
+        gap:20px !important;
+        border:1px solid #fff !important;
+        background:#000 !important;
+        box-shadow:0 18px 34px rgba(0,0,0,.78) !important;
+      }
+
+      .topbar.menu-open .nav a:not(.nav-btn){
+        width:max-content !important;
+        font-size:9px !important;
+      }
+
+      .formats-grid,
+      .base-grid{
+        grid-template-columns:1fr !important;
+      }
+
+      #playfield{
+        width:100vw !important;
+        margin-left:calc(50% - 50vw) !important;
+        margin-right:calc(50% - 50vw) !important;
+      }
+    }
+
+
+    /* === FINAL 20260630 menu / mobile cards / typography tracking / model touch scale === */
+    :root{
+      --pixel-track-ui:.02em;
+      --menu-pop:clamp(240px,30vw,320px);
+    }
+
+    /* Трекинг для пиксельного интерфейса, кроме логотипа DANYAPEZ и основного текста */
+    .media-kit,
+    .section-title,
+    .nav a:not(.brand),
+    .nav-btn,
+    .mobile-cta,
+    .hero-socials a,
+    .socials-big a,
+    .platform h3,
+    .platform-value,
+    .format h3,
+    .base-card h3,
+    .submit,
+    .thanks-box h3,
+    .thanks-box button{
+      letter-spacing:var(--pixel-track-ui) !important;
+      text-transform:none !important;
+    }
+
+    .brand,
+    .hero h1{
+      letter-spacing:0 !important;
+    }
+
+    .topbar .wrap{
+      position:relative !important;
+    }
+
+    /* Меню из бургера: компактный квадрат, начинается примерно там же, где кнопка заявки */
+    @media (max-width:1100px){
+      .topbar.menu-open .nav{
+        position:absolute !important;
+        display:grid !important;
+        grid-template-columns:1fr !important;
+        align-content:start !important;
+        justify-content:start !important;
+        top:calc(100% + 12px) !important;
+        left:auto !important;
+        right:calc(48px + 16px) !important;
+        width:var(--menu-pop) !important;
+        height:var(--menu-pop) !important;
+        min-height:var(--menu-pop) !important;
+        max-width:calc(100vw - var(--px)*2 - 64px) !important;
+        margin:0 !important;
+        padding:26px 24px !important;
+        gap:22px !important;
+        border:1px solid #fff !important;
+        background:#000 !important;
+        box-shadow:0 18px 34px rgba(0,0,0,.82) !important;
+        z-index:90 !important;
+      }
+
+      .topbar.menu-open .nav a:not(.nav-btn){
+        width:max-content !important;
+        padding:0 !important;
+        font-size:clamp(9px,1.2vw,12px) !important;
+        line-height:1.45 !important;
+        opacity:1 !important;
+      }
+
+      .topbar.menu-open .nav-btn{
+        display:none !important;
+      }
+    }
+
+    @media (max-width:720px){
+      :root{--menu-pop:250px;}
+      .topbar.menu-open .nav{
+        right:calc(44px + 12px) !important;
+        top:calc(100% + 10px) !important;
+        padding:24px 22px !important;
+        gap:20px !important;
+      }
+    }
+
+    @media (max-width:420px){
+      :root{--menu-pop:220px;}
+      .topbar.menu-open .nav{
+        right:calc(40px + 10px) !important;
+      }
+    }
+
+    /* На мобильных/узких планшетах карточки соцсетей идут одна под другой */
+    @media (max-width:980px){
+      .platform-cards{
+        grid-template-columns:1fr !important;
+        gap:18px !important;
+      }
+      .card.platform{
+        width:100% !important;
+        min-height:0 !important;
+        padding:22px 18px !important;
+      }
+      .platform h3{
+        white-space:normal !important;
+        word-break:normal !important;
+        overflow-wrap:normal !important;
+        font-size:16px !important;
+        line-height:1.35 !important;
+        margin-bottom:18px !important;
+      }
+      .platform-row{
+        grid-template-columns:minmax(0,1fr) max-content !important;
+        column-gap:18px !important;
+        align-items:baseline !important;
+        padding:13px 0 !important;
+      }
+      .platform-label{
+        white-space:normal !important;
+        word-break:normal !important;
+        overflow-wrap:normal !important;
+        font-size:14px !important;
+        line-height:1.35 !important;
+      }
+      .platform-value{
+        white-space:nowrap !important;
+        font-size:18px !important;
+        line-height:1 !important;
+      }
+    }
+
+    /* Модель слегка увеличивается при наведении / касании / перетаскивании */
+    .model-card:hover #voxelCanvas,
+    body.model-pressed #voxelCanvas{
+      transform:translate(-50%, -50%) scale(1.06) !important;
+    }
+
+    @media (max-width:720px){
+      .model-card:hover #voxelCanvas,
+      body.model-pressed #voxelCanvas{
+        transform:translate(-50%, -50%) scale(1.07) !important;
+      }
+    }
+
+    .hero,
+    .hero-grid,
+    .model-card{
+      overflow:visible !important;
+    }
+
+    /* Человечки в футере могут доходить ближе к краям */
+    #playfield{
+      padding-left:0 !important;
+      padding-right:0 !important;
+    }
+
+
+    /* === FINAL 20260630 user requested: menu aligned to CTA+burger, shorter copy === */
+    .brand{
+      margin-left:4px !important;
+    }
+    .topbar .wrap{
+      --menu-panel-left:auto;
+      --menu-panel-width:260px;
+      --menu-panel-height:260px;
+    }
+
+    @media (max-width:1100px){
+      .topbar.menu-open .nav{
+        left:var(--menu-panel-left) !important;
+        right:auto !important;
+        top:calc(100% + 12px) !important;
+        width:var(--menu-panel-width) !important;
+        height:var(--menu-panel-height) !important;
+        min-height:var(--menu-panel-height) !important;
+        max-width:none !important;
+        padding:26px 28px !important;
+        gap:24px !important;
+        border:1px solid #fff !important;
+        background:#000 !important;
+        box-shadow:0 18px 34px rgba(0,0,0,.82) !important;
+        overflow:hidden !important;
+      }
+      .topbar.menu-open .nav a:not(.nav-btn){
+        font-size:12px !important;
+        line-height:1.45 !important;
+        letter-spacing:.02em !important;
+      }
+    }
+
+    @media (max-width:720px){
+      .brand{
+        margin-left:4px !important;
+      }
+      .topbar.menu-open .nav{
+        left:var(--menu-panel-left) !important;
+        right:auto !important;
+        top:calc(100% + 10px) !important;
+        width:var(--menu-panel-width) !important;
+        height:var(--menu-panel-height) !important;
+        min-height:var(--menu-panel-height) !important;
+        padding:22px 24px !important;
+        gap:22px !important;
+      }
+      .topbar.menu-open .nav a:not(.nav-btn){
+        font-size:10px !important;
+        line-height:1.45 !important;
+      }
+    }
+
+    @media (max-width:420px){
+      .topbar.menu-open .nav{
+        padding:20px 22px !important;
+        gap:20px !important;
+      }
+    }
+
+
+    /* === FINAL compact burger dropdown: remove large empty space under База === */
+    @media (max-width:1100px){
+      .topbar.menu-open .nav{
+        height:auto !important;
+        min-height:0 !important;
+        padding-top:24px !important;
+        padding-bottom:24px !important;
+      }
+    }
+    @media (max-width:720px){
+      .topbar.menu-open .nav{
+        height:auto !important;
+        min-height:0 !important;
+        padding-top:20px !important;
+        padding-bottom:20px !important;
+        gap:20px !important;
+      }
+    }
+    @media (max-width:420px){
+      .topbar.menu-open .nav{
+        padding-top:18px !important;
+        padding-bottom:18px !important;
+        gap:18px !important;
+      }
+    }
+
   </style>
 
-  <script>window.__DANYAPEZ_VERSION__ = "20260630000100-tablet-footer-stats-density";</script>
+  <script>window.__DANYAPEZ_VERSION__ = "20260630004500-menu-copy-panel-fix";</script>
 </head>
 <body>
   <header class="topbar">
@@ -1913,7 +2264,7 @@
         <div class="hero-copy">
           <h1>DANYAPEZ</h1>
           <div class="media-kit">MEDIA KIT</div>
-          <p class="lead">Нишевый атмосферный контент: ретро-гейминг, коллекционирование, старые консоли и ПК.</p>
+          <p class="lead">Создаю атмосферные видео про ретро-гейминг, старые консоли и ПК. Буду рад сотрудничеству.</p>
           <div class="hero-socials" aria-label="Соцсети">
             <a href="https://www.tiktok.com/@danyapez_old" target="_blank" rel="noreferrer">TikTok</a>
             <a href="https://www.instagram.com/danyapez/" target="_blank" rel="noreferrer">Instagram</a>
@@ -1981,12 +2332,10 @@
       <div class="wrap">
         <h2 class="section-title">Форматы</h2>
         <div class="formats-grid">
-          <article class="card format"><h3>Нативная интеграция</h3><p>Атмосферно показываю продукт в ролике про ретро-гейминг, консоли, старый ПК или коллекцию. Короткий формат до 1 минуты, другой хронометраж обсуждается отдельно.</p></article>
-          <article class="card format"><h3>Распаковка</h3><p>Игровые устройства, геймпады, портативки, аксессуары, мерч, книги, журналы и вещи вокруг гейминга.</p></article>
-          <article class="card format"><h3>Предметный ролик</h3><p>Красивое видео продукта: свет, реквизит, крупные детали, монтаж и вертикальная подача под соцсети.</p></article>
-          <article class="card format"><h3>Съемка события</h3><p>Мероприятия на тему игр: атмосфера, гости, детали, бэкстейдж и короткие вертикальные ролики.</p></article>
-          <article class="card format"><h3>Telegram-дополнение</h3><p>Пост, подборка, ссылка или личная рекомендация как поддержка основной интеграции.</p></article>
-          <article class="card format"><h3>Пакет соцсетей</h3><p>Одна идея адаптируется под TikTok, Reels, YouTube Shorts и Telegram-пост.</p></article>
+          <article class="card format"><h3>Нативная интеграция</h3><p>Встрою продукт в ролик так, чтобы он смотрелся частью моего мира: ретро-гейминг, старые консоли, ПК, коллекция, сетап и атмосфера.</p></article>
+          <article class="card format"><h3>Распаковка</h3><p>Сниму распаковку или первое впечатление: игры, техника, аксессуары, мерч и другое из гик-культуры.</p></article>
+          <article class="card format"><h3>Съёмка события</h3><p>Могу снять мероприятие, магазин, стенд, запуск, бэкстейдж или атмосферный репортаж на тему игр, ретро, коллекционирования и развлечений.</p></article>
+          <article class="card format"><h3>Пакет для соцсетей</h3><p>Один материал можно адаптировать под TikTok, Instagram, YouTube Shorts и Telegram. Формат подберём под задачу.</p></article>
         </div>
       </div>
     </section>
@@ -1995,12 +2344,10 @@
       <div class="wrap">
         <h2 class="section-title">База</h2>
         <div class="base-grid">
-          <article class="card base-card"><h3>Консоли разных эпох</h3><p>8-bit Dendy/NES, 16-bit Sega, PlayStation, PlayStation 2, портативки, картриджи, диски и игровой реквизит.</p></article>
-          <article class="card base-card"><h3>Старый ПК</h3><p>Сборка под игры середины 2000-х: старый Windows, диски, колонки, монитор и настоящая компьютерная атмосфера.</p></article>
-          <article class="card base-card"><h3>CRT / PVM</h3><p>ЭЛТ-телевизоры и Sony PVM для консолей: живая картинка, которая хорошо работает с ретро-играми.</p></article>
-          <article class="card base-card"><h3>Съемка</h3><p>Ролики разной сложности на разную аппаратуру: от iPhone до Blackmagic. Монтаж и цвет — в DaVinci Resolve и CapCut.</p></article>
-          <article class="card base-card"><h3>Свет / монтаж / финал</h3><p>Сборка видео, цвет, звук, графика и финальная адаптация под площадку.</p></article>
-          <article class="card base-card"><h3>Визуальный вкус</h3><p>Автор — графический дизайнер и видеограф, поэтому интеграция выглядит аккуратно, атмосферно и без случайного визуального шума.</p></article>
+          <article class="card base-card"><h3>Консоли разных эпох</h3><p>От 3-го по 6-е поколение: Dendy, Sega, PlayStation, PlayStation 2, портативки, картриджи, диски и другой игровой реквизит.</p></article>
+          <article class="card base-card"><h3>Старый ПК</h3><p>Сборка в духе середины 2000-х, Windows, старые игры, периферия и атмосфера компьютерного стола того времени.</p></article>
+          <article class="card base-card"><h3>Sony PVM</h3><p>Профессиональный CRT-монитор для красивой картинки с консолей и настоящего ретро-вида.</p></article>
+          <article class="card base-card"><h3>Съёмка и монтаж</h3><p>Снимаю от iPhone до Blackmagic. Соберу ролик, подберу музыку, сделаю монтаж и адаптирую под нужные соцсети.</p></article>
         </div>
       </div>
     </section>
@@ -2302,7 +2649,7 @@
         const modelW=maxX-minX||1, modelH=maxZ-minZ||1;
         const isMobileModel = cardWidth <= 720;
         const modelFill = isMobileModel ? .92 : 1.06;
-        const scale=Math.min(cardWidth*modelFill/modelW, cardHeight*modelFill/modelH) * (1 + pressBoost*.045);
+        const scale=Math.min(cardWidth*modelFill/modelW, cardHeight*modelFill/modelH);
         const ox=width*.5 + (minX + modelW/2) * scale;
         const oy=height*.5 + (isMobileModel ? -cardHeight*.03 : cardHeight*.03) + (minZ + modelH/2) * scale;
         const keyLight=[-.70,-.28,1.20];
@@ -2511,7 +2858,7 @@
             b.x+=b.vx; b.y+=b.vy; b.rot+=b.vr;
             b.vx*=freeFloat?.996:.988; b.vy*=freeFloat?.996:.991; b.vr*=freeFloat?.965:.935;
             b.vr=clamp(b.vr,-.52,.52);
-            const pad=freeFloat ? Math.max(30, Math.min(62, b.w*.30)) : Math.max(8, Math.min(28, b.w*.12));
+            const pad=freeFloat ? 2 : Math.max(8, Math.min(28, b.w*.12));
             const minX=pad, minY=pad;
             const maxX=Math.max(minX, stageW-b.w-pad);
             const maxY=Math.max(minY, stageH-b.h-pad);
@@ -2520,7 +2867,7 @@
             if(b.y<minY){b.y=minY; b.vy=Math.abs(b.vy)*(freeFloat?.92:.48); b.vr*=freeFloat?.82:.5;}
             if(b.y>maxY){b.y=maxY; b.vy=-Math.abs(b.vy)*(freeFloat?.92:.30); b.vx*=freeFloat?.98:.91; b.vr*=freeFloat?.88:.58;}
           }
-          const pad2=freeFloat ? Math.max(30, Math.min(62, b.w*.30)) : Math.max(8, Math.min(28, b.w*.12));
+          const pad2=freeFloat ? 2 : Math.max(8, Math.min(28, b.w*.12));
           b.x=clamp(b.x,pad2,Math.max(pad2,stageW-b.w-pad2));
           b.y=clamp(b.y,pad2,Math.max(pad2,stageH-b.h-pad2));
           b.el.style.transform=`translate3d(${b.x.toFixed(2)}px,${b.y.toFixed(2)}px,0) rotate(${b.rot.toFixed(2)}deg) scaleX(${b.flip})`;
@@ -2533,11 +2880,39 @@
         clearTimeout(rt);
         rt=setTimeout(()=>{
           const r=rect();
-          bodies.forEach(b=>{const mobile=innerWidth<720; const pad=mobile?Math.max(30,Math.min(62,b.w*.30)):Math.max(8,Math.min(28,b.w*.12)); b.x=clamp(b.x,pad,Math.max(pad,r.width-b.w-pad)); b.y=clamp(b.y,pad,Math.max(pad,r.height-b.h-pad));});
+          bodies.forEach(b=>{const mobile=innerWidth<720; const pad=mobile?2:Math.max(8,Math.min(28,b.w*.12)); b.x=clamp(b.x,pad,Math.max(pad,r.width-b.w-pad)); b.y=clamp(b.y,pad,Math.max(pad,r.height-b.h-pad));});
         },120);
       }, {passive:true});
     }
     initToybox();
+
+    function updateBurgerPanelBox(){
+      const topbar = document.querySelector('.topbar');
+      const wrap = document.querySelector('.topbar .wrap');
+      const cta = document.querySelector('.mobile-cta');
+      const toggle = document.getElementById('menuToggle');
+      if (!topbar || !wrap || !cta || !toggle) return;
+      if (!window.matchMedia('(max-width:1100px)').matches) return;
+      const wrapRect = wrap.getBoundingClientRect();
+      const ctaRect = cta.getBoundingClientRect();
+      const toggleRect = toggle.getBoundingClientRect();
+      let left = Math.max(0, Math.round(ctaRect.left - wrapRect.left));
+      let width = Math.round(toggleRect.right - ctaRect.left);
+      const minWidth = window.matchMedia('(max-width:420px)').matches ? 210 : 240;
+      width = Math.max(minWidth, Math.min(width, Math.round(wrapRect.width - left)));
+      const height = Math.min(Math.max(width, minWidth), window.matchMedia('(max-width:720px)').matches ? 300 : 340);
+      wrap.style.setProperty('--menu-panel-left', left + 'px');
+      wrap.style.setProperty('--menu-panel-width', width + 'px');
+      wrap.style.setProperty('--menu-panel-height', height + 'px');
+    }
+    updateBurgerPanelBox();
+    window.addEventListener('resize', updateBurgerPanelBox, {passive:true});
+    window.addEventListener('orientationchange', () => setTimeout(updateBurgerPanelBox, 150), {passive:true});
+    const _panelToggle = document.getElementById('menuToggle');
+    if (_panelToggle){
+      _panelToggle.addEventListener('click', () => requestAnimationFrame(updateBurgerPanelBox));
+    }
+
   </script>
 </body>
 </html>
