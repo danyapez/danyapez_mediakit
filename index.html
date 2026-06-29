@@ -1,4 +1,4 @@
-<!-- cache-bust-version: 20260630005200-menu-panel-compact -->
+<!-- cache-bust-version: 20260630000400-format2-menu-model -->
 <!doctype html>
 <html lang="ru">
 <head>
@@ -2237,6 +2237,72 @@
       }
     }
 
+  
+
+    /* === FINAL 20260630: 2-column desktop cards, exact mobile menu width, desktop model scale === */
+    .formats-grid,
+    .base-grid{
+      grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+      gap:clamp(24px,2.4vw,38px) !important;
+    }
+    .format,
+    .base-card{
+      min-height:clamp(210px,18vw,300px) !important;
+    }
+    @media (max-width:720px){
+      .formats-grid,
+      .base-grid{
+        grid-template-columns:1fr !important;
+        gap:18px !important;
+      }
+      .format,
+      .base-card{
+        min-height:0 !important;
+      }
+    }
+
+    @media (min-width:721px){
+      #voxelCanvas{
+        transform:translate(-50%, -50%) scale(1.04) !important;
+      }
+      .model-card:hover #voxelCanvas,
+      body.model-pressed #voxelCanvas{
+        transform:translate(-50%, -50%) scale(1.12) !important;
+      }
+    }
+    @media (max-width:720px){
+      #voxelCanvas{
+        transform:translate(-50%, -50%) scale(1) !important;
+      }
+      .model-card:hover #voxelCanvas,
+      body.model-pressed #voxelCanvas{
+        transform:translate(-50%, -50%) scale(1.07) !important;
+      }
+    }
+
+    @media (max-width:1100px){
+      .topbar.menu-open .nav{
+        box-sizing:border-box !important;
+        left:var(--menu-panel-left) !important;
+        right:auto !important;
+        width:var(--menu-panel-width) !important;
+        max-width:calc(100vw - var(--menu-panel-left) - var(--px)) !important;
+        height:auto !important;
+        min-height:0 !important;
+        padding:24px 28px !important;
+        gap:22px !important;
+      }
+    }
+    @media (max-width:720px){
+      .topbar.menu-open .nav{
+        left:var(--menu-panel-left) !important;
+        width:var(--menu-panel-width) !important;
+        max-width:calc(100vw - var(--menu-panel-left) - 16px) !important;
+        padding:22px 24px !important;
+        gap:22px !important;
+      }
+    }
+
   </style>
 
   <script>window.__DANYAPEZ_VERSION__ = "20260630004500-menu-copy-panel-fix";</script>
@@ -2648,7 +2714,7 @@
         allPts.forEach(p=>{minX=Math.min(minX,p[0]);maxX=Math.max(maxX,p[0]);minZ=Math.min(minZ,p[2]);maxZ=Math.max(maxZ,p[2]);});
         const modelW=maxX-minX||1, modelH=maxZ-minZ||1;
         const isMobileModel = cardWidth <= 720;
-        const modelFill = isMobileModel ? .92 : 1.06;
+        const modelFill = isMobileModel ? .92 : 1.22;
         const scale=Math.min(cardWidth*modelFill/modelW, cardHeight*modelFill/modelH);
         const ox=width*.5 + (minX + modelW/2) * scale;
         const oy=height*.5 + (isMobileModel ? -cardHeight*.03 : cardHeight*.03) + (minZ + modelH/2) * scale;
@@ -2896,14 +2962,17 @@
       const wrapRect = wrap.getBoundingClientRect();
       const ctaRect = cta.getBoundingClientRect();
       const toggleRect = toggle.getBoundingClientRect();
-      let left = Math.max(0, Math.round(ctaRect.left - wrapRect.left));
-      let width = Math.round(toggleRect.right - ctaRect.left);
+      // панель меню начинается с левого края кнопки заявки
+      // и заканчивается ровно по правому краю бургер-кнопки
+      const left = Math.max(0, Math.round(ctaRect.left - wrapRect.left));
+      const targetRight = Math.round(toggleRect.right - wrapRect.left);
+      const rawWidth = Math.max(1, targetRight - left);
       const minWidth = window.matchMedia('(max-width:420px)').matches ? 210 : 240;
-      width = Math.max(minWidth, Math.min(width, Math.round(wrapRect.width - left)));
-      const height = Math.min(Math.max(width, minWidth), window.matchMedia('(max-width:720px)').matches ? 300 : 340);
+      const maxWidth = Math.max(minWidth, Math.round(wrapRect.width - left));
+      const width = Math.max(minWidth, Math.min(rawWidth, maxWidth));
       wrap.style.setProperty('--menu-panel-left', left + 'px');
       wrap.style.setProperty('--menu-panel-width', width + 'px');
-      wrap.style.setProperty('--menu-panel-height', height + 'px');
+      wrap.style.setProperty('--menu-panel-height', 'auto');
     }
     updateBurgerPanelBox();
     window.addEventListener('resize', updateBurgerPanelBox, {passive:true});
