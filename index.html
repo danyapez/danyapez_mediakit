@@ -1,4 +1,4 @@
-<!-- cache-bust-version: 20260630000400-format2-menu-model -->
+<!-- cache-bust-version: 20260630002500-brief-card-model-fix -->
 <!doctype html>
 <html lang="ru">
 <head>
@@ -2303,9 +2303,74 @@
       }
     }
 
-  </style>
+  
 
-  <script>window.__DANYAPEZ_VERSION__ = "20260630004500-menu-copy-panel-fix";</script>
+    /* === FINAL 20260630: brief copy, compact cards, single model hover === */
+    .hero .lead{
+      max-width:620px !important;
+    }
+
+    .brief-grid{
+      grid-template-columns:minmax(0,1fr) minmax(420px,1fr) !important;
+      gap:clamp(46px,5vw,86px) !important;
+      align-items:start !important;
+    }
+    .brief-copy .section-title{
+      max-width:760px !important;
+      margin-bottom:22px !important;
+    }
+    .brief-copy p{
+      max-width:520px !important;
+      margin:0 !important;
+      color:#dcdcdc !important;
+    }
+    #brief form{
+      width:100% !important;
+      max-width:100% !important;
+      justify-self:stretch !important;
+    }
+
+    .formats-grid,
+    .base-grid{
+      align-items:start !important;
+    }
+    .card.format,
+    .card.base-card{
+      min-height:0 !important;
+      height:auto !important;
+      padding:clamp(26px,2.1vw,36px) !important;
+    }
+    .format h3,
+    .base-card h3{
+      margin-bottom:clamp(16px,1.25vw,22px) !important;
+    }
+    .format p,
+    .base-card p{
+      line-height:1.38 !important;
+    }
+
+    @media (min-width:721px){
+      .model-card:hover #voxelCanvas,
+      body.model-pressed #voxelCanvas{
+        transform:translate(-50%, -50%) scale(1.08) !important;
+      }
+    }
+
+    @media (max-width:980px){
+      .brief-grid{
+        grid-template-columns:1fr !important;
+        gap:30px !important;
+      }
+      .brief-copy .section-title{
+        max-width:100% !important;
+      }
+      .brief-copy p{
+        max-width:100% !important;
+      }
+    }
+</style>
+
+  <script>window.__DANYAPEZ_VERSION__ = "20260630002500-brief-card-model-fix";</script>
 </head>
 <body>
   <header class="topbar">
@@ -2330,7 +2395,7 @@
         <div class="hero-copy">
           <h1>DANYAPEZ</h1>
           <div class="media-kit">MEDIA KIT</div>
-          <p class="lead">Создаю атмосферные видео про ретро-гейминг, старые консоли и ПК. Буду рад сотрудничеству.</p>
+          <p class="lead">Создаю атмосферные видео про ретро-гейминг, старые консоли и ПК.</p>
           <div class="hero-socials" aria-label="Соцсети">
             <a href="https://www.tiktok.com/@danyapez_old" target="_blank" rel="noreferrer">TikTok</a>
             <a href="https://www.instagram.com/danyapez/" target="_blank" rel="noreferrer">Instagram</a>
@@ -2421,7 +2486,8 @@
     <section class="section" id="brief">
       <div class="wrap brief-grid">
         <div class="brief-copy">
-          <h2 class="section-title">Проконсультирую вас по любому вопросу</h2>
+          <h2 class="section-title">Буду рад сотрудничеству</h2>
+          <p>Оставьте заявку, и я свяжусь с вами в ближайшее время.</p>
         </div>
         <form id="briefForm">
           <div class="field"><label for="name">Имя / бренд</label><input id="name" name="name" autocomplete="organization" required></div>
@@ -2451,7 +2517,7 @@
   <div class="thanks-pop" id="thanksPop" role="dialog" aria-modal="true" aria-labelledby="thanksTitle">
     <div class="thanks-box">
       <h3 id="thanksTitle">Спасибо</h3>
-      <p>Заявка отправлена. Проконсультирую вас по любому вопросу и свяжусь в ближайшее время.</p>
+      <p>Заявка отправлена. Свяжусь с вами в ближайшее время.</p>
       <p class="privacy-note">Данные из формы используются только для ответа на вашу заявку и не передаются третьим лицам.</p>
       <button type="button" id="thanksClose">Ок</button>
     </div>
