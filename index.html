@@ -1,4 +1,4 @@
-<!-- cache-bust-version: 20260629111500-hero-balance -->
+<!-- cache-bust-version: 20260629123000-menu-logo-left -->
 <!doctype html>
 <html lang="ru">
 <head>
@@ -36,9 +36,9 @@
     button,input,textarea{font:inherit}
     .wrap{position:relative;z-index:1;width:min(var(--max),100% - var(--px)*2);margin:0 auto}
     .topbar{position:sticky;top:0;z-index:40;background:rgba(0,0,0,.82);backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,255,255,.12)}
-    .topbar .wrap{height:58px;display:flex;align-items:center;gap:14px}
-    .brand{font-family:var(--pixel);font-size:12px;letter-spacing:.8px;white-space:nowrap}
-    .brand-mark{width:24px;height:24px;object-fit:contain;image-rendering:pixelated;flex:0 0 auto}
+    .topbar .wrap{height:58px;display:flex;align-items:center;gap:8px;width:min(1540px,100% - var(--px)*2)}
+    .brand{font-family:var(--pixel);font-size:13px;letter-spacing:.8px;white-space:nowrap;margin-left:2px}
+    .brand-mark{width:30px;height:30px;object-fit:contain;image-rendering:pixelated;flex:0 0 auto}
     .menu-toggle{display:none;border:1px solid #fff;background:#000;color:#fff;width:44px;height:38px;align-items:center;justify-content:center;cursor:pointer;padding:0}
     .menu-toggle i,.menu-toggle i:before,.menu-toggle i:after{content:"";display:block;width:18px;height:2px;background:currentColor;position:relative}
     .menu-toggle i:before{position:absolute;top:-6px;left:0}
@@ -177,8 +177,8 @@
       body:before{inset:calc(var(--grid-offset-y) - 1px) -2px 0 -2px;background-size:var(--mobile-grid-size) var(--mobile-grid-size);background-position:0 0}
       body:after{content:none}
       .topbar .wrap{display:grid;grid-template-columns:auto 1fr auto auto;gap:10px;padding:12px 0}
-      .brand-mark{width:26px;height:26px}
-      .brand{font-size:10px}
+      .brand-mark{width:32px;height:32px}
+      .brand{font-size:11px}
       .mobile-cta{display:inline-flex;grid-column:3;align-self:center}
       .menu-toggle{display:flex;grid-column:4}
       .nav{display:none;grid-column:1/5;margin:4px 0 0;padding:14px 0 2px;border-top:1px solid var(--line-soft);font-size:9px;line-height:1.2;gap:18px;overflow:visible}
@@ -311,8 +311,8 @@
     html{font-size:16px}
     body{font-size:var(--fs-body);text-rendering:geometricPrecision}
     .topbar .wrap{height:clamp(62px,4.2vw,84px);gap:clamp(14px,1.1vw,24px)}
-    .brand-mark{width:clamp(24px,1.45vw,34px);height:clamp(24px,1.45vw,34px)}
-    .brand{font-size:var(--fs-nav);letter-spacing:.08em}
+    .brand-mark{width:clamp(30px,1.7vw,40px);height:clamp(30px,1.7vw,40px)}
+    .brand{font-size:calc(var(--fs-nav) + 1px);letter-spacing:.08em}
     .nav{font-size:var(--fs-nav);gap:clamp(28px,3.4vw,64px)}
     .nav-btn{font-size:var(--fs-button);padding:clamp(13px,.92vw,18px) clamp(15px,1.2vw,24px)}
     .hero{min-height:clamp(760px,82vh,980px);padding:clamp(70px,6vw,120px) 0 clamp(82px,7vw,140px)}
@@ -373,7 +373,7 @@
         --fs-stat:clamp(46px,12vw,66px);
       }
       .topbar .wrap{min-height:62px}
-      .brand{font-size:10px}
+      .brand{font-size:11px}
       .mobile-cta{font-size:8px;height:42px;padding:0 12px}
       .menu-toggle{width:48px;height:42px}
       .hero{padding-top:48px}
@@ -502,7 +502,7 @@
 
   </style>
 
-  <script>window.__DANYAPEZ_VERSION__ = "20260629111500-hero-balance";</script>
+  <script>window.__DANYAPEZ_VERSION__ = "20260629123000-menu-logo-left";</script>
 </head>
 <body>
   <header class="topbar">
