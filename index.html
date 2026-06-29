@@ -1,4 +1,4 @@
-<!-- cache-bust-version: 20260629122500-menu-panel-logo-gap -->
+<!-- cache-bust-version: 20260629131500-grid-fade-extend -->
 <!doctype html>
 <html lang="ru">
 <head>
@@ -701,9 +701,43 @@
       }
     }
 
+
+    /* === extended background grid with top fade, no visible edge while scrolling === */
+    body:before{
+      inset:-220px -4px -260px -4px !important;
+      background-position:0 calc(var(--grid-offset-y) - 1px - 220px) !important;
+      -webkit-mask-image:linear-gradient(to bottom, transparent 0, rgba(0,0,0,.22) 90px, #000 220px, #000 calc(100% - 260px), rgba(0,0,0,.72) calc(100% - 145px), transparent 100%) !important;
+      mask-image:linear-gradient(to bottom, transparent 0, rgba(0,0,0,.22) 90px, #000 220px, #000 calc(100% - 260px), rgba(0,0,0,.72) calc(100% - 145px), transparent 100%) !important;
+    }
+    body:after{
+      content:"" !important;
+      position:fixed !important;
+      inset:0 !important;
+      z-index:0 !important;
+      pointer-events:none !important;
+      background:
+        linear-gradient(to bottom, #000 0, rgba(0,0,0,.92) 42px, rgba(0,0,0,.38) 145px, rgba(0,0,0,0) 260px),
+        linear-gradient(to top, #000 0, rgba(0,0,0,.68) 110px, rgba(0,0,0,0) 260px) !important;
+    }
+    @media (max-width:720px){
+      body:before{
+        inset:calc(var(--grid-offset-y) - 1px - (var(--mobile-grid-size) * 5)) -2px -220px -2px !important;
+        background-size:var(--mobile-grid-size) var(--mobile-grid-size) !important;
+        background-position:0 0 !important;
+        -webkit-mask-image:linear-gradient(to bottom, transparent 0, rgba(0,0,0,.25) calc(var(--mobile-grid-size) * 1.6), #000 calc(var(--mobile-grid-size) * 4.8), #000 calc(100% - 210px), rgba(0,0,0,.7) calc(100% - 120px), transparent 100%) !important;
+        mask-image:linear-gradient(to bottom, transparent 0, rgba(0,0,0,.25) calc(var(--mobile-grid-size) * 1.6), #000 calc(var(--mobile-grid-size) * 4.8), #000 calc(100% - 210px), rgba(0,0,0,.7) calc(100% - 120px), transparent 100%) !important;
+      }
+      body:after{
+        content:"" !important;
+        background:
+          linear-gradient(to bottom, #000 0, rgba(0,0,0,.9) 46px, rgba(0,0,0,.42) 132px, rgba(0,0,0,0) 240px),
+          linear-gradient(to top, #000 0, rgba(0,0,0,.62) 95px, rgba(0,0,0,0) 220px) !important;
+      }
+    }
+
   </style>
 
-  <script>window.__DANYAPEZ_VERSION__ = "20260629122500-menu-panel-logo-gap";</script>
+  <script>window.__DANYAPEZ_VERSION__ = "20260629131500-grid-fade-extend";</script>
 </head>
 <body>
   <header class="topbar">
