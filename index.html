@@ -1,6 +1,10 @@
+<!-- cache-bust-version: 20260629072426 -->
 <!doctype html>
 <html lang="ru">
 <head>
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>DANYAPEZ — Media Kit</title>
@@ -87,10 +91,14 @@
     .summary-item .big-num{font-size:clamp(42px,5vw,68px)}
     .big-num{font-family:var(--pixel);font-size:clamp(24px,3vw,34px);line-height:1;margin-bottom:8px}
     .label{font-size:14px;color:#dcdcdc;line-height:1.35}
-    .platform{min-height:340px;display:flex;flex-direction:column}
-    .platform h3{font-family:var(--pixel);font-size:clamp(14px,1.45vw,19px);letter-spacing:-.02em;margin:0 0 22px;line-height:1.35;overflow-wrap:anywhere}
+    .platform{min-height:310px;display:flex;flex-direction:column}
+    .platform h3{font-family:var(--pixel);font-size:clamp(14px,1.45vw,19px);letter-spacing:-.02em;margin:0 0 28px;line-height:1.35;overflow-wrap:anywhere}
     .platform-cards{grid-template-columns:repeat(3,minmax(0,1fr))}
-    .platform-main{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:0}
+    .platform-main{display:grid;grid-template-columns:1fr;gap:0;margin-bottom:0}
+    .platform-row{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:baseline;gap:18px;padding:14px 0;border-top:1px solid var(--line-soft)}
+    .platform-row:first-child{border-top:0;padding-top:0}
+    .platform-label{font-size:15px;color:#d8d8d8;line-height:1.35;min-width:0}
+    .platform-value{font-family:var(--pixel);font-size:clamp(16px,1.65vw,24px);line-height:1;color:#fff;text-align:right;white-space:nowrap}
     .stat-row{display:flex;justify-content:space-between;gap:18px;padding:12px 0;border-top:1px solid var(--line-soft);font-size:15px;color:#d8d8d8}
     .stat-row b{font-family:var(--pixel);font-size:12px;color:#fff;white-space:nowrap}
 
@@ -187,7 +195,10 @@
       .section{padding:48px 0}
       .cards.four,.cards.three,.platform-cards,.cards.two,.formats-grid,.base-grid{grid-template-columns:1fr}
       .platform{min-height:auto}
-      .platform-main{grid-template-columns:1fr;gap:18px}
+      .platform h3{margin-bottom:22px}
+      .platform-row{padding:13px 0;gap:14px}
+      .platform-label{font-size:14px}
+      .platform-value{font-size:18px}
       .summary,.audience-big{grid-template-columns:1fr;gap:24px}
       .summary-item,.audience-big .summary-item{min-height:88px}
       #formats .section-title,#base .section-title{margin-bottom:38px}
@@ -208,6 +219,8 @@
       .socials-big a{font-size:clamp(30px,10vw,46px);line-height:1.05}
     }
   </style>
+
+  <script>window.__DANYAPEZ_VERSION__ = "20260629072426";</script>
 </head>
 <body>
   <header class="topbar">
@@ -258,25 +271,25 @@
           <article class="card platform">
             <h3>TikTok</h3>
             <div class="platform-main">
-              <div><div class="big-num count-up" data-count="9300" data-format="short-1">0</div><div class="label">подписчики</div></div>
-              <div><div class="big-num count-up" data-count="655000" data-format="short">0</div><div class="label">просмотры</div></div>
-              <div><div class="big-num count-up" data-count="21900" data-format="short-1">0</div><div class="label">лайки / вовлечения</div></div>
+              <div class="platform-row"><span class="platform-label">подписчики</span><b class="platform-value count-up" data-count="9300" data-format="short-1">0</b></div>
+              <div class="platform-row"><span class="platform-label">просмотры</span><b class="platform-value count-up" data-count="655000" data-format="short">0</b></div>
+              <div class="platform-row"><span class="platform-label">лайки / вовлечения</span><b class="platform-value count-up" data-count="21900" data-format="short-1">0</b></div>
             </div>
           </article>
           <article class="card platform">
             <h3>Instagram</h3>
             <div class="platform-main">
-              <div><div class="big-num count-up" data-count="250" data-format="number">0</div><div class="label">подписчики</div></div>
-              <div><div class="big-num count-up" data-count="40000" data-format="short">0</div><div class="label">просмотры / охваты</div></div>
-              <div><div class="big-num count-up" data-count="3800" data-format="short-1">0</div><div class="label">взаимодействия</div></div>
+              <div class="platform-row"><span class="platform-label">подписчики</span><b class="platform-value count-up" data-count="250" data-format="number">0</b></div>
+              <div class="platform-row"><span class="platform-label">просмотры / охваты</span><b class="platform-value count-up" data-count="40000" data-format="short">0</b></div>
+              <div class="platform-row"><span class="platform-label">взаимодействия</span><b class="platform-value count-up" data-count="3800" data-format="short-1">0</b></div>
             </div>
           </article>
           <article class="card platform">
             <h3>YouTube</h3>
             <div class="platform-main">
-              <div><div class="big-num count-up" data-count="416" data-format="number">0</div><div class="label">подписчики</div></div>
-              <div><div class="big-num count-up" data-count="250000" data-format="short">0</div><div class="label">просмотры канала</div></div>
-              <div><div class="big-num count-up" data-count="7500" data-format="short-1-plus">0</div><div class="label">лучшие Shorts</div></div>
+              <div class="platform-row"><span class="platform-label">подписчики</span><b class="platform-value count-up" data-count="416" data-format="number">0</b></div>
+              <div class="platform-row"><span class="platform-label">просмотры канала</span><b class="platform-value count-up" data-count="250000" data-format="short">0</b></div>
+              <div class="platform-row"><span class="platform-label">лучшие Shorts</span><b class="platform-value count-up" data-count="7500" data-format="short-1-plus">0</b></div>
             </div>
           </article>
         </div>
