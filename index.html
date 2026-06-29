@@ -1,8 +1,8 @@
-<!-- cache-bust-version: 20260630012500-mobile-model-hero-logo-fix -->
+<!-- cache-bust-version: 20260630013500-mobile-spacing-brief-stats -->
 <!doctype html>
 <html lang="ru">
 <head>
-  <!-- cache-bust: mobile-model-hero-logo-fix-20260630 -->
+  <!-- cache-bust: mobile-spacing-brief-stats-20260630 -->
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Expires" content="0">
@@ -2630,9 +2630,55 @@
       font-variant-numeric:tabular-nums;
     }
 
+
+    /* === FINAL 20260630 mobile-only restore spacing + brief title + stats density === */
+    @media (max-width:720px){
+      /* на мобиле модель не увеличивается от повторных тапов/залипшего hover */
+      .model-card:hover #voxelCanvas,
+      .model-card:active #voxelCanvas,
+      body.model-pressed #voxelCanvas{
+        transform:translate(-50%, -50%) scale(1) !important;
+      }
+
+      /* вернуть более спокойный отступ между первым экраном и цифрами */
+      .hero{
+        padding-bottom:58px !important;
+      }
+      #stats{
+        padding-top:54px !important;
+      }
+
+      /* заголовок заявки в мобиле — как пиксельные ссылки соцсетей */
+      #brief .brief-copy .section-title{
+        font-family:var(--pixel) !important;
+        font-size:10px !important;
+        line-height:1.45 !important;
+        letter-spacing:.02em !important;
+        margin-bottom:14px !important;
+        max-width:100% !important;
+      }
+
+      /* цифры на мобиле плотнее: число, подпись, небольшой отступ и следующий пункт */
+      #stats .summary,
+      #audience .audience-big{
+        grid-template-columns:1fr !important;
+        gap:18px !important;
+        margin-bottom:30px !important;
+      }
+      #stats .summary-item,
+      #audience .summary-item{
+        min-height:0 !important;
+      }
+      #stats .summary .label,
+      #audience .audience-big span{
+        margin-top:6px !important;
+        line-height:1.3 !important;
+      }
+    }
+
 </style>
 
-  <script>window.__DANYAPEZ_VERSION__ = "20260630012500-mobile-model-hero-logo-fix";</script>
+  <script>window.__DANYAPEZ_VERSION__ = "20260630013500-mobile-spacing-brief-stats";</script>
 </head>
 <body>
   <header class="topbar">
