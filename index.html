@@ -1,4 +1,4 @@
-<!-- cache-bust-version: 20260629192200-tablet-spacing-stats-footer -->
+<!-- cache-bust-version: 20260630000100-tablet-footer-stats-density -->
 <!doctype html>
 <html lang="ru">
 <head>
@@ -1490,9 +1490,405 @@
       }
     }
 
+
+    /* === FINAL 20260629 popup/loading/footer polish === */
+    .thanks-pop{
+      background:rgba(0,0,0,.84) !important;
+      padding:clamp(18px,4vw,42px) !important;
+    }
+    .thanks-box{
+      width:min(760px,100%) !important;
+      padding:clamp(30px,4vw,54px) !important;
+      border:1px solid #fff !important;
+      box-shadow:none !important;
+    }
+    .thanks-box h3{
+      font-size:clamp(28px,3.2vw,34px) !important;
+      line-height:1.18 !important;
+      margin:0 0 24px !important;
+    }
+    .thanks-box p{
+      font-size:clamp(18px,1.65vw,24px) !important;
+      line-height:1.45 !important;
+      max-width:640px !important;
+      margin:0 0 22px !important;
+    }
+    .thanks-box .privacy-note{
+      font-size:clamp(12px,.95vw,14px) !important;
+      line-height:1.45 !important;
+      color:#aaa !important;
+      max-width:620px !important;
+      margin:0 0 26px !important;
+    }
+    .thanks-box button{
+      min-width:72px !important;
+      min-height:46px !important;
+      padding:14px 18px !important;
+    }
+    .submit[disabled]{
+      opacity:1 !important;
+      background:#fff !important;
+      color:#000 !important;
+      cursor:wait !important;
+    }
+    #brief .section-title{
+      max-width:560px !important;
+    }
+    @media (min-width:721px) and (max-width:1400px){
+      #playfield{
+        height:clamp(560px,70svh,760px) !important;
+        min-height:560px !important;
+      }
+      .toybox{
+        padding-bottom:clamp(26px,3vw,46px) !important;
+      }
+      .socials-big{
+        top:47% !important;
+      }
+    }
+    @media (min-width:1181px) and (max-width:1500px){
+      #playfield{
+        height:clamp(610px,72svh,820px) !important;
+        min-height:610px !important;
+      }
+      .socials-big a{
+        font-size:clamp(48px,4.2vw,68px) !important;
+      }
+    }
+    @media (max-width:720px){
+      .thanks-box{padding:28px 22px !important;}
+      .thanks-box h3{font-size:28px !important;}
+      .thanks-box p{font-size:18px !important;}
+      #brief .section-title{font-size:22px !important;line-height:1.35 !important;}
+    }
+
+
+    /* === final typography + desktop 3D scale pass === */
+    :root{
+      --type-pixel-ui:clamp(10px,.72vw,12px);
+      --type-pixel-ui-mobile:clamp(9px,2.25vw,11px);
+      --type-body-fixed:16px;
+      --type-lead-fixed:21px;
+    }
+
+    body,
+    .label,
+    .platform-label,
+    .format p,
+    .base-card p,
+    .note,
+    .brief-copy p,
+    .stat-row,
+    .bar-line,
+    label,
+    input,
+    textarea,
+    .thanks-box p{
+      font-size:var(--type-body-fixed) !important;
+      font-weight:400;
+    }
+
+    .lead{
+      font-size:var(--type-lead-fixed) !important;
+      line-height:1.34 !important;
+      font-weight:500 !important;
+      max-width:560px;
+    }
+
+    .nav,
+    .nav-btn,
+    .mobile-cta,
+    .hero-socials,
+    .contact-list a,
+    .submit,
+    .thanks-box button{
+      font-size:var(--type-pixel-ui) !important;
+    }
+
+    .brand{
+      font-size:12px !important;
+    }
+
+    .platform h3,
+    .format h3,
+    .base-card h3{
+      font-size:clamp(16px,1.05vw,21px) !important;
+    }
+
+    .platform-value,
+    .stat-row b{
+      font-size:clamp(18px,1.24vw,24px) !important;
+    }
+
+    @media (min-width:981px){
+      .hero-grid{
+        grid-template-columns:minmax(520px,1fr) minmax(560px,1.04fr) !important;
+        gap:clamp(60px,5.4vw,120px) !important;
+      }
+      .model-card{
+        height:clamp(680px,49vw,960px) !important;
+        min-height:620px !important;
+        overflow:visible !important;
+      }
+      #voxelCanvas{
+        overflow:visible !important;
+      }
+    }
+
+    @media (max-width:980px){
+      .nav,
+      .nav-btn,
+      .mobile-cta,
+      .hero-socials,
+      .contact-list a,
+      .submit,
+      .thanks-box button{
+        font-size:var(--type-pixel-ui-mobile) !important;
+      }
+      .lead{
+        font-size:clamp(18px,2.15vw,21px) !important;
+        font-weight:500 !important;
+      }
+    }
+
+    @media (max-width:720px){
+      .brand{font-size:11px !important;}
+      .mobile-cta{font-size:8px !important;}
+      .hero-socials{font-size:10px !important;}
+      body,
+      .label,
+      .platform-label,
+      .format p,
+      .base-card p,
+      .note,
+      .brief-copy p,
+      .stat-row,
+      .bar-line,
+      label,
+      input,
+      textarea{
+        font-size:16px !important;
+      }
+    }
+
+
+    /* === FINAL 20260630 tablet stats / form / footer density fix === */
+    #stats .summary,
+    #audience .audience-big{
+      grid-template-columns:repeat(3,minmax(0,1fr)) !important;
+      column-gap:clamp(34px,5.2vw,92px) !important;
+      row-gap:24px !important;
+      align-items:start !important;
+    }
+
+    #stats .summary-item,
+    #audience .summary-item{
+      min-width:0 !important;
+      text-align:left !important;
+      overflow:visible !important;
+    }
+
+    #stats .summary-item .big-num,
+    #audience .audience-big .big-num,
+    #audience .audience-big .summary-item:nth-child(3) .big-num{
+      font-size:clamp(44px,4.05vw,66px) !important;
+      line-height:.98 !important;
+      letter-spacing:-.06em !important;
+      white-space:nowrap !important;
+      margin-bottom:12px !important;
+    }
+
+    #stats .summary .label,
+    #audience .audience-big span{
+      font-size:16px !important;
+      line-height:1.3 !important;
+      max-width:16em !important;
+    }
+
+    .platform-cards{
+      grid-template-columns:repeat(3,minmax(0,1fr)) !important;
+      gap:clamp(16px,2vw,28px) !important;
+    }
+
+    .card.platform{
+      min-height:0 !important;
+      padding:clamp(20px,1.8vw,28px) !important;
+    }
+
+    .platform h3{
+      margin-bottom:clamp(18px,1.8vw,26px) !important;
+    }
+
+    .platform-row{
+      padding:clamp(12px,1vw,16px) 0 !important;
+      grid-template-columns:minmax(0,1fr) max-content !important;
+    }
+
+    #brief{
+      padding-top:clamp(42px,4.2vw,72px) !important;
+      padding-bottom:clamp(28px,3vw,48px) !important;
+    }
+
+    .brief-grid{
+      gap:clamp(26px,3.2vw,52px) !important;
+      align-items:start !important;
+    }
+
+    #brief .section-title{
+      margin-bottom:0 !important;
+      max-width:720px !important;
+    }
+
+    #brief form{
+      gap:16px !important;
+    }
+
+    #brief .field{
+      gap:8px !important;
+    }
+
+    #brief input,
+    #brief textarea{
+      padding:14px 14px !important;
+    }
+
+    #brief textarea{
+      min-height:120px !important;
+    }
+
+    #brief .submit{
+      min-height:54px !important;
+      padding:16px 18px !important;
+    }
+
+    .toybox{
+      margin-top:0 !important;
+      padding-bottom:clamp(22px,2.4vw,42px) !important;
+      overflow:visible !important;
+    }
+
+    #playfield{
+      height:clamp(500px,60svh,680px) !important;
+      min-height:500px !important;
+      overflow:visible !important;
+    }
+
+    .socials-big{
+      top:46% !important;
+      transform:translateY(-50%) !important;
+      gap:clamp(10px,1.1vw,18px) !important;
+      padding:0 !important;
+    }
+
+    .socials-big a{
+      font-size:clamp(42px,4.25vw,68px) !important;
+      line-height:1.06 !important;
+    }
+
+    @media (min-width:721px) and (max-width:1400px){
+      .section{
+        padding-top:clamp(46px,4.6vw,68px) !important;
+        padding-bottom:clamp(46px,4.6vw,68px) !important;
+      }
+
+      #stats .summary,
+      #audience .audience-big{
+        column-gap:clamp(28px,4vw,56px) !important;
+      }
+
+      #stats .summary-item .big-num,
+      #audience .audience-big .big-num,
+      #audience .audience-big .summary-item:nth-child(3) .big-num{
+        font-size:clamp(42px,4.7vw,58px) !important;
+      }
+
+      #stats .summary .label,
+      #audience .audience-big span{
+        font-size:clamp(14px,1.55vw,16px) !important;
+      }
+
+      .platform-cards{
+        grid-template-columns:repeat(3,minmax(0,1fr)) !important;
+        gap:clamp(14px,1.9vw,22px) !important;
+      }
+
+      .platform-label{
+        font-size:clamp(12px,1.35vw,15px) !important;
+      }
+
+      .platform-value{
+        font-size:clamp(14px,1.55vw,18px) !important;
+      }
+
+      #brief{
+        padding-top:clamp(34px,3.5vw,52px) !important;
+        padding-bottom:clamp(26px,2.8vw,40px) !important;
+      }
+
+      #playfield{
+        height:clamp(470px,56svh,620px) !important;
+        min-height:470px !important;
+      }
+
+      .socials-big a{
+        font-size:clamp(38px,4.8vw,58px) !important;
+      }
+    }
+
+    @media (min-width:721px) and (max-width:900px){
+      .platform-cards{
+        grid-template-columns:1fr !important;
+      }
+
+      .card.platform{
+        padding:20px !important;
+      }
+
+      #stats .summary,
+      #audience .audience-big{
+        grid-template-columns:repeat(3,minmax(0,1fr)) !important;
+        column-gap:22px !important;
+      }
+
+      #stats .summary-item .big-num,
+      #audience .audience-big .big-num,
+      #audience .audience-big .summary-item:nth-child(3) .big-num{
+        font-size:clamp(34px,5.8vw,46px) !important;
+      }
+    }
+
+    @media (max-width:720px){
+      #stats .summary,
+      #audience .audience-big{
+        grid-template-columns:1fr !important;
+        gap:26px !important;
+      }
+
+      #stats .summary-item .big-num,
+      #audience .audience-big .big-num,
+      #audience .audience-big .summary-item:nth-child(3) .big-num{
+        font-size:clamp(42px,11vw,58px) !important;
+      }
+
+      #brief{
+        padding-top:46px !important;
+        padding-bottom:30px !important;
+      }
+
+      #playfield{
+        height:86svh !important;
+        min-height:580px !important;
+        overflow:hidden !important;
+      }
+
+      .socials-big{
+        top:42% !important;
+      }
+    }
+
   </style>
 
-  <script>window.__DANYAPEZ_VERSION__ = "20260629192200-tablet-spacing-stats-footer";</script>
+  <script>window.__DANYAPEZ_VERSION__ = "20260630000100-tablet-footer-stats-density";</script>
 </head>
 <body>
   <header class="topbar">
@@ -1612,7 +2008,7 @@
     <section class="section" id="brief">
       <div class="wrap brief-grid">
         <div class="brief-copy">
-          <h2 class="section-title">Заявка</h2>
+          <h2 class="section-title">Проконсультирую вас по любому вопросу</h2>
         </div>
         <form id="briefForm">
           <div class="field"><label for="name">Имя / бренд</label><input id="name" name="name" autocomplete="organization" required></div>
@@ -1642,7 +2038,7 @@
   <div class="thanks-pop" id="thanksPop" role="dialog" aria-modal="true" aria-labelledby="thanksTitle">
     <div class="thanks-box">
       <h3 id="thanksTitle">Спасибо</h3>
-      <p>Заявка отправлена. Свяжемся с вами в ближайшее время.</p>
+      <p>Заявка отправлена. Проконсультирую вас по любому вопросу и свяжусь в ближайшее время.</p>
       <p class="privacy-note">Данные из формы используются только для ответа на вашу заявку и не передаются третьим лицам.</p>
       <button type="button" id="thanksClose">Ок</button>
     </div>
@@ -1777,12 +2173,25 @@
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
       const submitBtn = form.querySelector('.submit');
+      const defaultSubmitText = submitBtn ? submitBtn.textContent : 'Оставить заявку';
+      let loadingTimer = null;
       const formData = new FormData(form);
       formData.append('source', 'DANYAPEZ media kit');
       formData.append('page', location.href);
       formData.append('date', new Date().toLocaleString('ru-RU'));
-      statusEl.textContent = 'Отправляем заявку...';
-      submitBtn.disabled = true;
+      if (statusEl) statusEl.textContent = '';
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        let step = 0;
+        const loadingBase = 'Отправляем заявку';
+        const tick = () => {
+          const dots = '.'.repeat(step % 4);
+          submitBtn.textContent = loadingBase + dots;
+          step += 1;
+        };
+        tick();
+        loadingTimer = setInterval(tick, 360);
+      }
       try {
         await fetch(FORM_ENDPOINT, {
           method: 'POST',
@@ -1792,9 +2201,13 @@
         form.reset();
         showThanks();
       } catch(err) {
-        statusEl.textContent = 'Не получилось отправить. Попробуйте ещё раз или напишите в соцсети.';
+        if (statusEl) statusEl.textContent = 'Не получилось отправить. Попробуйте ещё раз или напишите в соцсети.';
       } finally {
-        submitBtn.disabled = false;
+        if (loadingTimer) clearInterval(loadingTimer);
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.textContent = defaultSubmitText;
+        }
       }
     });
 
@@ -1888,7 +2301,7 @@
         allPts.forEach(p=>{minX=Math.min(minX,p[0]);maxX=Math.max(maxX,p[0]);minZ=Math.min(minZ,p[2]);maxZ=Math.max(maxZ,p[2]);});
         const modelW=maxX-minX||1, modelH=maxZ-minZ||1;
         const isMobileModel = cardWidth <= 720;
-        const modelFill = isMobileModel ? .92 : .90;
+        const modelFill = isMobileModel ? .92 : 1.06;
         const scale=Math.min(cardWidth*modelFill/modelW, cardHeight*modelFill/modelH) * (1 + pressBoost*.045);
         const ox=width*.5 + (minX + modelW/2) * scale;
         const oy=height*.5 + (isMobileModel ? -cardHeight*.03 : cardHeight*.03) + (minZ + modelH/2) * scale;
@@ -1965,9 +2378,11 @@
       function desiredCount(){
         const mobile=innerWidth<720;
         const tablet=innerWidth>=720 && innerWidth<=1180;
+        const wideTablet=innerWidth>1180 && innerWidth<=1400;
         if(mobile) return Math.min(SPRITE_ASSETS.length, innerWidth<620?8:10);
-        if(tablet) return innerWidth<900?12:15;
-        return 28;
+        if(tablet) return innerWidth<900?22:32;
+        if(wideTablet) return 38;
+        return 42;
       }
       function shuffledSprites(){
         const arr=SPRITE_ASSETS.slice();
@@ -1994,8 +2409,9 @@
           stage.appendChild(img);
           const isMobile=innerWidth<720;
           const isTablet=innerWidth>=720 && innerWidth<=1180;
-          const base=isMobile ? (innerWidth<620?78:88) : (isTablet ? 60 : 92);
-          const spread=isMobile ? (innerWidth<620?20:24) : (isTablet ? 16 : 30);
+          const isWideTablet=innerWidth>1180 && innerWidth<=1400;
+          const base=isMobile ? (innerWidth<620?78:88) : (isTablet ? 52 : (isWideTablet ? 58 : 78));
+          const spread=isMobile ? (innerWidth<620?20:24) : (isTablet ? 13 : (isWideTablet ? 15 : 22));
           const size=base + Math.random()*spread;
           img.style.width=size+'px';
           const b={
