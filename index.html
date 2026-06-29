@@ -1,8 +1,8 @@
-<!-- cache-bust-version: 20260630003700-layout-menu-model-fix -->
+<!-- cache-bust-version: 20260630012500-mobile-model-hero-logo-fix -->
 <!doctype html>
 <html lang="ru">
 <head>
-  <!-- cache-bust: brief-copy-spacing-20260630 -->
+  <!-- cache-bust: mobile-model-hero-logo-fix-20260630 -->
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Expires" content="0">
@@ -2509,9 +2509,130 @@
       margin-top:0 !important;
     }
 
+
+    /* === FINAL 20260630 setap + vertical spacing cleanup === */
+    /* меньше пустых пауз между первым экраном, цифрами и заявкой */
+    @media (min-width:981px){
+      .hero{
+        min-height:clamp(640px,66svh,820px) !important;
+        padding-top:clamp(42px,3.2vw,68px) !important;
+        padding-bottom:clamp(30px,2.6vw,58px) !important;
+      }
+      #stats{
+        padding-top:clamp(36px,3vw,56px) !important;
+      }
+      #brief{
+        padding-top:clamp(44px,4vw,72px) !important;
+      }
+      #brief .brief-copy .section-title{
+        font-size:clamp(42px,4vw,72px) !important;
+        line-height:1.12 !important;
+        letter-spacing:-.025em !important;
+        word-spacing:0 !important;
+        max-width:760px !important;
+        margin-bottom:clamp(18px,1.4vw,28px) !important;
+      }
+      #brief .brief-copy p{
+        margin-top:0 !important;
+        line-height:1.38 !important;
+      }
+    }
+
+    /* карточки без лишней пустоты, но одинаковые внутри ряда */
+    .formats-grid,
+    .base-grid{
+      grid-auto-rows:1fr !important;
+      align-items:stretch !important;
+    }
+    .card.format,
+    .card.base-card{
+      min-height:clamp(150px,10vw,210px) !important;
+      padding:clamp(22px,1.6vw,30px) !important;
+    }
+    .format h3,
+    .base-card h3{
+      margin-bottom:clamp(14px,1vw,18px) !important;
+    }
+    .format p,
+    .base-card p{
+      line-height:1.34 !important;
+    }
+
+    /* мобильные отступы тоже чуть плотнее */
+    @media (max-width:720px){
+      #stats{padding-top:42px !important;}
+      .card.format,
+      .card.base-card{
+        min-height:0 !important;
+        padding:20px 18px !important;
+      }
+      #brief .brief-copy .section-title{
+        margin-bottom:18px !important;
+      }
+    }
+
+
+    /* === FINAL 20260630 mobile model no sticky tap scale + tighter hero/brief copy + logo scramble base === */
+    @media (max-width:720px){
+      /* На телефоне тап не должен оставлять модель увеличенной. Размер фиксированный. */
+      #voxelCanvas,
+      .model-card:hover #voxelCanvas,
+      body.model-pressed #voxelCanvas{
+        transform:translate(-50%, -50%) scale(1.02) !important;
+      }
+      .hero{
+        min-height:auto !important;
+        padding-bottom:clamp(18px,4.5svh,34px) !important;
+      }
+      .hero-grid{
+        min-height:auto !important;
+      }
+      #stats{
+        padding-top:clamp(22px,5vw,36px) !important;
+      }
+      #brief .brief-copy .section-title{
+        margin-bottom:12px !important;
+      }
+      #brief .brief-copy p{
+        font-size:16px !important;
+        line-height:1.45 !important;
+        font-weight:400 !important;
+      }
+    }
+
+    @media (min-width:981px){
+      /* Убираем лишнюю пустоту после первого баннера перед цифрами. */
+      .hero{
+        min-height:clamp(560px,58svh,720px) !important;
+        padding-top:clamp(34px,2.6vw,54px) !important;
+        padding-bottom:clamp(12px,1.2vw,26px) !important;
+      }
+      #stats{
+        padding-top:clamp(22px,2.2vw,40px) !important;
+      }
+      #brief .brief-copy .section-title{
+        margin-bottom:clamp(12px,1vw,18px) !important;
+      }
+      #brief .brief-copy p{
+        font-size:16px !important;
+        line-height:1.45 !important;
+        font-weight:400 !important;
+        max-width:560px !important;
+      }
+    }
+
+    @media (min-width:721px) and (max-width:980px){
+      #brief .brief-copy .section-title{margin-bottom:14px !important;}
+      #brief .brief-copy p{font-size:16px !important;line-height:1.45 !important;font-weight:400 !important;}
+    }
+
+    .hero h1.is-scrambling{
+      font-variant-numeric:tabular-nums;
+    }
+
 </style>
 
-  <script>window.__DANYAPEZ_VERSION__ = "20260630003700-layout-menu-model-fix";</script>
+  <script>window.__DANYAPEZ_VERSION__ = "20260630012500-mobile-model-hero-logo-fix";</script>
 </head>
 <body>
   <header class="topbar">
@@ -2524,7 +2645,7 @@
         <a href="#stats">Цифры</a>
         <a href="#audience">Аудитория</a>
         <a href="#formats">Форматы</a>
-        <a href="#base">База</a>
+        <a href="#base">Сетап</a>
         <a href="#brief" class="nav-btn">Оставить заявку</a>
       </nav>
     </div>
@@ -2555,7 +2676,7 @@
         <h2 class="section-title">Цифры</h2>
         <div class="summary">
           <div class="summary-item"><div class="big-num count-up" data-count="10000" data-format="short-plus">0</div><div class="label">суммарно подписчиков</div></div>
-          <div class="summary-item"><div class="big-num count-up" data-count="900000" data-format="short-plus">0</div><div class="label">общие просмотры</div></div>
+          <div class="summary-item"><div class="big-num count-up" data-count="900000" data-format="short-plus">0</div><div class="label">общие просмотры контента</div></div>
           <div class="summary-item"><div class="big-num count-up" data-count="655000" data-format="short">0</div><div class="label">просмотры за год</div></div>
         </div>
         <div class="cards platform-cards">
@@ -2604,17 +2725,17 @@
       <div class="wrap">
         <h2 class="section-title">Форматы</h2>
         <div class="formats-grid">
-          <article class="card format"><h3>Нативная интеграция</h3><p>Встрою продукт в ролик так, чтобы он смотрелся частью моего мира: ретро-гейминг, старые консоли, ПК, коллекция, сетап и атмосфера.</p></article>
-          <article class="card format"><h3>Распаковка</h3><p>Сниму распаковку или первое впечатление: игры, техника, аксессуары, мерч и другое из гик-культуры.</p></article>
-          <article class="card format"><h3>Съёмка события</h3><p>Могу снять мероприятие, магазин, стенд, запуск, бэкстейдж или атмосферный репортаж на тему игр, ретро, коллекционирования и развлечений.</p></article>
-          <article class="card format"><h3>Пакет для соцсетей</h3><p>Один материал можно адаптировать под TikTok, Instagram, YouTube Shorts и Telegram. Формат подберём под задачу.</p></article>
+          <article class="card format"><h3>Нативная интеграция</h3><p>Встрою продукт в ролик так, чтобы он смотрелся частью сетапа, а не отдельной рекламой.</p></article>
+          <article class="card format"><h3>Распаковка</h3><p>Сниму распаковку или первое впечатление: игры, техника, мерч и гик-вещи.</p></article>
+          <article class="card format"><h3>Съёмка события</h3><p>Сниму магазин, стенд, запуск, бэкстейдж или атмосферный репортаж.</p></article>
+          <article class="card format"><h3>Пакет для соцсетей</h3><p>Адаптирую материал под TikTok, Instagram, YouTube Shorts и Telegram.</p></article>
         </div>
       </div>
     </section>
 
     <section class="section" id="base">
       <div class="wrap">
-        <h2 class="section-title">База</h2>
+        <h2 class="section-title">Сетап</h2>
         <div class="base-grid">
           <article class="card base-card"><h3>Консоли разных эпох</h3><p>От 3-го по 6-е поколение: Dendy, Sega, PlayStation, PlayStation 2, портативки, картриджи, диски и другой игровой реквизит.</p></article>
           <article class="card base-card"><h3>Старый ПК</h3><p>Сборка в духе середины 2000-х, Windows, старые игры, периферия и атмосфера компьютерного стола того времени.</p></article>
@@ -2775,6 +2896,48 @@
     document.querySelectorAll('.count-up').forEach(el=>{
       if(counterObserver) counterObserver.observe(el); else animateCounter(el);
     });
+
+
+    function animateHeroLogo(){
+      const el = document.querySelector('.hero h1');
+      if (!el || el.dataset.logoDone === '1') return;
+      el.dataset.logoDone = '1';
+      const finalText = 'DANYAPEZ';
+      const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+      const totalFrames = 24;
+      let frame = 0;
+      el.classList.add('is-scrambling');
+      const timer = setInterval(() => {
+        frame += 1;
+        const reveal = Math.floor((frame / totalFrames) * finalText.length);
+        let out = '';
+        for (let i = 0; i < finalText.length; i++) {
+          out += i < reveal ? finalText[i] : chars[Math.floor(Math.random() * chars.length)];
+        }
+        el.textContent = out;
+        if (frame >= totalFrames) {
+          clearInterval(timer);
+          el.textContent = finalText;
+          el.classList.remove('is-scrambling');
+        }
+      }, 42);
+    }
+    if ('IntersectionObserver' in window) {
+      const logoTarget = document.querySelector('.hero h1');
+      if (logoTarget) {
+        const logoObserver = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              animateHeroLogo();
+              logoObserver.disconnect();
+            }
+          });
+        }, {threshold:.55});
+        logoObserver.observe(logoTarget);
+      }
+    } else {
+      animateHeroLogo();
+    }
 
     const form = document.getElementById('briefForm');
     const statusEl = document.getElementById('formStatus');
