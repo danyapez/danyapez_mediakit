@@ -15,7 +15,7 @@
       --muted:#9a9a9a;
       --line:rgba(255,255,255,.36);
       --line-soft:rgba(255,255,255,.13);
-      --grid:rgba(255,255,255,.075);
+      --grid:rgba(255,255,255,.115);
       --max:1180px;
       --px:clamp(18px,4vw,44px);
       --pixel:"Press Start 2P",ui-monospace,SFMono-Regular,Menlo,monospace;
@@ -24,7 +24,7 @@
     *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
     html{scroll-behavior:smooth;background:#000}
     body{margin:0;background:#000;color:#fff;font-family:var(--sans);overflow-x:hidden}
-    body:before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:36px 36px;mask-image:radial-gradient(circle at 54% 10%,#000 0%,rgba(0,0,0,.74) 35%,transparent 82%);opacity:.9}
+    body:before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:34px 34px;mask-image:radial-gradient(circle at 54% 10%,#000 0%,rgba(0,0,0,.82) 38%,transparent 86%);opacity:1}
     a{color:inherit;text-decoration:none}
     img,canvas{display:block}
     button,input,textarea{font:inherit}
@@ -63,10 +63,10 @@
     .hero-socials a:hover{opacity:1;color:#cfcfcf}
     .chip{font-family:var(--pixel);font-size:9px;border:1px solid var(--line);padding:10px 12px;line-height:1.2;background:rgba(0,0,0,.5)}
     .chip:hover{background:#fff;color:#000}
-    .model-card{position:relative;height:min(650px,70svh);min-height:430px;overflow:hidden;display:grid;place-items:center;background:transparent;touch-action:none;cursor:grab}
+    .model-card{position:relative;height:min(650px,70svh);min-height:430px;overflow:hidden;display:grid;place-items:center;background:transparent;touch-action:none;cursor:grab;isolation:isolate}
     .model-card:active{cursor:grabbing}
-    .model-card:before{content:none}
-    #voxelCanvas{position:relative;z-index:1;width:100%;height:100%;filter:drop-shadow(0 28px 18px rgba(0,0,0,.9))}
+    .model-card:before,.model-card:after{content:none}
+    #voxelCanvas{position:relative;z-index:1;width:100%;height:100%;filter:drop-shadow(0 32px 22px rgba(0,0,0,.92)) contrast(1.03) saturate(1.03)}
 
     .section{padding:62px 0;border-bottom:0}
     .section-title{font-family:var(--pixel);font-size:clamp(22px,3vw,34px);line-height:1.25;margin:0 0 42px}
@@ -88,7 +88,7 @@
     .platform{min-height:340px;display:flex;flex-direction:column}
     .platform h3{font-family:var(--pixel);font-size:clamp(14px,1.45vw,19px);letter-spacing:-.02em;margin:0 0 22px;line-height:1.35;overflow-wrap:anywhere}
     .platform-cards{grid-template-columns:repeat(3,minmax(0,1fr))}
-    .platform-main{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:22px}
+    .platform-main{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:0}
     .stat-row{display:flex;justify-content:space-between;gap:18px;padding:12px 0;border-top:1px solid var(--line-soft);font-size:15px;color:#d8d8d8}
     .stat-row b{font-family:var(--pixel);font-size:12px;color:#fff;white-space:nowrap}
 
@@ -183,6 +183,7 @@
       .section{padding:48px 0}
       .cards.four,.cards.three,.platform-cards,.cards.two,.formats-grid,.base-grid{grid-template-columns:1fr}
       .platform{min-height:auto}
+      .platform-main{grid-template-columns:1fr;gap:18px}
       .summary,.audience-big{grid-template-columns:1fr;gap:24px}
       .summary-item,.audience-big .summary-item{min-height:88px}
       #formats .section-title,#base .section-title{margin-bottom:38px}
@@ -227,7 +228,7 @@
         <div class="hero-copy">
           <h1>DANYAPEZ</h1>
           <div class="media-kit">MEDIA KIT</div>
-          <p class="lead">Нишевый атмосферный контент: ретро-гейминг, коллекционирование, старые консоли и ПК.</p>
+          <p class="lead">Нишевый атмосферный контент: ретро-гейминг, коллекционирование, старые консоли и ПК. Интеграции выглядят как часть сетапа, а не как баннер.</p>
           <div class="hero-socials" aria-label="Соцсети">
             <a href="https://www.tiktok.com/@danyapez_old" target="_blank" rel="noreferrer">TikTok</a>
             <a href="https://www.instagram.com/danyapez/" target="_blank" rel="noreferrer">Instagram</a>
@@ -246,8 +247,8 @@
         <h2 class="section-title">Цифры</h2>
         <div class="summary">
           <div class="summary-item"><div class="big-num count-up" data-count="10000" data-format="short-plus">0</div><div class="label">суммарно подписчиков</div></div>
-          <div class="summary-item"><div class="big-num count-up" data-count="900000" data-format="short-plus">0</div><div class="label">суммарно просмотров</div></div>
-          <div class="summary-item"><div class="big-num count-up" data-count="655000" data-format="short">0</div><div class="label">просмотров за год</div></div>
+          <div class="summary-item"><div class="big-num count-up" data-count="900000" data-format="short-plus">0</div><div class="label">общие просмотры</div></div>
+          <div class="summary-item"><div class="big-num count-up" data-count="655000" data-format="short">0</div><div class="label">просмотры за год</div></div>
         </div>
         <div class="cards platform-cards">
           <article class="card platform">
@@ -255,32 +256,24 @@
             <div class="platform-main">
               <div><div class="big-num count-up" data-count="9300" data-format="short-1">0</div><div class="label">подписчики</div></div>
               <div><div class="big-num count-up" data-count="655000" data-format="short">0</div><div class="label">просмотры</div></div>
+              <div><div class="big-num count-up" data-count="21900" data-format="short-1">0</div><div class="label">лайки / вовлечения</div></div>
             </div>
-            <div class="stat-row"><span>Зрители за год</span><b class="count-up" data-count="382000" data-format="short">0</b></div>
-            <div class="stat-row"><span>Новые зрители</span><b>235K</b></div>
-            <div class="stat-row"><span>Взаимодействия</span><b>21.9K</b></div>
-            <div class="stat-row"><span>Топ ролики</span><b>83K / 78K</b></div>
           </article>
           <article class="card platform">
             <h3>Instagram</h3>
             <div class="platform-main">
               <div><div class="big-num count-up" data-count="250" data-format="number">0</div><div class="label">подписчики</div></div>
-              <div><div class="big-num count-up" data-count="40000" data-format="short">0</div><div class="label">просмотры 90 дней</div></div>
+              <div><div class="big-num count-up" data-count="40000" data-format="short">0</div><div class="label">просмотры / охваты</div></div>
+              <div><div class="big-num count-up" data-count="3800" data-format="short-1">0</div><div class="label">взаимодействия</div></div>
             </div>
-            <div class="stat-row"><span>Зрители</span><b>27.4K</b></div>
-            <div class="stat-row"><span>Взаимодействия</span><b>3.8K</b></div>
-            <div class="stat-row"><span>Действия в профиле</span><b>205</b></div>
-            <div class="stat-row"><span>Reels</span><b>91.9%</b></div>
           </article>
           <article class="card platform">
             <h3>YouTube</h3>
             <div class="platform-main">
               <div><div class="big-num count-up" data-count="416" data-format="number">0</div><div class="label">подписчики</div></div>
-              <div><div class="big-num count-up" data-count="250000" data-format="short">0</div><div class="label">просмотры за всё время</div></div>
+              <div><div class="big-num count-up" data-count="250000" data-format="short">0</div><div class="label">просмотры канала</div></div>
+              <div><div class="big-num count-up" data-count="7500" data-format="short-1-plus">0</div><div class="label">лучшие Shorts</div></div>
             </div>
-            <div class="stat-row"><span>Лайки</span><b>5.7K</b></div>
-            <div class="stat-row"><span>Комментарии</span><b>262</b></div>
-            <div class="stat-row"><span>Лучшие Shorts</span><b>7.5K+</b></div>
           </article>
         </div>
       </div>
@@ -291,7 +284,7 @@
         <div>
           <h2 class="section-title">Аудитория</h2>
           <div class="audience-big">
-            <div class="summary-item"><div class="big-num count-up" data-count="382000" data-format="short">0</div><span>зрителей за год</span></div>
+            <div class="summary-item"><div class="big-num count-up" data-count="382000" data-format="short">0</div><span>годовой охват</span></div>
             <div class="summary-item"><div class="big-num count-up" data-count="87" data-format="percent">0</div><span>мужская аудитория</span></div>
             <div class="summary-item"><div class="big-num">18–35</div><span>основной возраст</span></div>
           </div>
@@ -438,6 +431,7 @@
       if (format === 'percent') return Math.round(value) + '%';
       if (format === 'short-plus') return Math.round(value / 1000) + 'K+';
       if (format === 'short-1') return (value / 1000).toFixed(1).replace('.', '.') + 'K';
+      if (format === 'short-1-plus') return (value / 1000).toFixed(1).replace('.', '.') + 'K+';
       if (format === 'short') return Math.round(value / 1000) + 'K';
       return Math.round(value).toLocaleString('ru-RU');
     }
@@ -584,16 +578,21 @@
         const scale=Math.min(width*.84/modelW, height*.84/modelH) * (1 + pressBoost*.045);
         const ox=width*.5 + (minX + modelW/2) * scale;
         const oy=height*.53 + (minZ + modelH/2) * scale;
-        const light=[-0.45,-0.7,0.8];
-        const ll=Math.hypot(light[0],light[1],light[2]); light[0]/=ll; light[1]/=ll; light[2]/=ll;
+        const keyLight=[-.70,-.28,1.20];
+        const fillLight=[.55,.18,.54];
+        const normalize=(v)=>{ const l=Math.hypot(v[0],v[1],v[2])||1; return [v[0]/l,v[1]/l,v[2]/l]; };
+        const key=normalize(keyLight);
+        const fill=normalize(fillLight);
         const projected = faces.map(face=>{
           const pts3=face.corners.map(p=>rotatePoint(p,cy,syaw,cp,sp));
           const pts=pts3.map(p=>[ox-p[0]*scale, oy-p[2]*scale]);
           const n=rotatePoint(face.normal,cy,syaw,cp,sp);
-          const dot=Math.max(0,n[0]*light[0]+n[1]*light[1]+n[2]*light[2]);
-          const shade=0.68+dot*.42;
+          const keyDot=Math.max(0,n[0]*key[0]+n[1]*key[1]+n[2]*key[2]);
+          const fillDot=Math.max(0,n[0]*fill[0]+n[1]*fill[1]+n[2]*fill[2]);
+          const rim=Math.pow(Math.max(0, -n[1]*.55 + n[2]*.45), 1.35);
+          const shade=0.72 + keyDot*.24 + fillDot*.08 + rim*.04;
           const depth=pts3.reduce((s,p)=>s+p[1],0)/4;
-          return {pts,depth,color:shadeColor(face.color,shade)};
+          return {pts,depth,color:shadeColor(face.color,Math.min(1.10, shade))};
         }).sort((a,b)=>a.depth-b.depth);
         ctx.lineJoin='miter';
         for (const f of projected){
@@ -646,13 +645,32 @@
       const pointer={x:-9999,y:-9999,active:false,down:false};
       let motionX=0;
       function rect(){return stage.getBoundingClientRect();}
-      function desiredCount(){return innerWidth<620?8:innerWidth<980?12:24;}
+      function desiredCount(){
+        const mobile=innerWidth<720;
+        if(mobile) return Math.min(SPRITE_ASSETS.length, innerWidth<620?8:10);
+        return innerWidth<980?16:28;
+      }
+      function shuffledSprites(){
+        const arr=SPRITE_ASSETS.slice();
+        for(let i=arr.length-1;i>0;i--){
+          const j=Math.floor(Math.random()*(i+1));
+          [arr[i],arr[j]]=[arr[j],arr[i]];
+        }
+        return arr;
+      }
+      function pickSprite(i, shuffled, mobile){
+        if(mobile) return shuffled[i];
+        if(i<shuffled.length) return shuffled[i];
+        return SPRITE_ASSETS[Math.floor(Math.random()*SPRITE_ASSETS.length)];
+      }
       function spawn(){
         const r=rect();
+        const mobile=innerWidth<720;
+        const shuffled=shuffledSprites();
         const n=desiredCount();
         for(let i=0;i<n;i++){
           const img=new Image();
-          img.src=SPRITE_ASSETS[Math.floor(Math.random()*SPRITE_ASSETS.length)];
+          img.src=pickSprite(i, shuffled, mobile);
           img.alt=''; img.draggable=false; img.className='shake-sprite';
           stage.appendChild(img);
           const base=innerWidth<620?86:112;
@@ -783,3 +801,5 @@
     }
     initToybox();
   </script>
+</body>
+</html>
