@@ -15,7 +15,9 @@
       --muted:#9a9a9a;
       --line:rgba(255,255,255,.36);
       --line-soft:rgba(255,255,255,.13);
-      --grid:rgba(255,255,255,.115);
+      --grid:rgba(255,255,255,.14);
+      --grid-size:48px;
+      --grid-offset-y:0px;
       --max:1180px;
       --px:clamp(18px,4vw,44px);
       --pixel:"Press Start 2P",ui-monospace,SFMono-Regular,Menlo,monospace;
@@ -24,7 +26,7 @@
     *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
     html{scroll-behavior:smooth;background:#000}
     body{margin:0;background:#000;color:#fff;font-family:var(--sans);overflow-x:hidden}
-    body:before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:34px 34px;mask-image:radial-gradient(circle at 54% 10%,#000 0%,rgba(0,0,0,.82) 38%,transparent 86%);opacity:1}
+    body:before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:var(--grid-size) var(--grid-size);background-position:0 calc(var(--grid-offset-y) - 1px);mask-image:radial-gradient(circle at 54% 10%,#000 0%,rgba(0,0,0,.82) 38%,transparent 86%);opacity:1}
     a{color:inherit;text-decoration:none}
     img,canvas{display:block}
     button,input,textarea{font:inherit}
@@ -163,7 +165,9 @@
       .menu-toggle{width:40px;height:36px}
     }
     @media(max-width:720px){
-      :root{--px:16px}
+      :root{--px:16px;--grid-cols:15;--mobile-grid-size:calc((100vw + 4px) / var(--grid-cols));--grid-size:var(--mobile-grid-size);--grid-offset-y:62px}
+      body:before{inset:calc(var(--grid-offset-y) - 1px) -2px 0 -2px;background-size:var(--mobile-grid-size) var(--mobile-grid-size);background-position:0 0}
+      body:after{content:none}
       .topbar .wrap{display:grid;grid-template-columns:auto 1fr auto auto;gap:10px;padding:12px 0}
       .brand-mark{width:26px;height:26px}
       .brand{font-size:10px}
@@ -371,6 +375,7 @@
       if (!topbar || !toggle) return;
       topbar.classList.remove('menu-open');
       toggle.setAttribute('aria-expanded','false');
+      requestAnimationFrame(updateMobileGrid);
     }
     function scrollToTarget(hash){
       if (!hash || hash === '#') return;
@@ -381,7 +386,19 @@
       const top = target.getBoundingClientRect().top + window.scrollY - offset;
       window.scrollTo({top, behavior:'smooth'});
     }
+    function updateMobileGrid(){
+      const topbar = document.querySelector('.topbar');
+      if (!topbar) return;
+      if (window.matchMedia('(max-width:720px)').matches){
+        document.documentElement.style.setProperty('--grid-offset-y', `${Math.round(topbar.getBoundingClientRect().height)}px`);
+      } else {
+        document.documentElement.style.setProperty('--grid-offset-y', '0px');
+      }
+    }
+
     function initHeader(){
+      updateMobileGrid();
+      window.addEventListener('resize', updateMobileGrid);
       const topbar = document.querySelector('.topbar');
       const toggle = document.getElementById('menuToggle');
       const mark = document.getElementById('brandMark');
@@ -400,6 +417,7 @@
           const open = !topbar.classList.contains('menu-open');
           topbar.classList.toggle('menu-open', open);
           toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+          requestAnimationFrame(updateMobileGrid);
         });
         topbar.addEventListener('click', e => e.stopPropagation());
         document.addEventListener('click', () => closeMobileMenu());
@@ -621,10 +639,10 @@
         const dx=e.clientX-lastX, dy=e.clientY-lastY;
         const now=performance.now();
         const dt=Math.max(16, now-lastT);
-        yaw -= dx*.012;
-        pitch += dy*.010;
-        yawVel = -(dx/dt)*.18;
-        pitchVel = (dy/dt)*.15;
+        yaw += dx*.012;
+        pitch -= dy*.010;
+        yawVel = (dx/dt)*.18;
+        pitchVel = -(dy/dt)*.15;
         lastX=e.clientX; lastY=e.clientY; lastT=now;
         e.preventDefault();
       }
