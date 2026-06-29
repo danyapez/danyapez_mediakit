@@ -1,7 +1,8 @@
-<!-- cache-bust-version: 20260630002500-brief-card-model-fix -->
+<!-- cache-bust-version: 20260630003700-layout-menu-model-fix -->
 <!doctype html>
 <html lang="ru">
 <head>
+  <!-- cache-bust: brief-copy-spacing-20260630 -->
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Expires" content="0">
@@ -2368,9 +2369,149 @@
         max-width:100% !important;
       }
     }
+
+
+    /* === FINAL 20260630 strict fixes from screenshots === */
+    /* карточки Форматы/База одного размера в строке, без лишней пустоты */
+    .formats-grid,
+    .base-grid{
+      grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+      gap:clamp(28px,3vw,48px) !important;
+      align-items:stretch !important;
+    }
+    .format,
+    .base-card{
+      height:100% !important;
+      min-height:clamp(190px,13vw,250px) !important;
+      display:flex !important;
+      flex-direction:column !important;
+      justify-content:flex-start !important;
+    }
+    .format p,
+    .base-card p{
+      max-width:100% !important;
+    }
+
+    /* заявка: та же сетка/ширина, что у двухколоночных блоков */
+    #brief{
+      padding-top:clamp(64px,7vw,110px) !important;
+    }
+    .brief-grid{
+      grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+      gap:clamp(28px,3vw,48px) !important;
+      align-items:start !important;
+    }
+    .brief-copy .section-title{
+      margin-bottom:clamp(18px,1.6vw,26px) !important;
+      max-width:100% !important;
+    }
+    .brief-copy p{
+      margin:0 !important;
+      max-width:100% !important;
+      font-size:21px !important;
+      line-height:1.42 !important;
+      font-weight:500 !important;
+    }
+    #brief form,
+    #brief .submit{
+      width:100% !important;
+      max-width:100% !important;
+    }
+    .submit .loading-label{display:inline-block;white-space:nowrap}
+    .submit .loading-dots{display:inline-block;width:3ch;text-align:left;white-space:pre}
+
+    /* десктоп: модель стабильного размера, увеличивается только один раз по hover/touch */
+    @media (min-width:721px){
+      #voxelCanvas{
+        transform:translate(-50%, -50%) scale(1.08) !important;
+        transition:transform .16s ease-out !important;
+      }
+      .model-card:hover #voxelCanvas,
+      body.model-pressed #voxelCanvas{
+        transform:translate(-50%, -50%) scale(1.14) !important;
+      }
+    }
+
+    /* мобильный первый экран: модель крупнее, текст ниже, соцсети ближе к низу первого экрана */
+    @media (max-width:720px){
+      .hero{
+        min-height:calc(100svh - 62px) !important;
+        padding-top:0 !important;
+        padding-bottom:clamp(34px,7svh,62px) !important;
+      }
+      .hero .wrap{
+        width:calc(100% - var(--px)*2) !important;
+      }
+      .hero-grid{
+        display:flex !important;
+        flex-direction:column !important;
+        gap:0 !important;
+        min-height:calc(100svh - 62px) !important;
+        justify-content:flex-start !important;
+      }
+      .model-card{
+        order:0 !important;
+        height:clamp(450px,56svh,560px) !important;
+        min-height:450px !important;
+        margin-top:-4px !important;
+      }
+      #voxelCanvas{
+        transform:translate(-50%, -50%) scale(1.02) !important;
+      }
+      .model-card:hover #voxelCanvas,
+      body.model-pressed #voxelCanvas{
+        transform:translate(-50%, -50%) scale(1.08) !important;
+      }
+      .hero-copy{
+        order:1 !important;
+        padding-top:0 !important;
+        margin-top:-18px !important;
+        transform:none !important;
+      }
+      .hero-socials{
+        margin-top:clamp(26px,4svh,42px) !important;
+      }
+
+      .formats-grid,
+      .base-grid,
+      .brief-grid{
+        grid-template-columns:1fr !important;
+        gap:18px !important;
+      }
+      .format,
+      .base-card{
+        min-height:0 !important;
+      }
+      #brief{
+        padding-top:58px !important;
+      }
+      .brief-copy p{
+        font-size:18px !important;
+      }
+
+      /* выпадашка строго от начала кнопки до правого края бургера */
+      .topbar.menu-open .nav{
+        left:var(--menu-panel-left) !important;
+        width:var(--menu-panel-width) !important;
+        right:auto !important;
+        max-width:var(--menu-panel-width) !important;
+        box-sizing:border-box !important;
+      }
+    }
+
+
+
+    /* === FINAL 20260630 brief copy spacing === */
+    #brief .brief-copy .section-title{
+      margin-bottom:clamp(28px,2.4vw,44px) !important;
+    }
+    #brief .brief-copy p{
+      margin-top:0 !important;
+    }
+
 </style>
 
-  <script>window.__DANYAPEZ_VERSION__ = "20260630002500-brief-card-model-fix";</script>
+  <script>window.__DANYAPEZ_VERSION__ = "20260630003700-layout-menu-model-fix";</script>
 </head>
 <body>
   <header class="topbar">
@@ -2486,7 +2627,7 @@
     <section class="section" id="brief">
       <div class="wrap brief-grid">
         <div class="brief-copy">
-          <h2 class="section-title">Буду рад сотрудничеству</h2>
+          <h2 class="section-title">Есть задача для съёмки?</h2>
           <p>Оставьте заявку, и я свяжусь с вами в ближайшее время.</p>
         </div>
         <form id="briefForm">
@@ -2663,9 +2804,10 @@
         submitBtn.disabled = true;
         let step = 0;
         const loadingBase = 'Отправляем заявку';
+        submitBtn.innerHTML = '<span class="loading-label">' + loadingBase + '</span><span class="loading-dots"></span>';
+        const dotsEl = submitBtn.querySelector('.loading-dots');
         const tick = () => {
-          const dots = '.'.repeat(step % 4);
-          submitBtn.textContent = loadingBase + dots;
+          if (dotsEl) dotsEl.textContent = '.'.repeat(step % 4);
           step += 1;
         };
         tick();
@@ -2780,8 +2922,11 @@
         allPts.forEach(p=>{minX=Math.min(minX,p[0]);maxX=Math.max(maxX,p[0]);minZ=Math.min(minZ,p[2]);maxZ=Math.max(maxZ,p[2]);});
         const modelW=maxX-minX||1, modelH=maxZ-minZ||1;
         const isMobileModel = cardWidth <= 720;
-        const modelFill = isMobileModel ? .92 : 1.22;
-        const scale=Math.min(cardWidth*modelFill/modelW, cardHeight*modelFill/modelH);
+        const modelFill = isMobileModel ? .98 : 1.24;
+        // стабильный масштаб: модель не должна сама увеличиваться/уменьшаться при вращении
+        const stableModelW = Math.hypot(sx, sy);
+        const stableModelH = sz + Math.hypot(sx, sy) * .12;
+        const scale=Math.min(cardWidth*modelFill/stableModelW, cardHeight*modelFill/stableModelH);
         const ox=width*.5 + (minX + modelW/2) * scale;
         const oy=height*.5 + (isMobileModel ? -cardHeight*.03 : cardHeight*.03) + (minZ + modelH/2) * scale;
         const keyLight=[-.70,-.28,1.20];
@@ -3033,9 +3178,8 @@
       const left = Math.max(0, Math.round(ctaRect.left - wrapRect.left));
       const targetRight = Math.round(toggleRect.right - wrapRect.left);
       const rawWidth = Math.max(1, targetRight - left);
-      const minWidth = window.matchMedia('(max-width:420px)').matches ? 210 : 240;
-      const maxWidth = Math.max(minWidth, Math.round(wrapRect.width - left));
-      const width = Math.max(minWidth, Math.min(rawWidth, maxWidth));
+      // ширина строго от левого края кнопки заявки до правого края бургера
+      const width = rawWidth;
       wrap.style.setProperty('--menu-panel-left', left + 'px');
       wrap.style.setProperty('--menu-panel-width', width + 'px');
       wrap.style.setProperty('--menu-panel-height', 'auto');
