@@ -1,8 +1,8 @@
-<!-- cache-bust-version: 20260630013500-mobile-spacing-brief-stats -->
+<!-- cache-bust-version: 20260630015000-mobile-stats-brief-touch -->
 <!doctype html>
 <html lang="ru">
 <head>
-  <!-- cache-bust: mobile-spacing-brief-stats-20260630 -->
+  <!-- cache-bust: mobile-stats-brief-touch-20260630 -->
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Expires" content="0">
@@ -2676,9 +2676,63 @@
       }
     }
 
+
+    /* === FINAL 20260630 mobile stats/brief/model correction === */
+    @media (max-width:720px){
+      /* На мобиле модель не увеличивается от тапов и залипшего hover */
+      #voxelCanvas,
+      .model-card:hover #voxelCanvas,
+      .model-card:active #voxelCanvas,
+      body.model-pressed #voxelCanvas{
+        transform:translate(-50%, -50%) scale(1.02) !important;
+      }
+
+      /* Заголовок заявки на мобиле — пиксельный, как крупные соцсети в футере, но не как h1 */
+      #brief .brief-copy .section-title{
+        font-family:var(--pixel) !important;
+        font-size:clamp(24px,7.2vw,34px) !important;
+        line-height:1.22 !important;
+        letter-spacing:-.035em !important;
+        margin-bottom:18px !important;
+        max-width:100% !important;
+      }
+
+      #brief .brief-copy p{
+        font-size:16px !important;
+        line-height:1.45 !important;
+        font-weight:400 !important;
+      }
+
+      /* Цифры / Аудитория: подпись ближе к числу, между самими пунктами больше воздуха */
+      #stats .summary,
+      #audience .audience-big{
+        grid-template-columns:1fr !important;
+        gap:40px !important;
+        margin-bottom:34px !important;
+      }
+
+      #stats .summary-item,
+      #audience .summary-item{
+        min-height:0 !important;
+      }
+
+      #stats .summary-item .big-num,
+      #audience .audience-big .big-num,
+      #audience .audience-big .summary-item:nth-child(3) .big-num{
+        margin-bottom:0 !important;
+      }
+
+      #stats .summary .label,
+      #audience .audience-big span{
+        margin-top:4px !important;
+        line-height:1.28 !important;
+      }
+    }
+
+
 </style>
 
-  <script>window.__DANYAPEZ_VERSION__ = "20260630013500-mobile-spacing-brief-stats";</script>
+  <script>window.__DANYAPEZ_VERSION__ = "20260630015000-mobile-stats-brief-touch";</script>
 </head>
 <body>
   <header class="topbar">
@@ -3171,7 +3225,7 @@
         requestAnimationFrame(render);
       }
       function pointerDown(e){
-        document.body.classList.add('model-pressed');
+        if (cardWidth > 720) document.body.classList.add('model-pressed');
         drag=true; lastX=e.clientX; lastY=e.clientY; lastT=performance.now();
         yawVel=0; pitchVel=0;
         card.setPointerCapture(e.pointerId);
