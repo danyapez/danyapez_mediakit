@@ -1,8 +1,8 @@
-<!-- cache-bust-version: 20260630172500-og-preview-subpath -->
+<!-- cache-bust-version: 20260630175500-lang-timezone-detect -->
 <!doctype html>
 <html lang="ru">
 <head>
-  <!-- cache-bust: 20260630172500-og-preview-subpath -->
+  <!-- cache-bust: 20260630175500-lang-timezone-detect -->
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Expires" content="0">
@@ -3431,11 +3431,39 @@
         loading:'Sending request', formError:'Could not send the request. Try again or message me on social media.'
       }
     };
+    const RU_LANG_PREFIXES = ['ru', 'be', 'uk', 'kk', 'ky', 'uz', 'tg', 'hy', 'ka', 'az'];
+    const RU_TIMEZONES = [
+      'Europe/Moscow','Europe/Kaliningrad','Europe/Samara','Europe/Volgograd','Europe/Astrakhan','Europe/Saratov','Europe/Ulyanovsk','Europe/Kirov',
+      'Asia/Yekaterinburg','Asia/Omsk','Asia/Novosibirsk','Asia/Barnaul','Asia/Tomsk','Asia/Krasnoyarsk','Asia/Irkutsk','Asia/Chita',
+      'Asia/Yakutsk','Asia/Khandyga','Asia/Vladivostok','Asia/Ust-Nera','Asia/Magadan','Asia/Sakhalin','Asia/Srednekolymsk','Asia/Kamchatka','Asia/Anadyr',
+      'Europe/Minsk','Europe/Kyiv','Europe/Kiev','Europe/Chisinau',
+      'Asia/Almaty','Asia/Qostanay','Asia/Aqtau','Asia/Aqtobe','Asia/Atyrau','Asia/Oral',
+      'Asia/Yerevan','Asia/Tbilisi','Asia/Baku','Asia/Tashkent','Asia/Samarkand','Asia/Bishkek','Asia/Dushanbe','Asia/Ashgabat'
+    ];
+    function getSavedLang(){
+      try {
+        const saved = localStorage.getItem('danyapez_lang');
+        return saved === 'ru' || saved === 'en' ? saved : '';
+      } catch (e) {
+        return '';
+      }
+    }
+    function saveLang(lang){
+      try { localStorage.setItem('danyapez_lang', lang); } catch (e) {}
+    }
     function getInitialLang(){
-      const saved = localStorage.getItem('danyapez_lang');
-      if (saved === 'ru' || saved === 'en') return saved;
+      const saved = getSavedLang();
+      if (saved) return saved;
+
       const browserLangs = navigator.languages && navigator.languages.length ? navigator.languages : [navigator.language || ''];
-      return browserLangs.some(l => String(l).toLowerCase().startsWith('ru')) ? 'ru' : 'en';
+      const normalizedLangs = browserLangs.map(l => String(l || '').toLowerCase());
+      if (normalizedLangs.some(l => RU_LANG_PREFIXES.some(prefix => l === prefix || l.startsWith(prefix + '-')))) return 'ru';
+
+      let timezone = '';
+      try { timezone = Intl.DateTimeFormat().resolvedOptions().timeZone || ''; } catch (e) {}
+      if (RU_TIMEZONES.includes(timezone)) return 'ru';
+
+      return 'en';
     }
     let currentLang = getInitialLang();
     function tr(key){return (I18N[currentLang] && I18N[currentLang][key]) || (I18N.ru && I18N.ru[key]) || key;}
@@ -3470,7 +3498,7 @@
         e.preventDefault();
         e.stopPropagation();
         currentLang = currentLang === 'ru' ? 'en' : 'ru';
-        localStorage.setItem('danyapez_lang', currentLang);
+        saveLang(currentLang);
         applyI18n();
       });
     }
