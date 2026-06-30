@@ -1,8 +1,8 @@
-<!-- cache-bust-version: 20260630015000-mobile-stats-brief-touch -->
+<!-- cache-bust-version: 20260630021000-i18n-lang-switch -->
 <!doctype html>
 <html lang="ru">
 <head>
-  <!-- cache-bust: mobile-stats-brief-touch-20260630 -->
+  <!-- cache-bust: i18n-lang-switch-20260630 -->
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Expires" content="0">
@@ -2730,23 +2730,54 @@
     }
 
 
+
+    /* === FINAL 20260630 language switch === */
+    .lang-toggle{
+      border:0;
+      background:transparent;
+      color:#fff;
+      font-family:var(--pixel);
+      font-size:10px;
+      line-height:1;
+      padding:0;
+      cursor:pointer;
+      opacity:.86;
+      letter-spacing:var(--pixel-track-ui,.02em);
+    }
+    .lang-toggle:hover{opacity:1;color:#cfcfcf}
+    @media(max-width:1100px){
+      .topbar.menu-open .lang-toggle{
+        display:block !important;
+        width:max-content !important;
+        padding:0 !important;
+        font-size:clamp(9px,1.2vw,12px) !important;
+        line-height:1.45 !important;
+        opacity:1 !important;
+        text-align:left !important;
+      }
+    }
+    @media(max-width:720px){
+      .topbar.menu-open .lang-toggle{font-size:10px !important;}
+    }
+
 </style>
 
-  <script>window.__DANYAPEZ_VERSION__ = "20260630015000-mobile-stats-brief-touch";</script>
+  <script>window.__DANYAPEZ_VERSION__ = "20260630021000-i18n-lang-switch";</script>
 </head>
 <body>
   <header class="topbar">
     <div class="wrap">
       <img class="brand-mark" id="brandMark" alt="" aria-hidden="true">
       <a class="brand" href="#top">DANYAPEZ</a>
-      <a class="mobile-cta" href="#brief">Оставить заявку</a>
-      <button class="menu-toggle" id="menuToggle" type="button" aria-label="Открыть меню" aria-expanded="false"><i></i></button>
+      <a class="mobile-cta" href="#brief" data-i18n="cta">Оставить заявку</a>
+      <button class="menu-toggle" id="menuToggle" type="button" aria-label="Открыть меню" aria-expanded="false" data-i18n-aria="menuOpen"><i></i></button>
       <nav class="nav" aria-label="Навигация">
-        <a href="#stats">Цифры</a>
-        <a href="#audience">Аудитория</a>
-        <a href="#formats">Форматы</a>
-        <a href="#base">Сетап</a>
-        <a href="#brief" class="nav-btn">Оставить заявку</a>
+        <a href="#stats" data-i18n="navStats">Цифры</a>
+        <a href="#audience" data-i18n="navAudience">Аудитория</a>
+        <a href="#formats" data-i18n="navFormats">Форматы</a>
+        <a href="#base" data-i18n="navSetup">Сетап</a>
+        <button class="lang-toggle" id="langToggle" type="button" aria-label="Switch language">EN</button>
+        <a href="#brief" class="nav-btn" data-i18n="cta">Оставить заявку</a>
       </nav>
     </div>
   </header>
@@ -2757,7 +2788,7 @@
         <div class="hero-copy">
           <h1>DANYAPEZ</h1>
           <div class="media-kit">MEDIA KIT</div>
-          <p class="lead">Создаю атмосферные видео про ретро-гейминг, старые консоли и ПК.</p>
+          <p class="lead" data-i18n="heroLead">Создаю атмосферные видео про ретро-гейминг, старые консоли и ПК.</p>
           <div class="hero-socials" aria-label="Соцсети">
             <a href="https://www.tiktok.com/@danyapez_old" target="_blank" rel="noreferrer">TikTok</a>
             <a href="https://www.instagram.com/danyapez/" target="_blank" rel="noreferrer">Instagram</a>
@@ -2773,35 +2804,35 @@
 
     <section class="section" id="stats">
       <div class="wrap">
-        <h2 class="section-title">Цифры</h2>
+        <h2 class="section-title" data-i18n="statsTitle">Цифры</h2>
         <div class="summary">
-          <div class="summary-item"><div class="big-num count-up" data-count="10000" data-format="short-plus">0</div><div class="label">суммарно подписчиков</div></div>
-          <div class="summary-item"><div class="big-num count-up" data-count="900000" data-format="short-plus">0</div><div class="label">общие просмотры контента</div></div>
-          <div class="summary-item"><div class="big-num count-up" data-count="655000" data-format="short">0</div><div class="label">просмотры за год</div></div>
+          <div class="summary-item"><div class="big-num count-up" data-count="10000" data-format="short-plus">0</div><div class="label" data-i18n="totalFollowers">суммарно подписчиков</div></div>
+          <div class="summary-item"><div class="big-num count-up" data-count="900000" data-format="short-plus">0</div><div class="label" data-i18n="totalContentViews">общие просмотры контента</div></div>
+          <div class="summary-item"><div class="big-num count-up" data-count="655000" data-format="short">0</div><div class="label" data-i18n="yearViews">просмотры за год</div></div>
         </div>
         <div class="cards platform-cards">
           <article class="card platform">
             <h3>TikTok</h3>
             <div class="platform-main">
-              <div class="platform-row"><span class="platform-label">подписчики</span><b class="platform-value count-up" data-count="9300" data-format="short-1">0</b></div>
-              <div class="platform-row"><span class="platform-label">просмотры</span><b class="platform-value count-up" data-count="655000" data-format="short">0</b></div>
-              <div class="platform-row"><span class="platform-label">лайки / вовлечения</span><b class="platform-value count-up" data-count="21900" data-format="short-1">0</b></div>
+              <div class="platform-row"><span class="platform-label" data-i18n="followers">подписчики</span><b class="platform-value count-up" data-count="9300" data-format="short-1">0</b></div>
+              <div class="platform-row"><span class="platform-label" data-i18n="views">просмотры</span><b class="platform-value count-up" data-count="655000" data-format="short">0</b></div>
+              <div class="platform-row"><span class="platform-label" data-i18n="likesEngagement">лайки / вовлечения</span><b class="platform-value count-up" data-count="21900" data-format="short-1">0</b></div>
             </div>
           </article>
           <article class="card platform">
             <h3>Instagram</h3>
             <div class="platform-main">
-              <div class="platform-row"><span class="platform-label">подписчики</span><b class="platform-value count-up" data-count="250" data-format="number">0</b></div>
-              <div class="platform-row"><span class="platform-label">просмотры / охваты</span><b class="platform-value count-up" data-count="40000" data-format="short">0</b></div>
-              <div class="platform-row"><span class="platform-label">взаимодействия</span><b class="platform-value count-up" data-count="3800" data-format="short-1">0</b></div>
+              <div class="platform-row"><span class="platform-label" data-i18n="followers">подписчики</span><b class="platform-value count-up" data-count="250" data-format="number">0</b></div>
+              <div class="platform-row"><span class="platform-label" data-i18n="viewsReach">просмотры / охваты</span><b class="platform-value count-up" data-count="40000" data-format="short">0</b></div>
+              <div class="platform-row"><span class="platform-label" data-i18n="interactions">взаимодействия</span><b class="platform-value count-up" data-count="3800" data-format="short-1">0</b></div>
             </div>
           </article>
           <article class="card platform">
             <h3>YouTube</h3>
             <div class="platform-main">
-              <div class="platform-row"><span class="platform-label">подписчики</span><b class="platform-value count-up" data-count="416" data-format="number">0</b></div>
-              <div class="platform-row"><span class="platform-label">просмотры канала</span><b class="platform-value count-up" data-count="250000" data-format="short">0</b></div>
-              <div class="platform-row"><span class="platform-label">лучшие Shorts</span><b class="platform-value count-up" data-count="7500" data-format="short-1-plus">0</b></div>
+              <div class="platform-row"><span class="platform-label" data-i18n="followers">подписчики</span><b class="platform-value count-up" data-count="416" data-format="number">0</b></div>
+              <div class="platform-row"><span class="platform-label" data-i18n="channelViews">просмотры канала</span><b class="platform-value count-up" data-count="250000" data-format="short">0</b></div>
+              <div class="platform-row"><span class="platform-label" data-i18n="topShorts">лучшие Shorts</span><b class="platform-value count-up" data-count="7500" data-format="short-1-plus">0</b></div>
             </div>
           </article>
         </div>
@@ -2811,11 +2842,11 @@
     <section class="section" id="audience">
       <div class="wrap audience-grid">
         <div>
-          <h2 class="section-title">Аудитория</h2>
+          <h2 class="section-title" data-i18n="audienceTitle">Аудитория</h2>
           <div class="audience-big">
-            <div class="summary-item"><div class="big-num count-up" data-count="382000" data-format="short">0</div><span>годовой охват</span></div>
-            <div class="summary-item"><div class="big-num count-up" data-count="87" data-format="percent">0</div><span>мужская аудитория</span></div>
-            <div class="summary-item"><div class="big-num">18–35</div><span>основной возраст</span></div>
+            <div class="summary-item"><div class="big-num count-up" data-count="382000" data-format="short">0</div><span data-i18n="annualReach">годовой охват</span></div>
+            <div class="summary-item"><div class="big-num count-up" data-count="87" data-format="percent">0</div><span data-i18n="maleAudience">мужская аудитория</span></div>
+            <div class="summary-item"><div class="big-num">18–35</div><span data-i18n="coreAge">основной возраст</span></div>
           </div>
         </div>
       </div>
@@ -2823,24 +2854,24 @@
 
     <section class="section" id="formats">
       <div class="wrap">
-        <h2 class="section-title">Форматы</h2>
+        <h2 class="section-title" data-i18n="formatsTitle">Форматы</h2>
         <div class="formats-grid">
-          <article class="card format"><h3>Нативная интеграция</h3><p>Встрою продукт в ролик так, чтобы он смотрелся частью сетапа, а не отдельной рекламой.</p></article>
-          <article class="card format"><h3>Распаковка</h3><p>Сниму распаковку или первое впечатление: игры, техника, мерч и гик-вещи.</p></article>
-          <article class="card format"><h3>Съёмка события</h3><p>Сниму магазин, стенд, запуск, бэкстейдж или атмосферный репортаж.</p></article>
-          <article class="card format"><h3>Пакет для соцсетей</h3><p>Адаптирую материал под TikTok, Instagram, YouTube Shorts и Telegram.</p></article>
+          <article class="card format"><h3 data-i18n="nativeTitle">Нативная интеграция</h3><p data-i18n="nativeText">Встрою продукт в ролик так, чтобы он смотрелся частью сетапа, а не отдельной рекламой.</p></article>
+          <article class="card format"><h3 data-i18n="unboxTitle">Распаковка</h3><p data-i18n="unboxText">Сниму распаковку или первое впечатление: игры, техника, мерч и гик-вещи.</p></article>
+          <article class="card format"><h3 data-i18n="eventTitle">Съёмка события</h3><p data-i18n="eventText">Сниму магазин, стенд, запуск, бэкстейдж или атмосферный репортаж.</p></article>
+          <article class="card format"><h3 data-i18n="socialPackTitle">Пакет для соцсетей</h3><p data-i18n="socialPackText">Адаптирую материал под TikTok, Instagram, YouTube Shorts и Telegram.</p></article>
         </div>
       </div>
     </section>
 
     <section class="section" id="base">
       <div class="wrap">
-        <h2 class="section-title">Сетап</h2>
+        <h2 class="section-title" data-i18n="setupTitle">Сетап</h2>
         <div class="base-grid">
-          <article class="card base-card"><h3>Консоли разных эпох</h3><p>От 3-го по 6-е поколение: Dendy, Sega, PlayStation, PlayStation 2, портативки, картриджи, диски и другой игровой реквизит.</p></article>
-          <article class="card base-card"><h3>Старый ПК</h3><p>Сборка в духе середины 2000-х, Windows, старые игры, периферия и атмосфера компьютерного стола того времени.</p></article>
-          <article class="card base-card"><h3>Sony PVM</h3><p>Профессиональный CRT-монитор для красивой картинки с консолей и настоящего ретро-вида.</p></article>
-          <article class="card base-card"><h3>Съёмка и монтаж</h3><p>Снимаю от iPhone до Blackmagic. Соберу ролик, подберу музыку, сделаю монтаж и адаптирую под нужные соцсети.</p></article>
+          <article class="card base-card"><h3 data-i18n="consolesTitle">Консоли разных эпох</h3><p data-i18n="consolesText">От 3-го по 6-е поколение: Dendy, Sega, PlayStation, PlayStation 2, портативки, картриджи, диски и другой игровой реквизит.</p></article>
+          <article class="card base-card"><h3 data-i18n="oldPcTitle">Старый ПК</h3><p data-i18n="oldPcText">Сборка в духе середины 2000-х, Windows, старые игры, периферия и атмосфера компьютерного стола того времени.</p></article>
+          <article class="card base-card"><h3 data-i18n="pvmTitle">Sony PVM</h3><p data-i18n="pvmText">Профессиональный CRT-монитор для красивой картинки с консолей и настоящего ретро-вида.</p></article>
+          <article class="card base-card"><h3 data-i18n="shootEditTitle">Съёмка и монтаж</h3><p data-i18n="shootEditText">Снимаю от iPhone до Blackmagic. Соберу ролик, подберу музыку, сделаю монтаж и адаптирую под нужные соцсети.</p></article>
         </div>
       </div>
     </section>
@@ -2848,14 +2879,14 @@
     <section class="section" id="brief">
       <div class="wrap brief-grid">
         <div class="brief-copy">
-          <h2 class="section-title">Есть задача для съёмки?</h2>
-          <p>Оставьте заявку, и я свяжусь с вами в ближайшее время.</p>
+          <h2 class="section-title" data-i18n="briefTitle">Есть задача для съёмки?</h2>
+          <p data-i18n="briefText">Оставьте заявку, и я свяжусь с вами в ближайшее время.</p>
         </div>
         <form id="briefForm">
-          <div class="field"><label for="name">Имя / бренд</label><input id="name" name="name" autocomplete="organization" required></div>
-          <div class="field"><label for="contact">Как связаться</label><input id="contact" name="contact" placeholder="Telegram, почта, Instagram или другой удобный способ" required></div>
-          <div class="field"><label for="task">Что нужно</label><textarea id="task" name="task" placeholder="Интеграция, обзор, распаковка, съемка мероприятия, пакет соцсетей..." required></textarea></div>
-          <button class="submit" type="submit">Оставить заявку</button>
+          <div class="field"><label for="name" data-i18n="nameLabel">Имя / бренд</label><input id="name" name="name" autocomplete="organization" required></div>
+          <div class="field"><label for="contact" data-i18n="contactLabel">Как связаться</label><input id="contact" name="contact" placeholder="Telegram, почта, Instagram или другой удобный способ" data-i18n-placeholder="contactPlaceholder" required></div>
+          <div class="field"><label for="task" data-i18n="taskLabel">Что нужно</label><textarea id="task" name="task" placeholder="Интеграция, обзор, распаковка, съемка мероприятия, пакет соцсетей..." data-i18n-placeholder="taskPlaceholder" required></textarea></div>
+          <button class="submit" type="submit" data-i18n="cta">Оставить заявку</button>
           <div class="form-status" id="formStatus"></div>
         </form>
       </div>
@@ -2878,10 +2909,10 @@
 
   <div class="thanks-pop" id="thanksPop" role="dialog" aria-modal="true" aria-labelledby="thanksTitle">
     <div class="thanks-box">
-      <h3 id="thanksTitle">Спасибо</h3>
-      <p>Заявка отправлена. Свяжусь с вами в ближайшее время.</p>
-      <p class="privacy-note">Данные из формы используются только для ответа на вашу заявку и не передаются третьим лицам.</p>
-      <button type="button" id="thanksClose">Ок</button>
+      <h3 id="thanksTitle" data-i18n="thanksTitle">Спасибо</h3>
+      <p data-i18n="thanksText">Заявка отправлена. Свяжусь с вами в ближайшее время.</p>
+      <p class="privacy-note" data-i18n="privacy">Данные из формы используются только для ответа на вашу заявку и не передаются третьим лицам.</p>
+      <button type="button" id="thanksClose" data-i18n="ok">Ок</button>
     </div>
   </div>
 
@@ -2956,6 +2987,93 @@
       });
     }
     initHeader();
+
+
+    const I18N = {
+      ru: {
+        htmlLang:'ru', pageTitle:'DANYAPEZ — Media Kit', metaDescription:'Media Kit Danyapez: ретро-гейминг, коллекционирование, старые консоли, ПК и рекламные интеграции.',
+        switchLabel:'EN', menuOpen:'Открыть меню', cta:'Оставить заявку',
+        navStats:'Цифры', navAudience:'Аудитория', navFormats:'Форматы', navSetup:'Сетап',
+        heroLead:'Создаю атмосферные видео про ретро-гейминг, старые консоли и ПК.',
+        statsTitle:'Цифры', totalFollowers:'суммарно подписчиков', totalContentViews:'общие просмотры контента', yearViews:'просмотры за год',
+        audienceTitle:'Аудитория', annualReach:'годовой охват', maleAudience:'мужская аудитория', coreAge:'основной возраст',
+        followers:'подписчики', views:'просмотры', likesEngagement:'лайки / вовлечения', viewsReach:'просмотры / охваты', interactions:'взаимодействия', channelViews:'просмотры канала', topShorts:'лучшие Shorts',
+        formatsTitle:'Форматы', nativeTitle:'Нативная интеграция', nativeText:'Встрою продукт в ролик так, чтобы он смотрелся частью сетапа, а не отдельной рекламой.',
+        unboxTitle:'Распаковка', unboxText:'Сниму распаковку или первое впечатление: игры, техника, мерч и гик-вещи.',
+        eventTitle:'Съёмка события', eventText:'Сниму магазин, стенд, запуск, бэкстейдж или атмосферный репортаж.',
+        socialPackTitle:'Пакет для соцсетей', socialPackText:'Адаптирую материал под TikTok, Instagram, YouTube Shorts и Telegram.',
+        setupTitle:'Сетап', consolesTitle:'Консоли разных эпох', consolesText:'От 3-го по 6-е поколение: Dendy, Sega, PlayStation, PlayStation 2, портативки, картриджи, диски и другой игровой реквизит.',
+        oldPcTitle:'Старый ПК', oldPcText:'Сборка в духе середины 2000-х, Windows, старые игры, периферия и атмосфера компьютерного стола того времени.',
+        pvmTitle:'Sony PVM', pvmText:'Профессиональный CRT-монитор для красивой картинки с консолей и настоящего ретро-вида.',
+        shootEditTitle:'Съёмка и монтаж', shootEditText:'Снимаю от iPhone до Blackmagic. Соберу ролик, подберу музыку, сделаю монтаж и адаптирую под нужные соцсети.',
+        briefTitle:'Есть задача для съёмки?', briefText:'Оставьте заявку, и я свяжусь с вами в ближайшее время.',
+        nameLabel:'Имя / бренд', contactLabel:'Как связаться', taskLabel:'Что нужно', contactPlaceholder:'Telegram, почта, Instagram или другой удобный способ', taskPlaceholder:'Интеграция, обзор, распаковка, съемка мероприятия, пакет соцсетей...',
+        thanksTitle:'Спасибо', thanksText:'Заявка отправлена. Свяжусь с вами в ближайшее время.', privacy:'Данные из формы используются только для ответа на вашу заявку и не передаются третьим лицам.', ok:'Ок',
+        loading:'Отправляем заявку', formError:'Не получилось отправить. Попробуйте ещё раз или напишите в соцсети.'
+      },
+      en: {
+        htmlLang:'en', pageTitle:'DANYAPEZ — Media Kit', metaDescription:'Danyapez media kit: retro gaming, collecting, old consoles, PCs and brand integrations.',
+        switchLabel:'RU', menuOpen:'Open menu', cta:'Send request',
+        navStats:'Stats', navAudience:'Audience', navFormats:'Formats', navSetup:'Setup',
+        heroLead:'I create atmospheric videos about retro gaming, old consoles and PCs.',
+        statsTitle:'Stats', totalFollowers:'total followers', totalContentViews:'total content views', yearViews:'views per year',
+        audienceTitle:'Audience', annualReach:'annual reach', maleAudience:'male audience', coreAge:'core age',
+        followers:'followers', views:'views', likesEngagement:'likes / engagement', viewsReach:'views / reach', interactions:'interactions', channelViews:'channel views', topShorts:'top Shorts',
+        formatsTitle:'Formats', nativeTitle:'Native integration', nativeText:'I place the product inside the video so it feels like part of the setup, not a separate ad.',
+        unboxTitle:'Unboxing', unboxText:'I can film an unboxing or first impression: games, tech, merch and geek-culture items.',
+        eventTitle:'Event shoot', eventText:'I can film a store, booth, launch, backstage or atmospheric event recap.',
+        socialPackTitle:'Social package', socialPackText:'I can adapt one piece for TikTok, Instagram, YouTube Shorts and Telegram.',
+        setupTitle:'Setup', consolesTitle:'Consoles from different eras', consolesText:'3rd to 6th generation: Dendy, Sega, PlayStation, PlayStation 2, handhelds, cartridges, discs and gaming props.',
+        oldPcTitle:'Old PC', oldPcText:'A mid-2000s style PC setup: Windows, old games, peripherals and the atmosphere of that era.',
+        pvmTitle:'Sony PVM', pvmText:'A professional CRT monitor for a clean console image and a real retro look.',
+        shootEditTitle:'Shooting and editing', shootEditText:'I shoot from iPhone to Blackmagic, edit the video, pick music and adapt it for the needed platforms.',
+        briefTitle:'Need something filmed?', briefText:'Send a request, and I will get back to you soon.',
+        nameLabel:'Name / brand', contactLabel:'Contact', taskLabel:'What do you need?', contactPlaceholder:'Telegram, email, Instagram or another convenient contact', taskPlaceholder:'Integration, review, unboxing, event shoot, social package...',
+        thanksTitle:'Thanks', thanksText:'Request sent. I will get back to you soon.', privacy:'Form data is used only to reply to your request and is not shared with third parties.', ok:'Ok',
+        loading:'Sending request', formError:'Could not send the request. Try again or message me on social media.'
+      }
+    };
+    function getInitialLang(){
+      const saved = localStorage.getItem('danyapez_lang');
+      if (saved === 'ru' || saved === 'en') return saved;
+      const browserLangs = navigator.languages && navigator.languages.length ? navigator.languages : [navigator.language || ''];
+      return browserLangs.some(l => String(l).toLowerCase().startsWith('ru')) ? 'ru' : 'en';
+    }
+    let currentLang = getInitialLang();
+    function tr(key){return (I18N[currentLang] && I18N[currentLang][key]) || (I18N.ru && I18N.ru[key]) || key;}
+    function applyI18n(){
+      const dict = I18N[currentLang] || I18N.ru;
+      document.documentElement.lang = dict.htmlLang;
+      document.title = dict.pageTitle;
+      const meta = document.querySelector('meta[name="description"]');
+      if (meta) meta.setAttribute('content', dict.metaDescription);
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (dict[key]) el.textContent = dict[key];
+      });
+      document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+        const key = el.getAttribute('data-i18n-placeholder');
+        if (dict[key]) el.setAttribute('placeholder', dict[key]);
+      });
+      document.querySelectorAll('[data-i18n-aria]').forEach(el => {
+        const key = el.getAttribute('data-i18n-aria');
+        if (dict[key]) el.setAttribute('aria-label', dict[key]);
+      });
+      const toggle = document.getElementById('langToggle');
+      if (toggle) toggle.textContent = dict.switchLabel;
+    }
+    applyI18n();
+    const langToggle = document.getElementById('langToggle');
+    if (langToggle){
+      langToggle.addEventListener('click', (e)=>{
+        e.preventDefault();
+        e.stopPropagation();
+        currentLang = currentLang === 'ru' ? 'en' : 'ru';
+        localStorage.setItem('danyapez_lang', currentLang);
+        applyI18n();
+      });
+    }
+
 
     const navLinks = [...document.querySelectorAll('.nav a[href^="#"]')];
     const navSections = navLinks.map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
@@ -3056,7 +3174,7 @@
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
       const submitBtn = form.querySelector('.submit');
-      const defaultSubmitText = submitBtn ? submitBtn.textContent : 'Оставить заявку';
+      const defaultSubmitText = submitBtn ? submitBtn.textContent : tr('cta');
       let loadingTimer = null;
       const formData = new FormData(form);
       formData.append('source', 'DANYAPEZ media kit');
@@ -3066,7 +3184,7 @@
       if (submitBtn) {
         submitBtn.disabled = true;
         let step = 0;
-        const loadingBase = 'Отправляем заявку';
+        const loadingBase = tr('loading');
         submitBtn.innerHTML = '<span class="loading-label">' + loadingBase + '</span><span class="loading-dots"></span>';
         const dotsEl = submitBtn.querySelector('.loading-dots');
         const tick = () => {
@@ -3085,7 +3203,7 @@
         form.reset();
         showThanks();
       } catch(err) {
-        if (statusEl) statusEl.textContent = 'Не получилось отправить. Попробуйте ещё раз или напишите в соцсети.';
+        if (statusEl) statusEl.textContent = tr('formError');
       } finally {
         if (loadingTimer) clearInterval(loadingTimer);
         if (submitBtn) {
