@@ -1,8 +1,8 @@
-<!-- cache-bust-version: 20260630141500-card-outline-text-width -->
+<!-- cache-bust-version: 20260630150000-desktop-fixed-width-type-cards -->
 <!doctype html>
 <html lang="ru">
 <head>
-  <!-- cache-bust: card-outline-text-width-20260630 -->
+  <!-- cache-bust: 20260630150000-desktop-fixed-width-type-cards -->
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Expires" content="0">
@@ -2887,9 +2887,134 @@
       }
     }
 
+
+    /* === FINAL 20260630 desktop >1500 fixed scale / card readability === */
+    @media (min-width:1501px){
+      :root{
+        --max:1280px;
+        --px:44px;
+      }
+
+      .wrap,
+      .hero .wrap{
+        width:min(1280px, calc(100% - 88px)) !important;
+      }
+
+      .topbar .wrap{
+        width:min(1280px, calc(100% - 88px)) !important;
+        height:64px !important;
+      }
+
+      .topbar .nav,
+      .topbar .nav a:not(.nav-btn),
+      .topbar .nav .lang-toggle,
+      .topbar .nav-btn{
+        font-size:12px !important;
+        line-height:1 !important;
+      }
+
+      .hero{
+        min-height:720px !important;
+        padding-top:44px !important;
+        padding-bottom:38px !important;
+      }
+      .hero-grid{
+        grid-template-columns:560px 1fr !important;
+        gap:76px !important;
+        align-items:center !important;
+      }
+      .hero-copy{padding-top:0 !important;}
+      h1{font-size:70px !important;line-height:1.05 !important;}
+      .media-kit{font-size:30px !important;line-height:1.1 !important;margin-bottom:28px !important;}
+      .lead{font-size:21px !important;line-height:1.34 !important;max-width:540px !important;}
+      .hero-socials{font-size:12px !important;gap:24px !important;margin-top:30px !important;}
+
+      .model-card{
+        height:650px !important;
+        min-height:650px !important;
+        overflow:visible !important;
+      }
+      #voxelCanvas{
+        transform:translate(-50%, -50%) scale(1.08) !important;
+      }
+      .model-card:hover #voxelCanvas,
+      body.model-pressed #voxelCanvas{
+        transform:translate(-50%, -50%) scale(1.13) !important;
+      }
+
+      .section{padding:58px 0 !important;}
+      #stats{padding-top:56px !important;}
+      .section-title{font-size:34px !important;line-height:1.25 !important;margin-bottom:42px !important;}
+
+      .summary-item .big-num,
+      .audience-big .big-num{
+        font-size:62px !important;
+      }
+      .label,
+      .audience-big span{
+        font-size:16px !important;
+        line-height:1.35 !important;
+      }
+
+      .platform h3{font-size:18px !important;line-height:1.35 !important;}
+      .platform-label{font-size:16px !important;line-height:1.35 !important;}
+      .platform-value{font-size:22px !important;line-height:1 !important;}
+
+      .formats-grid,
+      .base-grid{
+        grid-template-columns:repeat(2, minmax(0, 1fr)) !important;
+        gap:36px 44px !important;
+        grid-auto-rows:1fr !important;
+        align-items:stretch !important;
+      }
+
+      .card.format,
+      .card.base-card{
+        min-height:230px !important;
+        height:auto !important;
+        padding:34px 36px !important;
+      }
+
+      .format h3,
+      .base-card h3{
+        font-size:18px !important;
+        line-height:1.42 !important;
+        margin-bottom:24px !important;
+        max-width:520px !important;
+      }
+
+      .format p,
+      .base-card p{
+        font-size:18px !important;
+        line-height:1.45 !important;
+        max-width:520px !important;
+        width:auto !important;
+      }
+
+      #brief{
+        padding-top:64px !important;
+      }
+      .brief-grid{
+        grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+        gap:44px !important;
+      }
+      #brief .brief-copy .section-title{
+        font-size:58px !important;
+        line-height:1.12 !important;
+        margin-bottom:22px !important;
+        max-width:520px !important;
+      }
+      #brief .brief-copy p{
+        font-size:18px !important;
+        line-height:1.45 !important;
+        max-width:520px !important;
+      }
+      input,textarea{font-size:16px !important;}
+    }
+
 </style>
 
-  <script>window.__DANYAPEZ_VERSION__ = "20260630141500-card-outline-text-width";</script>
+  <script>window.__DANYAPEZ_VERSION__ = "20260630150000-desktop-fixed-width-type-cards";</script>
 </head>
 <body>
   <header class="topbar">
