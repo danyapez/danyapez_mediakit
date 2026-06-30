@@ -1,8 +1,8 @@
-<!-- cache-bust-version: 20260630161000-crisp-model-footer-toys -->
+<!-- cache-bust-version: 20260630163000-font-load-fix -->
 <!doctype html>
 <html lang="ru">
 <head>
-  <!-- cache-bust: 20260630161000-crisp-model-footer-toys -->
+  <!-- cache-bust: 20260630163000-font-load-fix -->
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Expires" content="0">
@@ -12,7 +12,11 @@
   <meta name="description" content="Media Kit Danyapez: ретро-гейминг, коллекционирование, старые консоли, ПК и рекламные интеграции." />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Press+Start+2P&display=swap" rel="stylesheet">
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Press+Start+2P&display=block">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Press+Start+2P&display=block" rel="stylesheet">
+  <script>
+    document.documentElement.classList.add('font-loading');
+  </script>
   <style>
     :root{
       --bg:#000;
@@ -25,12 +29,14 @@
       --grid-offset-y:0px;
       --max:1180px;
       --px:clamp(18px,4vw,44px);
-      --pixel:"Press Start 2P",ui-monospace,SFMono-Regular,Menlo,monospace;
-      --sans:Inter,Arial,sans-serif;
+      --pixel:"Press Start 2P", "Courier New", ui-monospace, SFMono-Regular, Menlo, monospace;
+      --sans:"Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
     }
-    *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+    *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;font-synthesis:none;text-rendering:geometricPrecision}
     html{scroll-behavior:smooth;background:#000}
-    body{margin:0;background:#000;color:#fff;font-family:var(--sans);overflow-x:hidden}
+    html.font-loading body{opacity:0}
+    html.fonts-ready body{opacity:1}
+    body{margin:0;background:#000;color:#fff;font-family:var(--sans);overflow-x:hidden;transition:opacity .08s linear;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
     body:before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:var(--grid-size) var(--grid-size);background-position:0 calc(var(--grid-offset-y) - 1px);mask-image:radial-gradient(circle at 54% 10%,#000 0%,rgba(0,0,0,.82) 38%,transparent 86%);opacity:1}
     a{color:inherit;text-decoration:none}
     img,canvas{display:block}
@@ -3082,8 +3088,38 @@
     }
 
 </style>
+  <script>
+    (function(){
+      const root = document.documentElement;
+      const show = () => {
+        root.classList.remove('font-loading');
+        root.classList.add('fonts-ready');
+      };
+      if (!('fonts' in document)) {
+        show();
+        return;
+      }
+      const loadFonts = () => {
+        const jobs = [
+          document.fonts.load('12px "Press Start 2P"', 'DANYAPEZ Цифры Форматы Сетап Есть задача для съёмки?'),
+          document.fonts.load('16px "Inter"', 'Создаю атмосферные видео про ретро-гейминг, старые консоли и ПК.')
+        ];
+        Promise.race([
+          Promise.all(jobs),
+          new Promise(resolve => setTimeout(resolve, 3500))
+        ]).then(show).catch(show);
+        document.fonts.ready.then(show).catch(show);
+      };
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', loadFonts, {once:true});
+      } else {
+        loadFonts();
+      }
+    })();
+  </script>
 
-  <script>window.__DANYAPEZ_VERSION__ = "20260630161000-crisp-model-footer-toys";</script>
+
+  <script>window.__DANYAPEZ_VERSION__ = "20260630163000-font-load-fix";</script>
 </head>
 <body>
   <header class="topbar">
@@ -3942,6 +3978,28 @@
     if (_panelToggle){
       _panelToggle.addEventListener('click', () => requestAnimationFrame(updateBurgerPanelBox));
     }
+
+    // Ждём загрузку шрифтов, чтобы на iPhone/Windows не показывался левый fallback.
+    (function(){
+      const root = document.documentElement;
+      const show = () => {
+        root.classList.remove('font-loading');
+        root.classList.add('fonts-ready');
+      };
+      if (!('fonts' in document)) {
+        show();
+        return;
+      }
+      const samples = [
+        document.fonts.load('12px "Press Start 2P"', 'DANYAPEZ Цифры Форматы Сетап Есть задача для съёмки?'),
+        document.fonts.load('16px "Inter"', 'Создаю атмосферные видео про ретро-гейминг, старые консоли и ПК.')
+      ];
+      Promise.race([
+        Promise.all(samples),
+        new Promise(resolve => setTimeout(resolve, 3500))
+      ]).then(show).catch(show);
+      document.fonts.ready.then(show).catch(show);
+    })();
 
   </script>
 </body>
