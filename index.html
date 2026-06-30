@@ -1,8 +1,8 @@
-<!-- cache-bust-version: 20260630154500-fixed-scale-1500-3840 -->
+<!-- cache-bust-version: 20260630161000-crisp-model-footer-toys -->
 <!doctype html>
 <html lang="ru">
 <head>
-  <!-- cache-bust: 20260630154500-fixed-scale-1500-3840 -->
+  <!-- cache-bust: 20260630161000-crisp-model-footer-toys -->
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Expires" content="0">
@@ -3055,9 +3055,35 @@
 
 
 
+
+    /* === FINAL 20260630: crisp 4K model + desktop footer toy bounds === */
+    @media (min-width:1501px){
+      body.desktop-scaled #playfield{
+        width:var(--desktop-visible-width,1500px) !important;
+        margin-left:var(--desktop-visible-margin,calc(50% - 750px)) !important;
+        margin-right:var(--desktop-visible-margin,calc(50% - 750px)) !important;
+        height:620px !important;
+        min-height:620px !important;
+        overflow:hidden !important;
+      }
+      body.desktop-scaled .toybox{
+        padding-bottom:0 !important;
+        margin-bottom:0 !important;
+        overflow:hidden !important;
+      }
+      body.desktop-scaled .toybox .wrap{
+        width:1280px !important;
+        max-width:1280px !important;
+        overflow:visible !important;
+      }
+      body.desktop-scaled .shake-sprite{
+        filter:drop-shadow(0 6px 5px rgba(0,0,0,.55)) !important;
+      }
+    }
+
 </style>
 
-  <script>window.__DANYAPEZ_VERSION__ = "20260630154500-fixed-scale-1500-3840";</script>
+  <script>window.__DANYAPEZ_VERSION__ = "20260630161000-crisp-model-footer-toys";</script>
 </head>
 <body>
   <header class="topbar">
@@ -3227,9 +3253,14 @@
       if (vw > 1500){
         document.body.classList.add('desktop-scaled');
         document.body.style.width = (100 / scale).toFixed(5) + '%';
+        const visibleBaseWidth = vw / scale;
+        document.documentElement.style.setProperty('--desktop-visible-width', visibleBaseWidth.toFixed(2) + 'px');
+        document.documentElement.style.setProperty('--desktop-visible-margin', 'calc(50% - ' + (visibleBaseWidth / 2).toFixed(2) + 'px)');
       } else {
         document.body.classList.remove('desktop-scaled');
         document.body.style.width = '';
+        document.documentElement.style.removeProperty('--desktop-visible-width');
+        document.documentElement.style.removeProperty('--desktop-visible-margin');
       }
     }
     updateDesktopScale();
@@ -3583,7 +3614,10 @@
       function resize(){
         const r = card.getBoundingClientRect();
         const pageScale = getDesktopScale();
-        dpr = Math.min(window.devicePixelRatio || 1, 2);
+        const pageScaleForDpr = getDesktopScale();
+        // На больших экранах вся страница масштабируется, поэтому canvas тоже
+        // рендерим с запасом по плотности, чтобы 3D-модель не мылась в 4K.
+        dpr = Math.min((window.devicePixelRatio || 1) * pageScaleForDpr * 1.18, 5);
         // При десктопном zoom берём реальные CSS-размеры блока,
         // чтобы canvas не масштабировался дважды.
         cardWidth = Math.max(1, Math.floor(card.clientWidth || (r.width / pageScale)));
@@ -3719,7 +3753,7 @@
         if(mobile) return Math.min(SPRITE_ASSETS.length, innerWidth<620?8:10);
         if(tablet) return innerWidth<900?22:32;
         if(wideTablet) return 38;
-        return 28;
+        return 20;
       }
       function shuffledSprites(){
         const arr=SPRITE_ASSETS.slice();
@@ -3747,8 +3781,8 @@
           const isMobile=innerWidth<720;
           const isTablet=innerWidth>=720 && innerWidth<=1180;
           const isWideTablet=innerWidth>1180 && innerWidth<=1400;
-          const base=isMobile ? (innerWidth<620?78:88) : (isTablet ? 52 : (isWideTablet ? 58 : 104));
-          const spread=isMobile ? (innerWidth<620?20:24) : (isTablet ? 13 : (isWideTablet ? 15 : 30));
+          const base=isMobile ? (innerWidth<620?78:88) : (isTablet ? 52 : (isWideTablet ? 58 : 122));
+          const spread=isMobile ? (innerWidth<620?20:24) : (isTablet ? 13 : (isWideTablet ? 15 : 28));
           const size=base + Math.random()*spread;
           img.style.width=size+'px';
           const b={
@@ -3852,7 +3886,8 @@
             const pad=freeFloat ? 2 : (desktop ? 0 : Math.max(8, Math.min(28, b.w*.12)));
             const minX=pad, minY=pad;
             const maxX=Math.max(minX, stageW-b.w-pad);
-            const maxY=Math.max(minY, stageH-b.h-pad);
+            const bottomBleed=desktop ? Math.min(28, b.h*.20) : 0;
+            const maxY=Math.max(minY, stageH-b.h-pad+bottomBleed);
             if(b.x<minX){b.x=minX; b.vx=Math.abs(b.vx)*(freeFloat?.92:.54); b.vr*=freeFloat?.82:.45;}
             if(b.x>maxX){b.x=maxX; b.vx=-Math.abs(b.vx)*(freeFloat?.92:.54); b.vr*=freeFloat?.82:.45;}
             if(b.y<minY){b.y=minY; b.vy=Math.abs(b.vy)*(freeFloat?.92:.48); b.vr*=freeFloat?.82:.5;}
@@ -3860,8 +3895,9 @@
           }
           const desktop2=innerWidth>1400;
           const pad2=freeFloat ? 2 : (desktop2 ? 0 : Math.max(8, Math.min(28, b.w*.12)));
+          const bottomBleed2=desktop2 ? Math.min(28, b.h*.20) : 0;
           b.x=clamp(b.x,pad2,Math.max(pad2,stageW-b.w-pad2));
-          b.y=clamp(b.y,pad2,Math.max(pad2,stageH-b.h-pad2));
+          b.y=clamp(b.y,pad2,Math.max(pad2,stageH-b.h-pad2+bottomBleed2));
           b.el.style.transform=`translate3d(${b.x.toFixed(2)}px,${b.y.toFixed(2)}px,0) rotate(${b.rot.toFixed(2)}deg) scaleX(${b.flip})`;
         }
         requestAnimationFrame(physics);
