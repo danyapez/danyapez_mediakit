@@ -1,8 +1,8 @@
-<!-- cache-bust-version: 20260630150000-desktop-fixed-width-type-cards -->
+<!-- cache-bust-version: 20260630162000-desktop-fluid-to-3840 -->
 <!doctype html>
 <html lang="ru">
 <head>
-  <!-- cache-bust: 20260630150000-desktop-fixed-width-type-cards -->
+  <!-- cache-bust: 20260630162000-desktop-fluid-to-3840 -->
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Expires" content="0">
@@ -3012,9 +3012,184 @@
       input,textarea{font-size:16px !important;}
     }
 
+
+    /* === FINAL 20260630 desktop fluid scale 1500-3840 === */
+    @media (min-width:1501px){
+      :root{
+        --desk-scale:clamp(1, calc(100vw / 1500), 2.56);
+        --desk-wrap:calc(1280px * var(--desk-scale));
+        --desk-px:calc(44px * var(--desk-scale));
+      }
+
+      .wrap,
+      .hero .wrap,
+      .topbar .wrap{
+        width:min(var(--desk-wrap), calc(100% - var(--desk-px) * 2)) !important;
+      }
+
+      .topbar .wrap{
+        height:calc(64px * var(--desk-scale)) !important;
+      }
+      .brand-mark{
+        width:calc(30px * var(--desk-scale)) !important;
+        height:calc(30px * var(--desk-scale)) !important;
+      }
+      .brand{
+        font-size:calc(12px * var(--desk-scale)) !important;
+      }
+      .topbar .nav,
+      .topbar .nav a:not(.nav-btn),
+      .topbar .nav .lang-toggle{
+        font-size:calc(12px * var(--desk-scale)) !important;
+      }
+      .topbar .nav{
+        gap:calc(40px * var(--desk-scale)) !important;
+      }
+      .topbar .nav-btn{
+        font-size:calc(12px * var(--desk-scale)) !important;
+        padding:calc(13px * var(--desk-scale)) calc(18px * var(--desk-scale)) !important;
+      }
+
+      .hero{
+        min-height:calc(720px * var(--desk-scale)) !important;
+        padding-top:calc(44px * var(--desk-scale)) !important;
+        padding-bottom:calc(38px * var(--desk-scale)) !important;
+      }
+      .hero-grid{
+        grid-template-columns:calc(560px * var(--desk-scale)) 1fr !important;
+        gap:calc(76px * var(--desk-scale)) !important;
+      }
+      h1{
+        font-size:calc(70px * var(--desk-scale)) !important;
+      }
+      .media-kit{
+        font-size:calc(30px * var(--desk-scale)) !important;
+        margin-bottom:calc(28px * var(--desk-scale)) !important;
+      }
+      .lead{
+        font-size:calc(21px * var(--desk-scale)) !important;
+        max-width:calc(540px * var(--desk-scale)) !important;
+      }
+      .hero-socials{
+        font-size:calc(12px * var(--desk-scale)) !important;
+        gap:calc(24px * var(--desk-scale)) !important;
+        margin-top:calc(30px * var(--desk-scale)) !important;
+      }
+
+      .model-card{
+        height:calc(650px * var(--desk-scale)) !important;
+        min-height:calc(650px * var(--desk-scale)) !important;
+      }
+      #voxelCanvas{
+        transform:translate(-50%, -50%) scale(1.08) !important;
+      }
+      .model-card:hover #voxelCanvas,
+      body.model-pressed #voxelCanvas{
+        transform:translate(-50%, -50%) scale(1.13) !important;
+      }
+
+      .section{
+        padding:calc(58px * var(--desk-scale)) 0 !important;
+      }
+      #stats{
+        padding-top:calc(56px * var(--desk-scale)) !important;
+      }
+      .section-title{
+        font-size:calc(34px * var(--desk-scale)) !important;
+        margin-bottom:calc(42px * var(--desk-scale)) !important;
+      }
+      .summary{
+        gap:calc(20px * var(--desk-scale)) !important;
+        margin-bottom:calc(30px * var(--desk-scale)) !important;
+      }
+      .summary-item .big-num,
+      .audience-big .big-num{
+        font-size:calc(62px * var(--desk-scale)) !important;
+      }
+      .label,
+      .audience-big span{
+        font-size:calc(16px * var(--desk-scale)) !important;
+      }
+
+      .platform-cards{
+        gap:calc(24px * var(--desk-scale)) !important;
+      }
+      .card.platform{
+        padding:calc(26px * var(--desk-scale)) !important;
+      }
+      .platform h3{
+        font-size:calc(18px * var(--desk-scale)) !important;
+        margin-bottom:calc(28px * var(--desk-scale)) !important;
+      }
+      .platform-row{
+        column-gap:calc(18px * var(--desk-scale)) !important;
+        padding:calc(14px * var(--desk-scale)) 0 !important;
+      }
+      .platform-label{
+        font-size:calc(16px * var(--desk-scale)) !important;
+      }
+      .platform-value{
+        font-size:calc(22px * var(--desk-scale)) !important;
+      }
+
+      .formats-grid,
+      .base-grid{
+        grid-template-columns:repeat(2, minmax(0, 1fr)) !important;
+        gap:calc(36px * var(--desk-scale)) calc(44px * var(--desk-scale)) !important;
+      }
+      .card.format,
+      .card.base-card{
+        min-height:calc(230px * var(--desk-scale)) !important;
+        padding:calc(34px * var(--desk-scale)) calc(36px * var(--desk-scale)) !important;
+      }
+      .format h3,
+      .base-card h3{
+        font-size:calc(18px * var(--desk-scale)) !important;
+        margin-bottom:calc(24px * var(--desk-scale)) !important;
+        max-width:calc(520px * var(--desk-scale)) !important;
+      }
+      .format p,
+      .base-card p{
+        font-size:calc(18px * var(--desk-scale)) !important;
+        max-width:calc(520px * var(--desk-scale)) !important;
+      }
+
+      #brief{
+        padding-top:calc(64px * var(--desk-scale)) !important;
+      }
+      .brief-grid{
+        gap:calc(44px * var(--desk-scale)) !important;
+      }
+      #brief .brief-copy .section-title{
+        font-size:calc(58px * var(--desk-scale)) !important;
+        margin-bottom:calc(22px * var(--desk-scale)) !important;
+        max-width:calc(520px * var(--desk-scale)) !important;
+      }
+      #brief .brief-copy p{
+        font-size:calc(18px * var(--desk-scale)) !important;
+        max-width:calc(520px * var(--desk-scale)) !important;
+      }
+      label{
+        font-size:calc(13px * var(--desk-scale)) !important;
+      }
+      input,
+      textarea{
+        font-size:calc(16px * var(--desk-scale)) !important;
+        padding:calc(16px * var(--desk-scale)) calc(15px * var(--desk-scale)) !important;
+      }
+      textarea{
+        min-height:calc(150px * var(--desk-scale)) !important;
+      }
+      .submit{
+        font-size:calc(10px * var(--desk-scale)) !important;
+        min-height:calc(58px * var(--desk-scale)) !important;
+        padding:calc(18px * var(--desk-scale)) !important;
+      }
+    }
+
 </style>
 
-  <script>window.__DANYAPEZ_VERSION__ = "20260630150000-desktop-fixed-width-type-cards";</script>
+  <script>window.__DANYAPEZ_VERSION__ = "20260630162000-desktop-fluid-to-3840";</script>
 </head>
 <body>
   <header class="topbar">
