@@ -1,8 +1,8 @@
-<!-- cache-bust-version: 20260630162000-desktop-fluid-to-3840 -->
+<!-- cache-bust-version: 20260630150500-desktop-safe-proportional -->
 <!doctype html>
 <html lang="ru">
 <head>
-  <!-- cache-bust: 20260630162000-desktop-fluid-to-3840 -->
+  <!-- cache-bust: 20260630150500-desktop-safe-proportional -->
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Expires" content="0">
@@ -2888,50 +2888,67 @@
     }
 
 
-    /* === FINAL 20260630 desktop >1500 fixed scale / card readability === */
+    /* === FINAL 20260630 desktop >1500 proportional safe scale to 3840 === */
     @media (min-width:1501px){
       :root{
-        --max:1280px;
-        --px:44px;
+        /* 1500px layout is the base. After that everything grows in the same proportions up to 3840px. */
+        --max:clamp(1280px,85.333vw,3277px);
+        --px:clamp(44px,2.933vw,112px);
+        --grid-size:clamp(48px,3.2vw,123px);
       }
 
       .wrap,
       .hero .wrap{
-        width:min(1280px, calc(100% - 88px)) !important;
+        width:min(var(--max), calc(100% - var(--px) - var(--px))) !important;
       }
 
       .topbar .wrap{
-        width:min(1280px, calc(100% - 88px)) !important;
-        height:64px !important;
+        width:min(var(--max), calc(100% - var(--px) - var(--px))) !important;
+        height:clamp(64px,4.267vw,164px) !important;
+        gap:clamp(8px,.533vw,20px) !important;
       }
-
+      .brand-mark{
+        width:clamp(30px,2vw,77px) !important;
+        height:clamp(30px,2vw,77px) !important;
+      }
+      .brand{
+        font-size:clamp(13px,.867vw,33px) !important;
+        letter-spacing:clamp(.8px,.053vw,2px) !important;
+      }
+      .topbar .nav{
+        gap:clamp(42px,2.8vw,108px) !important;
+      }
       .topbar .nav,
       .topbar .nav a:not(.nav-btn),
       .topbar .nav .lang-toggle,
       .topbar .nav-btn{
-        font-size:12px !important;
+        font-size:clamp(12px,.8vw,31px) !important;
         line-height:1 !important;
+      }
+      .topbar .nav-btn{
+        padding:clamp(12px,.8vw,31px) clamp(14px,.933vw,36px) !important;
+        border-width:clamp(1px,.067vw,3px) !important;
       }
 
       .hero{
-        min-height:720px !important;
-        padding-top:44px !important;
-        padding-bottom:38px !important;
+        min-height:clamp(720px,48vw,1843px) !important;
+        padding-top:clamp(44px,2.933vw,113px) !important;
+        padding-bottom:clamp(38px,2.533vw,97px) !important;
       }
       .hero-grid{
-        grid-template-columns:560px 1fr !important;
-        gap:76px !important;
+        grid-template-columns:clamp(560px,37.333vw,1434px) 1fr !important;
+        gap:clamp(76px,5.067vw,195px) !important;
         align-items:center !important;
       }
       .hero-copy{padding-top:0 !important;}
-      h1{font-size:70px !important;line-height:1.05 !important;}
-      .media-kit{font-size:30px !important;line-height:1.1 !important;margin-bottom:28px !important;}
-      .lead{font-size:21px !important;line-height:1.34 !important;max-width:540px !important;}
-      .hero-socials{font-size:12px !important;gap:24px !important;margin-top:30px !important;}
+      h1{font-size:clamp(70px,4.667vw,179px) !important;line-height:1.05 !important;}
+      .media-kit{font-size:clamp(30px,2vw,77px) !important;line-height:1.1 !important;margin-bottom:clamp(28px,1.867vw,72px) !important;}
+      .lead{font-size:clamp(21px,1.4vw,54px) !important;line-height:1.34 !important;max-width:clamp(540px,36vw,1382px) !important;}
+      .hero-socials{font-size:clamp(12px,.8vw,31px) !important;gap:clamp(24px,1.6vw,61px) !important;margin-top:clamp(30px,2vw,77px) !important;}
 
       .model-card{
-        height:650px !important;
-        min-height:650px !important;
+        height:clamp(650px,43.333vw,1664px) !important;
+        min-height:clamp(650px,43.333vw,1664px) !important;
         overflow:visible !important;
       }
       #voxelCanvas{
@@ -2942,254 +2959,93 @@
         transform:translate(-50%, -50%) scale(1.13) !important;
       }
 
-      .section{padding:58px 0 !important;}
-      #stats{padding-top:56px !important;}
-      .section-title{font-size:34px !important;line-height:1.25 !important;margin-bottom:42px !important;}
+      .section{padding:clamp(58px,3.867vw,148px) 0 !important;}
+      #stats{padding-top:clamp(56px,3.733vw,143px) !important;}
+      .section-title{font-size:clamp(34px,2.267vw,87px) !important;line-height:1.25 !important;margin-bottom:clamp(42px,2.8vw,108px) !important;}
 
+      .summary{gap:clamp(44px,2.933vw,113px) !important;}
       .summary-item .big-num,
       .audience-big .big-num{
-        font-size:62px !important;
+        font-size:clamp(62px,4.133vw,159px) !important;
       }
       .label,
       .audience-big span{
-        font-size:16px !important;
+        font-size:clamp(16px,1.067vw,41px) !important;
         line-height:1.35 !important;
       }
+      .audience-grid{gap:clamp(44px,2.933vw,113px) !important;}
 
-      .platform h3{font-size:18px !important;line-height:1.35 !important;}
-      .platform-label{font-size:16px !important;line-height:1.35 !important;}
-      .platform-value{font-size:22px !important;line-height:1 !important;}
+      .platforms{gap:clamp(28px,1.867vw,72px) !important;}
+      .platform{padding:clamp(28px,1.867vw,72px) clamp(30px,2vw,77px) !important;}
+      .platform h3{font-size:clamp(18px,1.2vw,46px) !important;line-height:1.35 !important;margin-bottom:clamp(24px,1.6vw,61px) !important;}
+      .platform-row{padding:clamp(13px,.867vw,33px) 0 !important;}
+      .platform-label{font-size:clamp(16px,1.067vw,41px) !important;line-height:1.35 !important;}
+      .platform-value{font-size:clamp(22px,1.467vw,56px) !important;line-height:1 !important;}
 
       .formats-grid,
       .base-grid{
         grid-template-columns:repeat(2, minmax(0, 1fr)) !important;
-        gap:36px 44px !important;
+        gap:clamp(36px,2.4vw,92px) clamp(44px,2.933vw,113px) !important;
         grid-auto-rows:1fr !important;
         align-items:stretch !important;
       }
 
       .card.format,
       .card.base-card{
-        min-height:230px !important;
+        min-height:clamp(230px,15.333vw,589px) !important;
         height:auto !important;
-        padding:34px 36px !important;
+        padding:clamp(34px,2.267vw,87px) clamp(36px,2.4vw,92px) !important;
       }
 
       .format h3,
       .base-card h3{
-        font-size:18px !important;
+        font-size:clamp(18px,1.2vw,46px) !important;
         line-height:1.42 !important;
-        margin-bottom:24px !important;
-        max-width:520px !important;
+        margin-bottom:clamp(24px,1.6vw,61px) !important;
+        max-width:clamp(520px,34.667vw,1331px) !important;
       }
 
       .format p,
       .base-card p{
-        font-size:18px !important;
+        font-size:clamp(18px,1.2vw,46px) !important;
         line-height:1.45 !important;
-        max-width:520px !important;
+        max-width:clamp(520px,34.667vw,1331px) !important;
         width:auto !important;
       }
 
       #brief{
-        padding-top:64px !important;
+        padding-top:clamp(64px,4.267vw,164px) !important;
       }
       .brief-grid{
         grid-template-columns:repeat(2,minmax(0,1fr)) !important;
-        gap:44px !important;
+        gap:clamp(44px,2.933vw,113px) !important;
       }
       #brief .brief-copy .section-title{
-        font-size:58px !important;
+        font-size:clamp(58px,3.867vw,148px) !important;
         line-height:1.12 !important;
-        margin-bottom:22px !important;
-        max-width:520px !important;
+        margin-bottom:clamp(22px,1.467vw,56px) !important;
+        max-width:clamp(520px,34.667vw,1331px) !important;
       }
       #brief .brief-copy p{
-        font-size:18px !important;
+        font-size:clamp(18px,1.2vw,46px) !important;
         line-height:1.45 !important;
-        max-width:520px !important;
+        max-width:clamp(520px,34.667vw,1331px) !important;
       }
-      input,textarea{font-size:16px !important;}
+      .form label{font-size:clamp(16px,1.067vw,41px) !important;line-height:1.3 !important;margin-bottom:clamp(10px,.667vw,26px) !important;}
+      .form-group{margin-bottom:clamp(20px,1.333vw,51px) !important;}
+      input,textarea{font-size:clamp(16px,1.067vw,41px) !important;padding:clamp(14px,.933vw,36px) clamp(16px,1.067vw,41px) !important;}
+      input{height:clamp(58px,3.867vw,148px) !important;}
+      textarea{min-height:clamp(160px,10.667vw,410px) !important;}
+      .submit{font-size:clamp(12px,.8vw,31px) !important;padding:clamp(22px,1.467vw,56px) clamp(16px,1.067vw,41px) !important;}
     }
 
 
-    /* === FINAL 20260630 desktop fluid scale 1500-3840 === */
-    @media (min-width:1501px){
-      :root{
-        --desk-scale:clamp(1, calc(100vw / 1500), 2.56);
-        --desk-wrap:calc(1280px * var(--desk-scale));
-        --desk-px:calc(44px * var(--desk-scale));
-      }
 
-      .wrap,
-      .hero .wrap,
-      .topbar .wrap{
-        width:min(var(--desk-wrap), calc(100% - var(--desk-px) * 2)) !important;
-      }
 
-      .topbar .wrap{
-        height:calc(64px * var(--desk-scale)) !important;
-      }
-      .brand-mark{
-        width:calc(30px * var(--desk-scale)) !important;
-        height:calc(30px * var(--desk-scale)) !important;
-      }
-      .brand{
-        font-size:calc(12px * var(--desk-scale)) !important;
-      }
-      .topbar .nav,
-      .topbar .nav a:not(.nav-btn),
-      .topbar .nav .lang-toggle{
-        font-size:calc(12px * var(--desk-scale)) !important;
-      }
-      .topbar .nav{
-        gap:calc(40px * var(--desk-scale)) !important;
-      }
-      .topbar .nav-btn{
-        font-size:calc(12px * var(--desk-scale)) !important;
-        padding:calc(13px * var(--desk-scale)) calc(18px * var(--desk-scale)) !important;
-      }
-
-      .hero{
-        min-height:calc(720px * var(--desk-scale)) !important;
-        padding-top:calc(44px * var(--desk-scale)) !important;
-        padding-bottom:calc(38px * var(--desk-scale)) !important;
-      }
-      .hero-grid{
-        grid-template-columns:calc(560px * var(--desk-scale)) 1fr !important;
-        gap:calc(76px * var(--desk-scale)) !important;
-      }
-      h1{
-        font-size:calc(70px * var(--desk-scale)) !important;
-      }
-      .media-kit{
-        font-size:calc(30px * var(--desk-scale)) !important;
-        margin-bottom:calc(28px * var(--desk-scale)) !important;
-      }
-      .lead{
-        font-size:calc(21px * var(--desk-scale)) !important;
-        max-width:calc(540px * var(--desk-scale)) !important;
-      }
-      .hero-socials{
-        font-size:calc(12px * var(--desk-scale)) !important;
-        gap:calc(24px * var(--desk-scale)) !important;
-        margin-top:calc(30px * var(--desk-scale)) !important;
-      }
-
-      .model-card{
-        height:calc(650px * var(--desk-scale)) !important;
-        min-height:calc(650px * var(--desk-scale)) !important;
-      }
-      #voxelCanvas{
-        transform:translate(-50%, -50%) scale(1.08) !important;
-      }
-      .model-card:hover #voxelCanvas,
-      body.model-pressed #voxelCanvas{
-        transform:translate(-50%, -50%) scale(1.13) !important;
-      }
-
-      .section{
-        padding:calc(58px * var(--desk-scale)) 0 !important;
-      }
-      #stats{
-        padding-top:calc(56px * var(--desk-scale)) !important;
-      }
-      .section-title{
-        font-size:calc(34px * var(--desk-scale)) !important;
-        margin-bottom:calc(42px * var(--desk-scale)) !important;
-      }
-      .summary{
-        gap:calc(20px * var(--desk-scale)) !important;
-        margin-bottom:calc(30px * var(--desk-scale)) !important;
-      }
-      .summary-item .big-num,
-      .audience-big .big-num{
-        font-size:calc(62px * var(--desk-scale)) !important;
-      }
-      .label,
-      .audience-big span{
-        font-size:calc(16px * var(--desk-scale)) !important;
-      }
-
-      .platform-cards{
-        gap:calc(24px * var(--desk-scale)) !important;
-      }
-      .card.platform{
-        padding:calc(26px * var(--desk-scale)) !important;
-      }
-      .platform h3{
-        font-size:calc(18px * var(--desk-scale)) !important;
-        margin-bottom:calc(28px * var(--desk-scale)) !important;
-      }
-      .platform-row{
-        column-gap:calc(18px * var(--desk-scale)) !important;
-        padding:calc(14px * var(--desk-scale)) 0 !important;
-      }
-      .platform-label{
-        font-size:calc(16px * var(--desk-scale)) !important;
-      }
-      .platform-value{
-        font-size:calc(22px * var(--desk-scale)) !important;
-      }
-
-      .formats-grid,
-      .base-grid{
-        grid-template-columns:repeat(2, minmax(0, 1fr)) !important;
-        gap:calc(36px * var(--desk-scale)) calc(44px * var(--desk-scale)) !important;
-      }
-      .card.format,
-      .card.base-card{
-        min-height:calc(230px * var(--desk-scale)) !important;
-        padding:calc(34px * var(--desk-scale)) calc(36px * var(--desk-scale)) !important;
-      }
-      .format h3,
-      .base-card h3{
-        font-size:calc(18px * var(--desk-scale)) !important;
-        margin-bottom:calc(24px * var(--desk-scale)) !important;
-        max-width:calc(520px * var(--desk-scale)) !important;
-      }
-      .format p,
-      .base-card p{
-        font-size:calc(18px * var(--desk-scale)) !important;
-        max-width:calc(520px * var(--desk-scale)) !important;
-      }
-
-      #brief{
-        padding-top:calc(64px * var(--desk-scale)) !important;
-      }
-      .brief-grid{
-        gap:calc(44px * var(--desk-scale)) !important;
-      }
-      #brief .brief-copy .section-title{
-        font-size:calc(58px * var(--desk-scale)) !important;
-        margin-bottom:calc(22px * var(--desk-scale)) !important;
-        max-width:calc(520px * var(--desk-scale)) !important;
-      }
-      #brief .brief-copy p{
-        font-size:calc(18px * var(--desk-scale)) !important;
-        max-width:calc(520px * var(--desk-scale)) !important;
-      }
-      label{
-        font-size:calc(13px * var(--desk-scale)) !important;
-      }
-      input,
-      textarea{
-        font-size:calc(16px * var(--desk-scale)) !important;
-        padding:calc(16px * var(--desk-scale)) calc(15px * var(--desk-scale)) !important;
-      }
-      textarea{
-        min-height:calc(150px * var(--desk-scale)) !important;
-      }
-      .submit{
-        font-size:calc(10px * var(--desk-scale)) !important;
-        min-height:calc(58px * var(--desk-scale)) !important;
-        padding:calc(18px * var(--desk-scale)) !important;
-      }
-    }
 
 </style>
 
-  <script>window.__DANYAPEZ_VERSION__ = "20260630162000-desktop-fluid-to-3840";</script>
+  <script>window.__DANYAPEZ_VERSION__ = "20260630150500-desktop-safe-proportional";</script>
 </head>
 <body>
   <header class="topbar">
