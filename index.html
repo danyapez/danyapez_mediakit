@@ -1,8 +1,8 @@
-<!-- cache-bust-version: 20260630175500-lang-timezone-detect -->
+<!-- cache-bust-version: 20260630182000-form-placeholders-lines -->
 <!doctype html>
 <html lang="ru">
 <head>
-  <!-- cache-bust: 20260630175500-lang-timezone-detect -->
+  <!-- cache-bust: 20260630182000-form-placeholders-lines -->
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Expires" content="0">
@@ -3102,6 +3102,80 @@
       }
     }
 
+
+    /* === FINAL 20260630 form placeholders + 1px white platform lines === */
+    /* Убираем подписи над полями: текст теперь внутри самих блоков */
+    #brief .field{
+      gap:0 !important;
+    }
+    #brief .field > label{
+      position:absolute !important;
+      width:1px !important;
+      height:1px !important;
+      padding:0 !important;
+      margin:-1px !important;
+      overflow:hidden !important;
+      clip:rect(0 0 0 0) !important;
+      white-space:nowrap !important;
+      border:0 !important;
+    }
+    #brief input::placeholder,
+    #brief textarea::placeholder{
+      color:rgba(255,255,255,.46) !important;
+      opacity:1 !important;
+    }
+    #brief input,
+    #brief textarea{
+      border:1px solid #fff !important;
+    }
+    .platform-row,
+    .stat-row{
+      border-top:1px solid #fff !important;
+    }
+    .platform-row:first-child,
+    .stat-row:first-child{
+      border-top:0 !important;
+    }
+
+    @media (min-width:981px){
+      #brief .brief-grid{
+        align-items:start !important;
+      }
+      #brief form,
+      #briefForm{
+        margin-top:0 !important;
+        padding-top:0 !important;
+        align-self:start !important;
+        transform:none !important;
+      }
+    }
+
+    @media (min-width:1501px){
+      #brief .brief-grid{
+        align-items:start !important;
+      }
+      #brief form,
+      #briefForm{
+        margin-top:0 !important;
+        padding-top:0 !important;
+        align-self:start !important;
+      }
+      #brief .field{
+        gap:0 !important;
+      }
+      #brief input{
+        height:64px !important;
+        padding:0 18px !important;
+      }
+      #brief textarea{
+        min-height:176px !important;
+        padding:18px !important;
+      }
+      #brief .submit{
+        min-height:64px !important;
+      }
+    }
+
 </style>
   <script>
     (function(){
@@ -3255,9 +3329,9 @@
           <p data-i18n="briefText">Оставьте заявку, и я свяжусь с вами в ближайшее время.</p>
         </div>
         <form id="briefForm">
-          <div class="field"><label for="name" data-i18n="nameLabel">Имя / бренд</label><input id="name" name="name" autocomplete="organization" required></div>
-          <div class="field"><label for="contact" data-i18n="contactLabel">Как связаться</label><input id="contact" name="contact" placeholder="Telegram, почта, Instagram или другой удобный способ" data-i18n-placeholder="contactPlaceholder" required></div>
-          <div class="field"><label for="task" data-i18n="taskLabel">Что нужно</label><textarea id="task" name="task" placeholder="Интеграция, обзор, распаковка, съемка мероприятия, пакет соцсетей..." data-i18n-placeholder="taskPlaceholder" required></textarea></div>
+          <div class="field"><label for="name" data-i18n="nameLabel">Имя / бренд</label><input id="name" name="name" autocomplete="organization" placeholder="Имя / бренд" data-i18n-placeholder="namePlaceholder" required></div>
+          <div class="field"><label for="contact" data-i18n="contactLabel">Как связаться</label><input id="contact" name="contact" placeholder="Как связаться: Telegram / почта" data-i18n-placeholder="contactPlaceholder" required></div>
+          <div class="field"><label for="task" data-i18n="taskLabel">Что нужно</label><textarea id="task" name="task" placeholder="Напишите какого рода нужна услуга по видео" data-i18n-placeholder="taskPlaceholder" required></textarea></div>
           <button class="submit" type="submit" data-i18n="cta">Оставить заявку</button>
           <div class="form-status" id="formStatus"></div>
         </form>
@@ -3405,7 +3479,7 @@
         pvmTitle:'Sony PVM', pvmText:'Профессиональный CRT-монитор для красивой картинки с консолей и настоящего ретро-вида.',
         shootEditTitle:'Съёмка и монтаж', shootEditText:'Снимаю от iPhone до Blackmagic. Соберу ролик, подберу музыку, сделаю монтаж и адаптирую под нужные соцсети.',
         briefTitle:'Есть задача\nдля съёмки?', briefText:'Оставьте заявку, и я свяжусь с вами в ближайшее время.',
-        nameLabel:'Имя / бренд', contactLabel:'Как связаться', taskLabel:'Что нужно', contactPlaceholder:'Telegram, почта, Instagram или другой удобный способ', taskPlaceholder:'Интеграция, обзор, распаковка, съемка мероприятия, пакет соцсетей...',
+        nameLabel:'Имя / бренд', contactLabel:'Как связаться', taskLabel:'Что нужно', namePlaceholder:'Имя / бренд', contactPlaceholder:'Как связаться: Telegram / почта', taskPlaceholder:'Напишите какого рода нужна услуга по видео',
         thanksTitle:'Спасибо', thanksText:'Заявка отправлена. Свяжусь с вами в ближайшее время.', privacy:'Данные из формы используются только для ответа на вашу заявку и не передаются третьим лицам.', ok:'Ок', soundOn:'Включить звук', soundOff:'Выключить звук',
         loading:'Отправляем заявку', formError:'Не получилось отправить. Попробуйте ещё раз или напишите в соцсети.'
       },
@@ -3426,7 +3500,7 @@
         pvmTitle:'Sony PVM', pvmText:'A professional CRT monitor for a clean console image and a real retro look.',
         shootEditTitle:'Shooting and editing', shootEditText:'I shoot from iPhone to Blackmagic, edit the video, pick music and adapt it for the needed platforms.',
         briefTitle:'Need something\nfilmed?', briefText:'Send a request, and I will get back to you soon.',
-        nameLabel:'Name / brand', contactLabel:'Contact', taskLabel:'What do you need?', contactPlaceholder:'Telegram, email, Instagram or another convenient contact', taskPlaceholder:'Integration, review, unboxing, event shoot, social package...',
+        nameLabel:'Name / brand', contactLabel:'Contact', taskLabel:'What do you need?', namePlaceholder:'Name / brand', contactPlaceholder:'Contact: Telegram / email', taskPlaceholder:'Write what kind of video service you need',
         thanksTitle:'Thanks', thanksText:'Request sent. I will get back to you soon.', privacy:'Form data is used only to reply to your request and is not shared with third parties.', ok:'Ok', soundOn:'Turn sound on', soundOff:'Turn sound off',
         loading:'Sending request', formError:'Could not send the request. Try again or message me on social media.'
       }
