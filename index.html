@@ -1,8 +1,8 @@
-<!-- cache-bust-version: 20260630115000-header-menu-12 -->
+<!-- cache-bust-version: 20260630141500-card-outline-text-width -->
 <!doctype html>
 <html lang="ru">
 <head>
-  <!-- cache-bust: header-menu-12-20260630 -->
+  <!-- cache-bust: card-outline-text-width-20260630 -->
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Expires" content="0">
@@ -2846,9 +2846,50 @@
         line-height:1 !important;
       }
     }
+
+
+    /* === FINAL 20260630 card text width + white outlines === */
+    /* Контуры карточек и формы как у кнопки: 1px solid white */
+    .card,
+    .platform.card,
+    .card.format,
+    .card.base-card,
+    input,
+    textarea,
+    .submit,
+    .thanks-box,
+    .thanks-box button{
+      border:1px solid #fff !important;
+    }
+
+    /* В Форматах и Сетапе ограничиваем длину строки, чтобы текст не растягивался на всю карточку */
+    .format p,
+    .base-card p{
+      max-width:min(100%, 610px) !important;
+      width:100% !important;
+    }
+
+    @media (min-width:981px){
+      .formats-grid,
+      .base-grid{
+        grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+      }
+      .format p,
+      .base-card p{
+        max-width:clamp(460px,32vw,610px) !important;
+      }
+    }
+
+    @media (max-width:720px){
+      .format p,
+      .base-card p{
+        max-width:100% !important;
+      }
+    }
+
 </style>
 
-  <script>window.__DANYAPEZ_VERSION__ = "20260630112500-remove-gif-hero-fix";</script>
+  <script>window.__DANYAPEZ_VERSION__ = "20260630141500-card-outline-text-width";</script>
 </head>
 <body>
   <header class="topbar">
