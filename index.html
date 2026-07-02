@@ -1,8 +1,8 @@
-<!-- cache-bust-version: 20260630193000-selection-purple -->
+<!-- cache-bust-version: 20260702153000-telegram-ios-top-mask -->
 <!doctype html>
 <html lang="ru">
 <head>
-  <!-- cache-bust: 20260630193000-selection-purple -->
+  <!-- cache-bust: 20260702153000-telegram-ios-top-mask -->
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Expires" content="0">
@@ -3176,6 +3176,33 @@
       }
       #brief .submit{
         min-height:64px !important;
+      }
+    }
+
+
+    /* === FINAL 20260702: black top mask for iPhone / Telegram in-app browser === */
+    @media (max-width:720px){
+      .topbar{
+        isolation:isolate !important;
+        overflow:visible !important;
+      }
+      .topbar .wrap{
+        position:relative !important;
+        z-index:3 !important;
+      }
+      .topbar::before{
+        content:"" !important;
+        position:fixed !important;
+        left:0 !important;
+        right:0 !important;
+        top:0 !important;
+        height:max(190px, calc(env(safe-area-inset-top, 0px) + 150px)) !important;
+        background:#000 !important;
+        z-index:1 !important;
+        pointer-events:none !important;
+      }
+      .topbar::after{
+        content:none !important;
       }
     }
 
