@@ -3288,9 +3288,9 @@
           <article class="card platform">
             <h3>TikTok</h3>
             <div class="platform-main">
-              <div class="platform-row"><span class="platform-label" data-i18n="followers">подписчики</span><b class="platform-value count-up" data-count="9300" data-format="short-1">0</b></div>
-              <div class="platform-row"><span class="platform-label" data-i18n="views">просмотры</span><b class="platform-value count-up" data-count="655000" data-format="short">0</b></div>
-              <div class="platform-row"><span class="platform-label" data-i18n="likesEngagement">лайки / вовлечения</span><b class="platform-value count-up" data-count="21900" data-format="short-1">0</b></div>
+              <div class="platform-row"><span class="platform-label" data-i18n="followers">подписчики</span><b class="platform-value count-up" data-live-stat="tiktok.followers" data-count="9300" data-format="short-1">0</b></div>
+              <div class="platform-row"><span class="platform-label" data-i18n="views">просмотры</span><b class="platform-value count-up" data-live-stat="tiktok.views" data-count="655000" data-format="short">0</b></div>
+              <div class="platform-row"><span class="platform-label" data-i18n="likesEngagement">лайки / вовлечения</span><b class="platform-value count-up" data-live-stat="tiktok.likesEngagement" data-count="21900" data-format="short-1">0</b></div>
             </div>
           </article>
           <article class="card platform">
@@ -3304,9 +3304,9 @@
           <article class="card platform">
             <h3>YouTube</h3>
             <div class="platform-main">
-              <div class="platform-row"><span class="platform-label" data-i18n="followers">подписчики</span><b class="platform-value count-up" data-count="416" data-format="number">0</b></div>
-              <div class="platform-row"><span class="platform-label" data-i18n="channelViews">просмотры канала</span><b class="platform-value count-up" data-count="250000" data-format="short">0</b></div>
-              <div class="platform-row"><span class="platform-label" data-i18n="topShorts">лучшие Shorts</span><b class="platform-value count-up" data-count="7500" data-format="short-1-plus">0</b></div>
+              <div class="platform-row"><span class="platform-label" data-i18n="followers">подписчики</span><b class="platform-value count-up" data-live-stat="youtube.followers" data-count="416" data-format="number">0</b></div>
+              <div class="platform-row"><span class="platform-label" data-i18n="channelViews">просмотры канала</span><b class="platform-value count-up" data-live-stat="youtube.channelViews" data-count="250000" data-format="short">0</b></div>
+              <div class="platform-row"><span class="platform-label" data-i18n="topShorts">лучшие Shorts</span><b class="platform-value count-up" data-live-stat="youtube.topShorts" data-count="7500" data-format="short-1-plus">0</b></div>
             </div>
           </article>
         </div>
@@ -3318,9 +3318,9 @@
         <div>
           <h2 class="section-title" data-i18n="audienceTitle">Аудитория</h2>
           <div class="audience-big">
-            <div class="summary-item"><div class="big-num count-up" data-count="382000" data-format="short">0</div><span data-i18n="annualReach">годовой охват</span></div>
-            <div class="summary-item"><div class="big-num count-up" data-count="87" data-format="percent">0</div><span data-i18n="maleAudience">мужская аудитория</span></div>
-            <div class="summary-item"><div class="big-num">18–35</div><span data-i18n="coreAge">основной возраст</span></div>
+            <div class="summary-item"><div class="big-num count-up" data-live-stat="audience.annualReach" data-count="382000" data-format="short">0</div><span data-i18n="annualReach">годовой охват</span></div>
+            <div class="summary-item"><div class="big-num count-up" data-live-stat="audience.maleAudience" data-count="87" data-format="percent">0</div><span data-i18n="maleAudience">мужская аудитория</span></div>
+            <div class="summary-item"><div class="big-num" data-live-stat="audience.coreAge" data-format="text">18–35</div><span data-i18n="coreAge">основной возраст</span></div>
           </div>
         </div>
       </div>
@@ -3658,15 +3658,25 @@ function closeMobileMenu(){
        вставьте ссылку в LIVE_STATS_URL.
     */
     const LIVE_STATS_INLINE = {
+      tiktok: {
+        followers: 9300,
+        views: 655000,
+        likesEngagement: 21900
+      },
       instagram: {
         followers: 250,
         viewsReach: 40000,
         interactions: 3800
       },
-      totals: {
-        followers: 10000,
-        contentViews: 900000,
-        yearViews: 655000
+      youtube: {
+        followers: 416,
+        channelViews: 250000,
+        topShorts: 7500
+      },
+      audience: {
+        annualReach: 382000,
+        maleAudience: 87,
+        coreAge: '18–35'
       }
     };
     const LIVE_STATS_URL = '';
@@ -3752,14 +3762,38 @@ function closeMobileMenu(){
     function getNestedStat(source, path){
       return String(path || '').split('.').reduce((obj, key) => obj && obj[key] !== undefined ? obj[key] : undefined, source);
     }
+    function toNumberStat(value){
+      const next = Number(value);
+      return Number.isFinite(next) ? next : 0;
+    }
+    function prepareLiveStats(data){
+      const source = JSON.parse(JSON.stringify(data || {}));
+      const tiktok = source.tiktok || {};
+      const instagram = source.instagram || {};
+      const youtube = source.youtube || {};
+      source.totals = {
+        followers: toNumberStat(tiktok.followers) + toNumberStat(instagram.followers) + toNumberStat(youtube.followers),
+        contentViews: toNumberStat(tiktok.views) + toNumberStat(instagram.viewsReach) + toNumberStat(youtube.channelViews),
+        yearViews: toNumberStat(tiktok.views) + toNumberStat(instagram.viewsReach) + toNumberStat(youtube.channelViews)
+      };
+      return source;
+    }
     function applyLiveStats(data){
       if (!data || typeof data !== 'object') return;
+      const prepared = prepareLiveStats(data);
       document.querySelectorAll('[data-live-stat]').forEach(el => {
-        const next = Number(getNestedStat(data, el.dataset.liveStat));
+        const raw = getNestedStat(prepared, el.dataset.liveStat);
+        const format = el.dataset.format || 'number';
+        if (format === 'text') {
+          if (raw === undefined || raw === null) return;
+          el.textContent = String(raw);
+          return;
+        }
+        const next = Number(raw);
         if (!Number.isFinite(next)) return;
         el.dataset.count = String(next);
         el.dataset.done = '1';
-        el.textContent = formatCounter(next, el.dataset.format || 'number');
+        el.textContent = formatCounter(next, format);
       });
     }
     async function loadLiveStats(){
