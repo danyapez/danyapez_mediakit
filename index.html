@@ -1,8 +1,8 @@
-<!-- cache-bust-version: 20260708-auto-translate-content -->
+<!-- cache-bust-version: 20260708-auto-audience-reach -->
 <!doctype html>
 <html lang="ru">
 <head>
-  <!-- cache-bust: 20260708-auto-translate-content -->
+  <!-- cache-bust: 20260708-auto-audience-reach -->
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Expires" content="0">
@@ -3771,11 +3771,15 @@ function closeMobileMenu(){
       const tiktok = source.tiktok || {};
       const instagram = source.instagram || {};
       const youtube = source.youtube || {};
+      const totalFollowers = toNumberStat(tiktok.followers) + toNumberStat(instagram.followers) + toNumberStat(youtube.followers);
+      const totalReachViews = toNumberStat(tiktok.views) + toNumberStat(instagram.viewsReach) + toNumberStat(youtube.channelViews);
       source.totals = {
-        followers: toNumberStat(tiktok.followers) + toNumberStat(instagram.followers) + toNumberStat(youtube.followers),
-        contentViews: toNumberStat(tiktok.views) + toNumberStat(instagram.viewsReach) + toNumberStat(youtube.channelViews),
-        yearViews: toNumberStat(tiktok.views) + toNumberStat(instagram.viewsReach) + toNumberStat(youtube.channelViews)
+        followers: totalFollowers,
+        contentViews: totalReachViews,
+        yearViews: totalReachViews
       };
+      source.audience = source.audience || {};
+      source.audience.annualReach = totalReachViews;
       return source;
     }
     function applyLiveStats(data){
