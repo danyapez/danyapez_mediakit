@@ -1,8 +1,8 @@
-<!-- cache-bust-version: 20260708-auto-audience-reach -->
+<!-- cache-bust-version: 20260708-no-auto-translate -->
 <!doctype html>
 <html lang="ru">
 <head>
-  <!-- cache-bust: 20260708-auto-audience-reach -->
+  <!-- cache-bust: 20260708-no-auto-translate -->
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Expires" content="0">
@@ -3747,9 +3747,7 @@ function closeMobileMenu(){
         const content = await response.json();
         if (content.i18n) {
           deepMerge(I18N, content.i18n);
-          if (content.autoTranslateEn !== false && content.i18n.ru) {
-            await autoTranslateRuContentToEn(content.i18n.ru);
-          }
+          /* Автоперевод отключён: английский берётся только из блока i18n.en в content.json */
           applyI18n();
         }
         if (content.stats) {
