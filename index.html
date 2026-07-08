@@ -1,8 +1,8 @@
-<!-- cache-bust-version: 20260702161000-mobile-header-revert-safe-model -->
+<!-- cache-bust-version: 20260708-auto-translate-content -->
 <!doctype html>
 <html lang="ru">
 <head>
-  <!-- cache-bust: 20260702161000-mobile-header-revert-safe-model -->
+  <!-- cache-bust: 20260708-auto-translate-content -->
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Expires" content="0">
@@ -3236,7 +3236,7 @@
   </script>
 
 
-  <script>window.__DANYAPEZ_VERSION__ = "20260630163000-font-load-fix";</script>
+  <script>window.__DANYAPEZ_VERSION__ = "20260708212000-single-html-inline-stats";</script>
 </head>
 <body>
   <header class="topbar">
@@ -3280,9 +3280,9 @@
       <div class="wrap">
         <h2 class="section-title" data-i18n="statsTitle">Цифры</h2>
         <div class="summary">
-          <div class="summary-item"><div class="big-num count-up" data-count="10000" data-format="short-plus">0</div><div class="label" data-i18n="totalFollowers">суммарно подписчиков</div></div>
-          <div class="summary-item"><div class="big-num count-up" data-count="900000" data-format="short-plus">0</div><div class="label" data-i18n="totalContentViews">общие просмотры контента</div></div>
-          <div class="summary-item"><div class="big-num count-up" data-count="655000" data-format="short">0</div><div class="label" data-i18n="yearViews">просмотры за год</div></div>
+          <div class="summary-item"><div class="big-num count-up" data-live-stat="totals.followers" data-count="10000" data-format="short-plus">0</div><div class="label" data-i18n="totalFollowers">суммарно подписчиков</div></div>
+          <div class="summary-item"><div class="big-num count-up" data-live-stat="totals.contentViews" data-count="900000" data-format="short-plus">0</div><div class="label" data-i18n="totalContentViews">общие просмотры контента</div></div>
+          <div class="summary-item"><div class="big-num count-up" data-live-stat="totals.yearViews" data-count="655000" data-format="short">0</div><div class="label" data-i18n="yearViews">просмотры за год</div></div>
         </div>
         <div class="cards platform-cards">
           <article class="card platform">
@@ -3296,9 +3296,9 @@
           <article class="card platform">
             <h3>Instagram</h3>
             <div class="platform-main">
-              <div class="platform-row"><span class="platform-label" data-i18n="followers">подписчики</span><b class="platform-value count-up" data-count="250" data-format="number">0</b></div>
-              <div class="platform-row"><span class="platform-label" data-i18n="viewsReach">просмотры / охваты</span><b class="platform-value count-up" data-count="40000" data-format="short">0</b></div>
-              <div class="platform-row"><span class="platform-label" data-i18n="interactions">взаимодействия</span><b class="platform-value count-up" data-count="3800" data-format="short-1">0</b></div>
+              <div class="platform-row"><span class="platform-label" data-i18n="followers">подписчики</span><b class="platform-value count-up" data-live-stat="instagram.followers" data-count="250" data-format="number">0</b></div>
+              <div class="platform-row"><span class="platform-label" data-i18n="viewsReach">просмотры / охваты</span><b class="platform-value count-up" data-live-stat="instagram.viewsReach" data-count="40000" data-format="short">0</b></div>
+              <div class="platform-row"><span class="platform-label" data-i18n="interactions">взаимодействия</span><b class="platform-value count-up" data-live-stat="instagram.interactions" data-count="3800" data-format="short-1">0</b></div>
             </div>
           </article>
           <article class="card platform">
@@ -3649,6 +3649,134 @@ function closeMobileMenu(){
     document.querySelectorAll('.count-up').forEach(el=>{
       if(counterObserver) counterObserver.observe(el); else animateCounter(el);
     });
+
+
+    /* === INLINE STATS 20260708: one-file mode ===
+       Теперь отдельный stats.json не нужен.
+       Чтобы поменять цифры, правьте значения ниже прямо в HTML.
+       Если позже нужен настоящий live-режим из Google Sheets / Apps Script,
+       вставьте ссылку в LIVE_STATS_URL.
+    */
+    const LIVE_STATS_INLINE = {
+      instagram: {
+        followers: 250,
+        viewsReach: 40000,
+        interactions: 3800
+      },
+      totals: {
+        followers: 10000,
+        contentViews: 900000,
+        yearViews: 655000
+      }
+    };
+    const LIVE_STATS_URL = '';
+    const LIVE_STATS_REFRESH_MS = 60000;
+
+
+    /* === SIMPLE ADMIN CMS 20260708 ===
+       Админка редактирует файл content.json рядом с index.html.
+       Сайт подхватывает его при загрузке и обновляет тексты/цифры без правки HTML.
+    */
+    const CMS_CONTENT_URL = 'content.json';
+    function deepMerge(target, source){
+      if (!source || typeof source !== 'object') return target;
+      Object.keys(source).forEach(key => {
+        const value = source[key];
+        if (value && typeof value === 'object' && !Array.isArray(value)) {
+          if (!target[key] || typeof target[key] !== 'object') target[key] = {};
+          deepMerge(target[key], value);
+        } else {
+          target[key] = value;
+        }
+      });
+      return target;
+    }
+    function getTranslateCacheKey(text){
+      try { return 'danyapez_translate_ru_en_' + btoa(unescape(encodeURIComponent(text))).slice(0, 180); }
+      catch (e) { return 'danyapez_translate_ru_en_' + encodeURIComponent(text).slice(0, 180); }
+    }
+    async function translateRuToEn(text){
+      const original = String(text || '');
+      if (!original.trim()) return original;
+      const cacheKey = getTranslateCacheKey(original);
+      try {
+        const cached = localStorage.getItem(cacheKey);
+        if (cached) return cached;
+      } catch (e) {}
+
+      const url = 'https://translate.googleapis.com/translate_a/single?client=gtx&sl=ru&tl=en&dt=t&q=' + encodeURIComponent(original);
+      const response = await fetch(url, {cache:'force-cache'});
+      if (!response.ok) throw new Error('translate failed');
+      const data = await response.json();
+      const translated = (data && data[0] ? data[0].map(part => part && part[0] ? part[0] : '').join('') : '').trim();
+      const result = translated || original;
+      try { localStorage.setItem(cacheKey, result); } catch (e) {}
+      return result;
+    }
+    async function autoTranslateRuContentToEn(ruContent){
+      if (!ruContent || typeof ruContent !== 'object') return;
+      const entries = Object.entries(ruContent).filter(([key, value]) => typeof value === 'string' && key !== 'htmlLang' && key !== 'switchLabel');
+      if (!entries.length) return;
+      const translated = {};
+      for (const [key, value] of entries) {
+        try { translated[key] = await translateRuToEn(value); }
+        catch (e) { translated[key] = I18N.en[key] || value; }
+      }
+      deepMerge(I18N.en, translated);
+      if (I18N.en) {
+        I18N.en.htmlLang = 'en';
+        I18N.en.switchLabel = 'RU';
+        I18N.en.menuOpen = I18N.en.menuOpen || 'Open menu';
+        I18N.en.cta = I18N.en.cta || 'Send request';
+      }
+    }
+    async function loadCmsContent(){
+      try {
+        const response = await fetch(CMS_CONTENT_URL + '?t=' + Date.now(), {cache:'no-store'});
+        if (!response.ok) return;
+        const content = await response.json();
+        if (content.i18n) {
+          deepMerge(I18N, content.i18n);
+          if (content.autoTranslateEn !== false && content.i18n.ru) {
+            await autoTranslateRuContentToEn(content.i18n.ru);
+          }
+          applyI18n();
+        }
+        if (content.stats) {
+          deepMerge(LIVE_STATS_INLINE, content.stats);
+          applyLiveStats(LIVE_STATS_INLINE);
+        }
+      } catch (e) {}
+    }
+
+    function getNestedStat(source, path){
+      return String(path || '').split('.').reduce((obj, key) => obj && obj[key] !== undefined ? obj[key] : undefined, source);
+    }
+    function applyLiveStats(data){
+      if (!data || typeof data !== 'object') return;
+      document.querySelectorAll('[data-live-stat]').forEach(el => {
+        const next = Number(getNestedStat(data, el.dataset.liveStat));
+        if (!Number.isFinite(next)) return;
+        el.dataset.count = String(next);
+        el.dataset.done = '1';
+        el.textContent = formatCounter(next, el.dataset.format || 'number');
+      });
+    }
+    async function loadLiveStats(){
+      applyLiveStats(LIVE_STATS_INLINE);
+      if (!LIVE_STATS_URL) return;
+      try {
+        const url = LIVE_STATS_URL + (LIVE_STATS_URL.includes('?') ? '&' : '?') + 't=' + Date.now();
+        const response = await fetch(url, {cache:'no-store'});
+        if (!response.ok) return;
+        const data = await response.json();
+        applyLiveStats(data);
+      } catch (e) {}
+    }
+    loadLiveStats();
+    if (LIVE_STATS_URL) setInterval(loadLiveStats, LIVE_STATS_REFRESH_MS);
+    loadCmsContent();
+    setInterval(loadCmsContent, LIVE_STATS_REFRESH_MS);
 
 
     function animateHeroLogo(){
