@@ -3236,7 +3236,7 @@
   </script>
 
 
-  <script>window.__DANYAPEZ_VERSION__ = "20260708212000-single-html-inline-stats";</script>
+  <script>window.__DANYAPEZ_VERSION__ = "20260708213500-restore-count-animation";</script>
 </head>
 <body>
   <header class="topbar">
@@ -3628,8 +3628,8 @@ function closeMobileMenu(){
       if (format === 'short') return Math.round(value / 1000) + 'K';
       return Math.round(value).toLocaleString('ru-RU');
     }
-    function animateCounter(el){
-      if (el.dataset.done === '1') return;
+    function animateCounter(el, force){
+      if (!force && el.dataset.done === '1') return;
       el.dataset.done = '1';
       const target = Number(el.dataset.count || 0);
       const format = el.dataset.format || 'number';
@@ -3642,6 +3642,20 @@ function closeMobileMenu(){
         if (t < 1) requestAnimationFrame(tick);
       }
       requestAnimationFrame(tick);
+    }
+    function isElementInViewport(el){
+      const rect = el.getBoundingClientRect();
+      return rect.top < window.innerHeight * 0.92 && rect.bottom > 0;
+    }
+    function resetCounterAnimation(el){
+      if (!el.classList.contains('count-up')) return;
+      el.dataset.done = '0';
+      el.textContent = '0';
+      if (isElementInViewport(el)) {
+        requestAnimationFrame(() => animateCounter(el, true));
+      } else if (counterObserver) {
+        counterObserver.observe(el);
+      }
     }
     const counterObserver = 'IntersectionObserver' in window ? new IntersectionObserver((entries)=>{
       entries.forEach(entry=>{ if(entry.isIntersecting) animateCounter(entry.target); });
@@ -3794,8 +3808,7 @@ function closeMobileMenu(){
         const next = Number(raw);
         if (!Number.isFinite(next)) return;
         el.dataset.count = String(next);
-        el.dataset.done = '1';
-        el.textContent = formatCounter(next, format);
+        resetCounterAnimation(el);
       });
     }
     async function loadLiveStats(){
