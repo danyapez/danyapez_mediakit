@@ -3204,6 +3204,122 @@
       }
     }
 
+
+    /* === Support block between Formats and Setup === */
+    .support-section{
+      padding-top:clamp(26px,2.4vw,42px) !important;
+      padding-bottom:clamp(26px,2.4vw,42px) !important;
+      overflow:hidden;
+    }
+    .support-inner{
+      position:relative;
+      min-height:0;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+    }
+    .support-copy{
+      position:relative;
+      z-index:2;
+      width:100%;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+    }
+    .support-sprite{
+      position:relative;
+      z-index:1;
+      width:clamp(118px,10vw,160px);
+      height:auto;
+      margin:0 auto clamp(14px,1.2vw,20px);
+      image-rendering:pixelated;
+      filter:drop-shadow(0 8px 7px rgba(0,0,0,.62));
+      pointer-events:none;
+      user-select:none;
+    }
+    .support-title{
+      font-family:var(--pixel);
+      font-size:var(--fs-h2);
+      line-height:1.25;
+      letter-spacing:var(--pixel-track-ui,.02em);
+      margin:0 0 8px;
+    }
+    .support-text{
+      margin:0 0 22px;
+      font-family:var(--pixel);
+      font-size:clamp(16px,1.05vw,21px) !important;
+      line-height:1.38;
+      font-weight:400;
+    }
+    .support-button{
+      width:calc((100% - clamp(28px,3vw,48px))/2);
+      border:1px solid #fff;
+      background:#000;
+      color:#fff;
+      padding:20px 18px;
+      min-height:clamp(58px,4vw,78px);
+      font-family:var(--pixel);
+      font-size:var(--type-pixel-ui) !important;
+      line-height:1.25;
+      cursor:pointer;
+      white-space:normal;
+      text-align:center;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+    .support-button:hover{background:#fff;color:#000}
+    @media (min-width:1501px){
+      .support-section{padding-top:32px !important;padding-bottom:32px !important}
+      .support-title{font-size:34px !important}
+      .support-text{font-size:18px !important}
+      .support-button{width:618px !important;font-size:12px !important;min-height:64px !important;padding:22px 16px !important}
+      .support-sprite{width:145px !important;margin-bottom:18px !important}
+    }
+    @media (max-width:980px){
+      .support-button{
+        width:100% !important;
+        font-size:var(--type-pixel-ui-mobile) !important;
+      }
+    }
+    @media (max-width:720px){
+      .support-section{padding-top:28px !important;padding-bottom:28px !important}
+      .support-title{font-size:var(--fs-h2) !important;margin-bottom:7px}
+      .support-text{font-size:16px !important;margin-bottom:20px;max-width:330px}
+      .support-sprite{width:124px;margin-bottom:14px}
+    }
+
+    /* === FINAL support/menu button dimensions 20260713 === */
+    .support-button{
+      width:232px !important;
+      height:44px !important;
+      min-height:44px !important;
+      padding:0 14px !important;
+      font-size:12px !important;
+      line-height:1 !important;
+      white-space:nowrap !important;
+    }
+    @media (min-width:981px){
+      .topbar .nav-btn{
+        height:44px !important;
+        min-height:44px !important;
+        padding:0 14px !important;
+        display:flex !important;
+        align-items:center !important;
+        justify-content:center !important;
+      }
+    }
+    @media (max-width:720px){
+      .support-button{
+        width:232px !important;
+        height:44px !important;
+        min-height:44px !important;
+        padding:0 14px !important;
+        font-size:10px !important;
+      }
+    }
+
 </style>
   <script>
     (function(){
@@ -3236,7 +3352,7 @@
   </script>
 
 
-  <script>window.__DANYAPEZ_VERSION__ = "20260708213500-restore-count-animation";</script>
+  <script>window.__DANYAPEZ_VERSION__ = "20260713-support-block-v2";</script>
 </head>
 <body>
   <header class="topbar">
@@ -3334,6 +3450,18 @@
           <article class="card format"><h3 data-i18n="unboxTitle">Распаковка</h3><p data-i18n="unboxText">Сниму распаковку или первое впечатление: игры, техника, мерч и гик-вещи.</p></article>
           <article class="card format"><h3 data-i18n="eventTitle">Съёмка события</h3><p data-i18n="eventText">Сниму магазин, стенд, запуск, бэкстейдж или атмосферный репортаж на гик-тему.</p></article>
           <article class="card format"><h3 data-i18n="socialPackTitle">Пакет для соцсетей</h3><p data-i18n="socialPackText">Адаптирую материал под TikTok, Instagram, YouTube Shorts и Telegram.</p></article>
+        </div>
+      </div>
+    </section>
+
+
+    <section class="section support-section" id="support">
+      <div class="wrap support-inner">
+        <div class="support-copy">
+          <img class="support-sprite" id="supportSprite" alt="" aria-hidden="true">
+          <h2 class="support-title" data-i18n="supportTitle">Спасибо за поддержку!</h2>
+          <p class="support-text" data-i18n="supportText">Благодаря вам выходит больше нового контента</p>
+          <a class="support-button" href="https://dalink.to/danyapez" target="_blank" rel="noreferrer" data-i18n="supportButton">Поддержать</a>
         </div>
       </div>
     </section>
@@ -3498,6 +3626,7 @@ function closeMobileMenu(){
         htmlLang:'ru', pageTitle:'DANYAPEZ — Media Kit', metaDescription:'Media Kit Danyapez: ретро-гейминг, коллекционирование, старые консоли, ПК и рекламные интеграции.',
         switchLabel:'EN', menuOpen:'Открыть меню', cta:'Оставить заявку',
         navStats:'Цифры', navAudience:'Аудитория', navFormats:'Форматы', navSetup:'Сетап',
+        supportTitle:'Спасибо за поддержку!', supportText:'Благодаря вам выходит больше нового контента', supportButton:'Поддержать',
         heroLead:'Создаю атмосферные видео про ретро-гейминг, старые консоли и ПК.',
         statsTitle:'Цифры', totalFollowers:'суммарно подписчиков', totalContentViews:'общие просмотры контента', yearViews:'просмотры за год',
         audienceTitle:'Аудитория', annualReach:'годовой охват', maleAudience:'мужская аудитория', coreAge:'основной возраст',
@@ -3519,6 +3648,7 @@ function closeMobileMenu(){
         htmlLang:'en', pageTitle:'DANYAPEZ — Media Kit', metaDescription:'Danyapez media kit: retro gaming, collecting, old consoles, PCs and brand integrations.',
         switchLabel:'RU', menuOpen:'Open menu', cta:'Send request',
         navStats:'Stats', navAudience:'Audience', navFormats:'Formats', navSetup:'Setup',
+        supportTitle:'Thank you for your support!', supportText:'You help me create more new content', supportButton:'Support',
         heroLead:'I create atmospheric videos about retro gaming, old consoles and PCs.',
         statsTitle:'Stats', totalFollowers:'total followers', totalContentViews:'total content views', yearViews:'views per year',
         audienceTitle:'Audience', annualReach:'annual reach', maleAudience:'male audience', coreAge:'core age',
@@ -3924,6 +4054,12 @@ function closeMobileMenu(){
         }
       }
     });
+
+
+    const supportSprite = document.getElementById('supportSprite');
+    if (supportSprite && typeof SPRITE_ASSETS !== 'undefined' && SPRITE_ASSETS.length) {
+      supportSprite.src = SPRITE_ASSETS[4] || SPRITE_ASSETS[0];
+    }
 
     function initVoxelModel(){
       const card = document.getElementById('modelCard');
