@@ -1,8 +1,8 @@
-<!-- cache-bust-version: 20260713-support-setup-closer-v1 -->
+<!-- cache-bust-version: 20260713-support-break-only-700 -->
 <!doctype html>
 <html lang="ru">
 <head>
-  <!-- cache-bust: 20260713-support-setup-closer-v1 -->
+  <!-- cache-bust: 20260713-support-break-only-700 -->
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Expires" content="0">
@@ -3370,6 +3370,53 @@
       .support-section{padding-bottom:82px !important;}
     }
 
+
+
+    /* === FINAL support responsive correction 20260713-v3 === */
+    .support-text{
+      max-width:none !important;
+      white-space:nowrap !important;
+    }
+    .support-sprite-fallback{
+      background:transparent !important;
+    }
+    @media (min-width:981px) and (max-width:1500px){
+      .support-title{
+        font-size:clamp(42px,4vw,72px) !important;
+        line-height:1.12 !important;
+        letter-spacing:-.025em !important;
+      }
+    }
+    @media (min-width:1501px){
+      .support-title{
+        font-size:58px !important;
+        line-height:1.12 !important;
+        letter-spacing:-.025em !important;
+      }
+    }
+    @media (max-width:720px){
+      .support-text{
+        width:max-content !important;
+        max-width:calc(100vw - 32px) !important;
+        font-size:clamp(12px,3.45vw,16px) !important;
+        line-height:1.55 !important;
+      }
+      .support-sticker{
+        background:transparent !important;
+      }
+      .support-sticker .support-sprite-fallback{
+        opacity:1 !important;
+        visibility:visible !important;
+        background:transparent !important;
+      }
+    }
+
+    /* === FINAL support text break only on phones up to 700px === */
+    .support-mobile-break{display:none !important;}
+    @media (max-width:700px){
+      .support-mobile-break{display:block !important;}
+    }
+
 </style>
   <script>
     (function(){
@@ -3402,7 +3449,7 @@
   </script>
 
 
-  <script>window.__DANYAPEZ_VERSION__ = "20260713-support-setup-closer-v1";</script>
+  <script>window.__DANYAPEZ_VERSION__ = "20260713-support-break-only-700";</script>
 </head>
 <body>
   <header class="topbar">
@@ -3515,7 +3562,7 @@
             </video>
           </div>
           <h2 class="support-title" data-i18n="supportTitle">Спасибо за поддержку!</h2>
-          <p class="support-text" data-i18n="supportText">Благодаря вам выходит больше нового контента</p>
+          <p class="support-text" data-i18n="supportText">Благодаря вам выходит<br class="support-mobile-break"> больше нового контента</p>
           <a class="support-button" href="https://dalink.to/danyapez" target="_blank" rel="noreferrer" data-i18n="supportButton">Поддержать</a>
         </div>
       </div>
@@ -3681,7 +3728,7 @@ function closeMobileMenu(){
         htmlLang:'ru', pageTitle:'DANYAPEZ — Media Kit', metaDescription:'Media Kit Danyapez: ретро-гейминг, коллекционирование, старые консоли, ПК и рекламные интеграции.',
         switchLabel:'EN', menuOpen:'Открыть меню', cta:'Оставить заявку',
         navStats:'Цифры', navAudience:'Аудитория', navFormats:'Форматы', navSetup:'Сетап',
-        supportTitle:'Спасибо за поддержку!', supportText:'Благодаря вам выходит больше нового контента', supportButton:'Поддержать',
+        supportTitle:'Спасибо за поддержку!', supportText:'Благодаря вам выходит\nбольше нового контента', supportButton:'Поддержать',
         heroLead:'Создаю атмосферные видео про ретро-гейминг, старые консоли и ПК.',
         statsTitle:'Цифры', totalFollowers:'суммарно подписчиков', totalContentViews:'общие просмотры контента', yearViews:'просмотры за год',
         audienceTitle:'Аудитория', annualReach:'годовой охват', maleAudience:'мужская аудитория', coreAge:'основной возраст',
@@ -3703,7 +3750,7 @@ function closeMobileMenu(){
         htmlLang:'en', pageTitle:'DANYAPEZ — Media Kit', metaDescription:'Danyapez media kit: retro gaming, collecting, old consoles, PCs and brand integrations.',
         switchLabel:'RU', menuOpen:'Open menu', cta:'Send request',
         navStats:'Stats', navAudience:'Audience', navFormats:'Formats', navSetup:'Setup',
-        supportTitle:'Thank you for your support!', supportText:'You help me create more new content', supportButton:'Support',
+        supportTitle:'Thank you for your support!', supportText:'You help me create\nmore new content', supportButton:'Support',
         heroLead:'I create atmospheric videos about retro gaming, old consoles and PCs.',
         statsTitle:'Stats', totalFollowers:'total followers', totalContentViews:'total content views', yearViews:'views per year',
         audienceTitle:'Audience', annualReach:'annual reach', maleAudience:'male audience', coreAge:'core age',
@@ -3768,6 +3815,7 @@ function closeMobileMenu(){
         const key = el.getAttribute('data-i18n');
         if (dict[key]) {
           if (key === 'briefTitle') el.innerHTML = String(dict[key]).replace(/\n/g, '<br>');
+          else if (key === 'supportText') el.innerHTML = String(dict[key]).replace(/\n/g, '<br class="support-mobile-break"> ');
           else el.textContent = dict[key];
         }
       });
@@ -4525,6 +4573,12 @@ function closeMobileMenu(){
         if (!wrapper || !video) return;
         video.muted = true;
         video.defaultMuted = true;
+        const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) ||
+          (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+        if (isIOS) {
+          video.remove();
+          return;
+        }
         const play = () => video.play().catch(() => {});
         video.addEventListener('playing', () => wrapper.classList.add('video-ready'));
         video.addEventListener('error', () => wrapper.classList.remove('video-ready'));
