@@ -3417,6 +3417,18 @@
       .support-mobile-break{display:block !important;}
     }
 
+
+    /* extra spacing before the third summary metric */
+    @media (min-width:721px){
+      #stats .summary{
+        grid-template-columns:minmax(0,1fr) minmax(0,1fr) minmax(0,.72fr) !important;
+        column-gap:clamp(48px,7vw,140px) !important;
+      }
+      #stats .summary-item:nth-child(3){
+        padding-left:clamp(18px,2.4vw,42px) !important;
+      }
+    }
+
 </style>
   <script>
     (function(){
@@ -3495,7 +3507,7 @@
         <div class="summary">
           <div class="summary-item"><div class="big-num count-up" data-live-stat="totals.followers" data-count="10000" data-format="short-plus">0</div><div class="label" data-i18n="totalFollowers">суммарно подписчиков</div></div>
           <div class="summary-item"><div class="big-num count-up" data-live-stat="totals.contentViews" data-count="900000" data-format="short-plus">0</div><div class="label" data-i18n="totalContentViews">общие просмотры контента</div></div>
-          <div class="summary-item"><div class="big-num count-up" data-live-stat="totals.yearViews" data-count="655000" data-format="short">0</div><div class="label" data-i18n="yearViews">просмотры за год</div></div>
+          <div class="summary-item"><div class="big-num count-up" data-count="4" data-format="number">0</div><div class="label">платформы</div></div>
         </div>
         <div class="cards platform-cards">
           <article class="card platform">
