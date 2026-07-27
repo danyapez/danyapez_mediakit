@@ -146,5 +146,11 @@
       "loading": "Sending request",
       "formError": "Could not send the request. Try again or message me on social media."
     }
+  },
+  "socials": {
+    "tiktok": "https://www.tiktok.com/@danyapez_old",
+    "instagram": "https://www.instagram.com/danyapez/",
+    "youtube": "https://youtube.com/@danyapez?si=tLhDjJmtQxKkkVdt",
+    "telegram": "https://t.me/danyapez"
   }
 }
