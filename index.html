@@ -1,8 +1,8 @@
-<!-- cache-bust-version: 20260713-support-break-only-700 -->
+<!-- cache-bust-version: 20260727-editable-social-links -->
 <!doctype html>
 <html lang="ru">
 <head>
-  <!-- cache-bust: 20260713-support-break-only-700 -->
+  <!-- cache-bust: 20260727-editable-social-links -->
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Expires" content="0">
@@ -3461,7 +3461,7 @@
   </script>
 
 
-  <script>window.__DANYAPEZ_VERSION__ = "20260713-support-break-only-700";</script>
+  <script>window.__DANYAPEZ_VERSION__ = "20260727-editable-social-links";</script>
 </head>
 <body>
   <header class="topbar">
@@ -3489,10 +3489,10 @@
           <div class="media-kit">MEDIA KIT</div>
           <p class="lead" data-i18n="heroLead">Создаю атмосферные видео про ретро-гейминг, старые консоли и ПК.</p>
           <div class="hero-socials" aria-label="Соцсети">
-            <a href="https://www.tiktok.com/@danyapez_old" target="_blank" rel="noreferrer">TikTok</a>
-            <a href="https://www.instagram.com/danyapez/" target="_blank" rel="noreferrer">Instagram</a>
-            <a href="https://youtube.com/@danyapez?si=tLhDjJmtQxKkkVdt" target="_blank" rel="noreferrer">YouTube</a>
-            <a href="https://t.me/danyapez" target="_blank" rel="noreferrer">Telegram</a>
+            <a href="https://www.tiktok.com/@danyapez_old" data-social="tiktok" target="_blank" rel="noreferrer">TikTok</a>
+            <a href="https://www.instagram.com/danyapez/" data-social="instagram" target="_blank" rel="noreferrer">Instagram</a>
+            <a href="https://youtube.com/@danyapez?si=tLhDjJmtQxKkkVdt" data-social="youtube" target="_blank" rel="noreferrer">YouTube</a>
+            <a href="https://t.me/danyapez" data-social="telegram" target="_blank" rel="noreferrer">Telegram</a>
           </div>
         </div>
         <div class="model-card" id="modelCard" aria-label="3D модель персонажа. Потяните мышкой, чтобы покрутить.">
@@ -3612,10 +3612,10 @@
       <div class="wrap">
         <div id="playfield">
           <div class="socials-big" aria-label="Соцсети">
-            <a href="https://www.tiktok.com/@danyapez_old" target="_blank" rel="noreferrer">TikTok</a>
-            <a href="https://www.instagram.com/danyapez/" target="_blank" rel="noreferrer">Instagram</a>
-            <a href="https://youtube.com/@danyapez?si=tLhDjJmtQxKkkVdt" target="_blank" rel="noreferrer">YouTube</a>
-            <a href="https://t.me/danyapez" target="_blank" rel="noreferrer">Telegram</a>
+            <a href="https://www.tiktok.com/@danyapez_old" data-social="tiktok" target="_blank" rel="noreferrer">TikTok</a>
+            <a href="https://www.instagram.com/danyapez/" data-social="instagram" target="_blank" rel="noreferrer">Instagram</a>
+            <a href="https://youtube.com/@danyapez?si=tLhDjJmtQxKkkVdt" data-social="youtube" target="_blank" rel="noreferrer">YouTube</a>
+            <a href="https://t.me/danyapez" data-social="telegram" target="_blank" rel="noreferrer">Telegram</a>
           </div>
         </div>
       </div>
@@ -4607,5 +4607,25 @@ function closeMobileMenu(){
       }
     })();
   </script>
+
+<script>
+function applySocialLinks(content){
+  const socials = content && content.socials;
+  if (!socials || typeof socials !== 'object') return;
+  document.querySelectorAll('[data-social]').forEach((link) => {
+    const key = link.getAttribute('data-social');
+    const url = socials[key];
+    if (typeof url === 'string' && url.trim()) link.href = url.trim();
+  });
+}
+document.addEventListener('DOMContentLoaded', async () => {
+  try {
+    const response = await fetch('content.json', {cache:'no-store'});
+    if (!response.ok) return;
+    applySocialLinks(await response.json());
+  } catch (_) {}
+});
+</script>
+
 </body>
 </html>
