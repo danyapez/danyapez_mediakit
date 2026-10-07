@@ -4557,13 +4557,34 @@ function closeMobileMenu(){
         try{b.el.releasePointerCapture(ev.pointerId)}catch(_){}
       }
       // ---- физика: фиксированный шаг, небольшая гравитация, упругие столкновения с трением и вращением ----
-      const G = 520;              // небольшая гравитация, px/s²
+      const G_DESK = 520, G_MOB = 1150;   // гравитация: на телефоне сильнее
       const REST = 0.3;           // упругость отскока
       const FRIC = 0.4;           // трение между фигурками и о стенки
       const AIR = 0.9994;         // сопротивление воздуха за шаг
-      const STEP = 1/120;         // шаг симуляции, не зависит от частоты экрана
+      const STEP = 1/240;         // мелкий шаг симуляции — движение плавнее, не зависит от частоты экрана
       const MAXV = 2600;
-      let gx = 0, lastFrame = 0, acc = 0;
+      let gx = 0, gyTilt = 0, lastFrame = 0, acc = 0;
+      // тряска телефона — фигурки разлетаются; наклон — гравитация смещается
+      addEventListener('devicemotion', e => {
+        const a = e.acceleration;
+        if (!a || a.x == null) return;
+        const mag = Math.hypot(a.x, a.y || 0);
+        if (mag < 7) return;
+        const k = Math.min(1, (mag - 7) / 12);
+        for (const b of bodies) {
+          if (b.drag) continue;
+          b.vx = clamp(b.vx - a.x * 70 * k + (Math.random() - .5) * 500 * k, -MAXV, MAXV);
+          b.vy = clamp(b.vy + (a.y || 0) * 70 * k - (250 + Math.random() * 650) * k, -MAXV, MAXV);
+          b.w_ += (Math.random() - .5) * 14 * k;
+        }
+      }, {passive:true});
+      let motionAsked = false;
+      function askMotion(){
+        if (motionAsked) return; motionAsked = true;
+        try { if (window.DeviceMotionEvent && typeof DeviceMotionEvent.requestPermission === 'function') DeviceMotionEvent.requestPermission().catch(()=>{}); } catch(_){}
+        try { if (window.DeviceOrientationEvent && typeof DeviceOrientationEvent.requestPermission === 'function') DeviceOrientationEvent.requestPermission().catch(()=>{}); } catch(_){}
+      }
+      addEventListener('pointerdown', askMotion, {passive:true, once:false});
       stage.addEventListener('pointermove',ev=>{
         const r=rect();
         pointer.x=(ev.clientX-r.left)/r.scale; pointer.y=(ev.clientY-r.top)/r.scale; pointer.active=true;
@@ -4572,7 +4593,8 @@ function closeMobileMenu(){
       stage.addEventListener('pointerleave',()=>{pointer.active=false;}, {passive:true});
       addEventListener('deviceorientation',e=>{
         if(e.gamma==null) return;
-        gx=clamp(e.gamma*10,-260,260);
+        const mob=innerWidth<720;
+        gx=clamp(e.gamma*(mob?22:10),mob?-700:-260,mob?700:260);
       }, {passive:true});
       function bounds(b, W, H){
         const desktop=innerWidth>1400, mobile=innerWidth<720;
@@ -4581,7 +4603,9 @@ function closeMobileMenu(){
         return {minX:pad, minY:pad, maxX:Math.max(pad, W-b.w-pad), maxY:Math.max(pad, H-b.h-pad+bottomBleed)};
       }
       function step(dt, W, H){
+        const G = innerWidth<720 ? G_MOB : G_DESK;
         for(const b of bodies){
+          b.px=b.x; b.py=b.y; b.pa=b.ang;
           if(b.drag){
             // фигурка тянется за пальцем через скорость — поэтому толкает остальных и летит, когда отпускаешь
             b.vx=clamp((b.tx-b.x)/dt*0.45,-MAXV,MAXV);
@@ -4598,7 +4622,7 @@ function closeMobileMenu(){
           }
           b.x+=b.vx*dt; b.y+=b.vy*dt; b.ang+=b.w_*dt;
         }
-        for(let it=0; it<3; it++){
+        for(let it=0; it<2; it++){
           for(let i=0;i<bodies.length;i++){
             const A=bodies[i];
             for(let j=i+1;j<bodies.length;j++){
@@ -4648,12 +4672,16 @@ function closeMobileMenu(){
         acc+=Math.min(0.05,(now-lastFrame)/1000); lastFrame=now;
         const r=rect(), W=Math.max(1,r.width), H=Math.max(1,r.height);
         let n=0;
-        while(acc>=STEP && n<12){ step(STEP,W,H); acc-=STEP; n++; }
-        if(n>=12) acc=0;
+        while(acc>=STEP && n<24){ step(STEP,W,H); acc-=STEP; n++; }
+        if(n>=24) acc=0;
+        const al = Math.min(1, acc/STEP);
         for(const b of bodies){
           const L=bounds(b,W,H);
           b.x=clamp(b.x,L.minX,L.maxX); b.y=clamp(b.y,L.minY,L.maxY);
-          b.el.style.transform=`translate3d(${b.x.toFixed(2)}px,${b.y.toFixed(2)}px,0) rotate(${(b.ang*57.2958).toFixed(2)}deg) scaleX(${b.flip})`;
+          // плавно: рисуем между прошлым и текущим шагом
+          const px=b.px==null?b.x:b.px, py=b.py==null?b.y:b.py, pa=b.pa==null?b.ang:b.pa;
+          const x=px+(b.x-px)*al, y=py+(b.y-py)*al, an=pa+(b.ang-pa)*al;
+          b.el.style.transform=`translate3d(${x.toFixed(2)}px,${y.toFixed(2)}px,0) rotate(${(an*57.2958).toFixed(2)}deg) scaleX(${b.flip})`;
         }
         requestAnimationFrame(physics);
       }
