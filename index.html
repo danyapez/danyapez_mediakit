@@ -4528,11 +4528,11 @@ function closeMobileMenu(){
             el:img,
             x:8+Math.random()*Math.max(20,r.width-size-16),
             y:8+Math.random()*Math.max(40,r.height-size-16),
-            vx:(Math.random()-.5)*(innerWidth<720?2.2:1.1),
-            vy:(Math.random()-.5)*(innerWidth<720?2.0:.8),
-            w:size,h:size,rad:size*.43,mass:Math.max(.65,size/48),
+            vx:(Math.random()-.5)*120,
+            vy:(Math.random()-.5)*60,
+            w:size,h:size,rad:size*.43,mass:Math.max(.65,size/48),m:(size*.43)*(size*.43)/1600,ii:2/(((size*.43)*(size*.43)/1600)*(size*.43)*(size*.43)),tx:0,ty:0,w_:0,
             drag:false,dx:0,dy:0,lastX:0,lastY:0,lastT:0,
-            rot:(Math.random()-.5)*22,vr:(Math.random()-.5)*.22,
+            ang:(Math.random()-.5)*0.38,rot:0,vr:0,
             flip:Math.random()>.5?-1:1
           };
           bodies.push(b);
@@ -4543,7 +4543,7 @@ function closeMobileMenu(){
             const rr=rect();
             b.dx=(ev.clientX-rr.left)/rr.scale-b.x; b.dy=(ev.clientY-rr.top)/rr.scale-b.y;
             b.lastX=ev.clientX; b.lastY=ev.clientY; b.lastT=performance.now();
-            b.vx=0; b.vy=0; b.vr=0;
+            b.vx=0; b.vy=0; b.vr=0; b.w_=0; b.tx=b.x; b.ty=b.y;
             ev.preventDefault();
           }, {passive:false});
           img.addEventListener('pointerup',ev=>endDrag(ev,b), {passive:true});
@@ -4556,88 +4556,104 @@ function closeMobileMenu(){
         b.el.classList.remove('dragging');
         try{b.el.releasePointerCapture(ev.pointerId)}catch(_){}
       }
+      // ---- физика: фиксированный шаг, небольшая гравитация, упругие столкновения с трением и вращением ----
+      const G = 520;              // небольшая гравитация, px/s²
+      const REST = 0.3;           // упругость отскока
+      const FRIC = 0.4;           // трение между фигурками и о стенки
+      const AIR = 0.9994;         // сопротивление воздуха за шаг
+      const STEP = 1/120;         // шаг симуляции, не зависит от частоты экрана
+      const MAXV = 2600;
+      let gx = 0, lastFrame = 0, acc = 0;
       stage.addEventListener('pointermove',ev=>{
         const r=rect();
         pointer.x=(ev.clientX-r.left)/r.scale; pointer.y=(ev.clientY-r.top)/r.scale; pointer.active=true;
-        for(const b of bodies){
-          if(!b.drag) continue;
-          const now=performance.now();
-          const dt=Math.max(16,now-b.lastT);
-          const nx=pointer.x-b.dx, ny=pointer.y-b.dy;
-          b.vx=((ev.clientX-b.lastX)/r.scale)/dt*14;
-          b.vy=((ev.clientY-b.lastY)/r.scale)/dt*14;
-          b.vr=clamp(b.vx*.025,-.65,.65);
-          b.x=nx; b.y=ny; b.lastX=ev.clientX; b.lastY=ev.clientY; b.lastT=now;
-        }
+        for(const b of bodies){ if(b.drag){ b.tx=pointer.x-b.dx; b.ty=pointer.y-b.dy; } }
       }, {passive:true});
       stage.addEventListener('pointerleave',()=>{pointer.active=false;}, {passive:true});
       addEventListener('deviceorientation',e=>{
         if(e.gamma==null) return;
-        motionX=clamp(e.gamma*.0025,-.045,.045);
+        gx=clamp(e.gamma*10,-260,260);
       }, {passive:true});
-      function physics(){
-        const r=rect();
-        const stageW=Math.max(1,r.width), stageH=Math.max(1,r.height), freeFloat=innerWidth<720;
-        for(let i=0;i<bodies.length;i++){
-          const a=bodies[i];
-          for(let j=i+1;j<bodies.length;j++){
-            const b=bodies[j];
-            const ax=a.x+a.w/2, ay=a.y+a.h/2, bx=b.x+b.w/2, by=b.y+b.h/2;
-            let dx=bx-ax, dy=by-ay;
-            let dist=Math.hypot(dx,dy)||.001;
-            const min=a.rad+b.rad;
-            if(dist<min){
-              const nx=dx/dist, ny=dy/dist;
-              const overlap=(min-dist)*.52;
-              if(!a.drag){a.x-=nx*overlap; a.y-=ny*overlap;}
-              if(!b.drag){b.x+=nx*overlap; b.y+=ny*overlap;}
-              const rvx=b.vx-a.vx, rvy=b.vy-a.vy;
-              const rel=rvx*nx+rvy*ny;
-              if(rel<0){
-                const imp=-rel*.32;
-                if(!a.drag){a.vx-=nx*imp; a.vy-=ny*imp; a.vr-=ny*.08;}
-                if(!b.drag){b.vx+=nx*imp; b.vy+=ny*imp; b.vr+=ny*.08;}
-              }
+      function bounds(b, W, H){
+        const desktop=innerWidth>1400, mobile=innerWidth<720;
+        const pad=mobile ? 2 : (desktop ? 0 : Math.max(8, Math.min(28, b.w*.12)));
+        const bottomBleed=desktop ? Math.min(28, b.h*.20) : 0;
+        return {minX:pad, minY:pad, maxX:Math.max(pad, W-b.w-pad), maxY:Math.max(pad, H-b.h-pad+bottomBleed)};
+      }
+      function step(dt, W, H){
+        for(const b of bodies){
+          if(b.drag){
+            // фигурка тянется за пальцем через скорость — поэтому толкает остальных и летит, когда отпускаешь
+            b.vx=clamp((b.tx-b.x)/dt*0.45,-MAXV,MAXV);
+            b.vy=clamp((b.ty-b.y)/dt*0.45,-MAXV,MAXV);
+            b.w_*=0.9;
+          } else {
+            b.vy+=G*dt; b.vx+=gx*dt;
+            if(pointer.active && !pointer.down){
+              const cx=b.x+b.w/2, cy=b.y+b.h/2, dx=cx-pointer.x, dy=cy-pointer.y;
+              const dist=Math.hypot(dx,dy)||1, lim=b.rad+6;
+              if(dist<lim){ const f=(1-dist/lim)*900*dt; b.vx+=dx/dist*f; b.vy+=dy/dist*f; }
             }
+            b.vx*=AIR; b.vy*=AIR; b.w_*=0.998;
+          }
+          b.x+=b.vx*dt; b.y+=b.vy*dt; b.ang+=b.w_*dt;
+        }
+        for(let it=0; it<3; it++){
+          for(let i=0;i<bodies.length;i++){
+            const A=bodies[i];
+            for(let j=i+1;j<bodies.length;j++){
+              const B=bodies[j];
+              let dx=(B.x+B.w/2)-(A.x+A.w/2), dy=(B.y+B.h/2)-(A.y+A.h/2);
+              const dist=Math.hypot(dx,dy)||.001, min=A.rad+B.rad;
+              if(dist>=min) continue;
+              const nx=dx/dist, ny=dy/dist;
+              const ima=A.drag?0:1/A.m, imb=B.drag?0:1/B.m, sum=ima+imb;
+              if(!sum) continue;
+              const pen=(min-dist);
+              A.x-=nx*pen*ima/sum; A.y-=ny*pen*ima/sum;
+              B.x+=nx*pen*imb/sum; B.y+=ny*pen*imb/sum;
+              // скорости в точке контакта с учётом вращения
+              const rax=nx*A.rad, ray=ny*A.rad, rbx=-nx*B.rad, rby=-ny*B.rad;
+              const vax=A.vx-A.w_*ray, vay=A.vy+A.w_*rax, vbx=B.vx-B.w_*rby, vby=B.vy+B.w_*rbx;
+              const rvx=vbx-vax, rvy=vby-vay, vn=rvx*nx+rvy*ny;
+              if(vn>0) continue;
+              const iia=A.drag?0:A.ii, iib=B.drag?0:B.ii;
+              const jn=-(1+REST)*vn/sum;
+              const tx=-ny, ty=nx, vt=rvx*tx+rvy*ty;
+              const rat=rax*ty-ray*tx, rbt=rbx*ty-rby*tx;
+              let jt=-vt/(sum+rat*rat*iia+rbt*rbt*iib);
+              jt=clamp(jt,-FRIC*jn,FRIC*jn);
+              const Jx=nx*jn+tx*jt, Jy=ny*jn+ty*jt;
+              A.vx-=Jx*ima; A.vy-=Jy*ima; A.w_-=(rax*Jy-ray*Jx)*iia;
+              B.vx+=Jx*imb; B.vy+=Jy*imb; B.w_+=(rbx*Jy-rby*Jx)*iib;
+            }
+          }
+          for(const b of bodies){
+            if(b.drag) continue;
+            const L=bounds(b,W,H);
+            if(b.y>L.maxY){ b.y=L.maxY; if(b.vy>0) b.vy=-b.vy*REST; if(Math.abs(b.vy)<25) b.vy=0;
+              // качение по полу: трение подстраивает вращение под скорость
+              b.w_+=(b.vx/b.rad-b.w_)*0.12; b.vx*=0.992;
+              // утяжелённый низ: лёжа на полу, фигурка плавно встаёт ровно
+              b.w_-=Math.sin(b.ang)*4.5*dt*60*0.05; b.w_*=0.985; }
+            if(b.y<L.minY){ b.y=L.minY; if(b.vy<0) b.vy=-b.vy*REST; b.w_+=(-b.vx/b.rad-b.w_)*0.2; }
+            if(b.x<L.minX){ b.x=L.minX; if(b.vx<0) b.vx=-b.vx*REST; b.w_+=(-b.vy/b.rad-b.w_)*0.2; }
+            if(b.x>L.maxX){ b.x=L.maxX; if(b.vx>0) b.vx=-b.vx*REST; b.w_+=(b.vy/b.rad-b.w_)*0.2; }
           }
         }
+      }
+      function physics(now){
+        now = now || performance.now();
+        if(!lastFrame) lastFrame=now;
+        acc+=Math.min(0.05,(now-lastFrame)/1000); lastFrame=now;
+        const r=rect(), W=Math.max(1,r.width), H=Math.max(1,r.height);
+        let n=0;
+        while(acc>=STEP && n<12){ step(STEP,W,H); acc-=STEP; n++; }
+        if(n>=12) acc=0;
         for(const b of bodies){
-          if(!b.drag){
-            if(!freeFloat){ b.vy+=0.034; }
-            b.vx+=freeFloat?0:motionX;
-            if(freeFloat && Math.hypot(b.vx,b.vy)<0.32){ b.vx+=(Math.random()-.5)*0.18; b.vy+=(Math.random()-.5)*0.18; }
-            if(pointer.active && !pointer.down){
-              const cx=b.x+b.w/2, cy=b.y+b.h/2;
-              const dx=cx-pointer.x, dy=cy-pointer.y;
-              const dist=Math.hypot(dx,dy)||1;
-              const limit=b.rad+4;
-              if(dist<limit){
-                const force=(1-dist/limit)*.62;
-                b.vx+=(dx/dist)*force;
-                b.vy+=(dy/dist)*force;
-                b.vr+=(dx/dist)*.08;
-              }
-            }
-            b.x+=b.vx; b.y+=b.vy; b.rot+=b.vr;
-            b.vx*=freeFloat?.996:.988; b.vy*=freeFloat?.996:.991; b.vr*=freeFloat?.965:.935;
-            b.vr=clamp(b.vr,-.52,.52);
-            const desktop=innerWidth>1400;
-            const pad=freeFloat ? 2 : (desktop ? 0 : Math.max(8, Math.min(28, b.w*.12)));
-            const minX=pad, minY=pad;
-            const maxX=Math.max(minX, stageW-b.w-pad);
-            const bottomBleed=desktop ? Math.min(28, b.h*.20) : 0;
-            const maxY=Math.max(minY, stageH-b.h-pad+bottomBleed);
-            if(b.x<minX){b.x=minX; b.vx=Math.abs(b.vx)*(freeFloat?.92:.54); b.vr*=freeFloat?.82:.45;}
-            if(b.x>maxX){b.x=maxX; b.vx=-Math.abs(b.vx)*(freeFloat?.92:.54); b.vr*=freeFloat?.82:.45;}
-            if(b.y<minY){b.y=minY; b.vy=Math.abs(b.vy)*(freeFloat?.92:.48); b.vr*=freeFloat?.82:.5;}
-            if(b.y>maxY){b.y=maxY; b.vy=-Math.abs(b.vy)*(freeFloat?.92:.30); b.vx*=freeFloat?.98:.91; b.vr*=freeFloat?.88:.58;}
-          }
-          const desktop2=innerWidth>1400;
-          const pad2=freeFloat ? 2 : (desktop2 ? 0 : Math.max(8, Math.min(28, b.w*.12)));
-          const bottomBleed2=desktop2 ? Math.min(28, b.h*.20) : 0;
-          b.x=clamp(b.x,pad2,Math.max(pad2,stageW-b.w-pad2));
-          b.y=clamp(b.y,pad2,Math.max(pad2,stageH-b.h-pad2+bottomBleed2));
-          b.el.style.transform=`translate3d(${b.x.toFixed(2)}px,${b.y.toFixed(2)}px,0) rotate(${b.rot.toFixed(2)}deg) scaleX(${b.flip})`;
+          const L=bounds(b,W,H);
+          b.x=clamp(b.x,L.minX,L.maxX); b.y=clamp(b.y,L.minY,L.maxY);
+          b.el.style.transform=`translate3d(${b.x.toFixed(2)}px,${b.y.toFixed(2)}px,0) rotate(${(b.ang*57.2958).toFixed(2)}deg) scaleX(${b.flip})`;
         }
         requestAnimationFrame(physics);
       }
