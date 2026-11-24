@@ -1,14 +1,14 @@
 {
-  "updatedAt": "2026-07-08",
+  "updatedAt": "2026-11-24",
   "stats": {
     "tiktok": {
-      "followers": 9500,
-      "views": 800000,
-      "likesEngagement": 21900
+      "followers": 9514,
+      "views": 761700,
+      "likesEngagement": 22600
     },
     "instagram": {
-      "followers": 450,
-      "viewsReach": 87000,
+      "followers": 436,
+      "viewsReach": 54150,
       "interactions": 4400
     },
     "youtube": {
@@ -17,8 +17,12 @@
       "topShorts": 7500
     },
     "audience": {
-      "maleAudience": 87,
-      "coreAge": "18–35"
+      "maleAudience": 81,
+      "coreAge": "18–34",
+      "engagement": "3,2%"
+    },
+    "all": {
+      "viewsPerDay": "3K+"
     }
   },
   "i18n": {
@@ -36,16 +40,16 @@
       "heroLead": "Создаю атмосферные видео про ретро-гейминг, старые консоли и ПК.",
       "statsTitle": "Цифры",
       "totalFollowers": "суммарно подписчиков",
-      "totalContentViews": "общие просмотры контента",
+      "totalContentViews": "просмотров в день",
       "yearViews": "платформы",
       "audienceTitle": "Аудитория",
-      "annualReach": "годовой охват",
+      "annualReach": "просмотров Instagram в день",
       "maleAudience": "мужская аудитория",
       "coreAge": "основной возраст",
       "followers": "подписчики",
-      "views": "просмотры",
-      "likesEngagement": "лайки / вовлечения",
-      "viewsReach": "просмотры / охваты",
+      "views": "просмотры за год",
+      "likesEngagement": "лайки за год",
+      "viewsReach": "просмотры за 90 дней",
       "interactions": "взаимодействия",
       "channelViews": "просмотры канала",
       "topShorts": "лучшие Shorts",
@@ -82,7 +86,8 @@
       "soundOn": "Включить звук",
       "soundOff": "Выключить звук",
       "loading": "Отправляем заявку",
-      "formError": "Не получилось отправить. Попробуйте ещё раз или напишите в соцсети."
+      "formError": "Не получилось отправить. Попробуйте ещё раз или напишите в соцсети.",
+      "engagement": "вовлечённость аудитории"
     },
     "en": {
       "htmlLang": "en",
@@ -98,16 +103,16 @@
       "heroLead": "I create atmospheric videos about retro gaming, old consoles and PCs.",
       "statsTitle": "Stats",
       "totalFollowers": "total followers",
-      "totalContentViews": "total content views",
+      "totalContentViews": "views per day",
       "yearViews": "platforms",
       "audienceTitle": "Audience",
-      "annualReach": "annual reach",
+      "annualReach": "Instagram views per day",
       "maleAudience": "male audience",
       "coreAge": "core age",
       "followers": "followers",
-      "views": "views",
-      "likesEngagement": "likes / engagement",
-      "viewsReach": "views / reach",
+      "views": "views, last year",
+      "likesEngagement": "likes, last year",
+      "viewsReach": "views, 90 days",
       "interactions": "interactions",
       "channelViews": "channel views",
       "topShorts": "top Shorts",
@@ -144,7 +149,8 @@
       "soundOn": "Turn sound on",
       "soundOff": "Turn sound off",
       "loading": "Sending request",
-      "formError": "Could not send the request. Try again or message me on social media."
+      "formError": "Could not send the request. Try again or message me on social media.",
+      "engagement": "audience engagement"
     }
   },
   "socials": {
