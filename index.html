@@ -3528,6 +3528,31 @@
     }
     #stats .summary-item:nth-child(3),
     #audience .audience-big .summary-item:nth-child(3){justify-self:start !important;}
+    /* телефон: показатели идут друг под другом, по порядку сверху вниз */
+    @media (max-width:720px){
+      #stats .summary,
+      #audience .audience-big,
+      .summary,
+      .audience-big{
+        grid-template-columns:1fr !important;
+        gap:26px !important;
+        width:100% !important;
+      }
+      #stats .summary-item .big-num,
+      #audience .audience-big .big-num{
+        font-size:clamp(44px,13vw,60px) !important;
+        white-space:nowrap !important;
+        line-height:1 !important;
+      }
+      #stats .summary .label,
+      #audience .audience-big span,
+      #audience .audience-big .label{
+        font-size:15px !important;
+        line-height:1.35 !important;
+      }
+      #stats .summary-item:nth-child(3),
+      #audience .audience-big .summary-item:nth-child(3){padding-left:0 !important;}
+    }
 </style>
 </head>
 <body class="is-loading">
