@@ -3422,16 +3422,6 @@
     }
 
 
-    /* extra spacing before the third summary metric */
-    @media (min-width:721px){
-      #stats .summary{
-        grid-template-columns:minmax(0,1fr) minmax(0,1fr) minmax(0,.72fr) !important;
-        column-gap:clamp(48px,7vw,140px) !important;
-      }
-      #stats .summary-item:nth-child(3){
-        padding-left:clamp(18px,2.4vw,42px) !important;
-      }
-    }
 
 </style>
   <script>window.__DANYAPEZ_VERSION__ = "20261001-vpn-resilient";</script>
@@ -3526,6 +3516,18 @@
     .brand-mark{display:none !important}
     .topbar .wrap > .brand{margin-left:0 !important}
     @media (max-width:1180px){ .topbar .wrap{grid-template-columns:1fr auto auto !important} }
+    /* === выравнивание колонок статистики: обе строки на одной сетке === */
+    #stats .summary,
+    #audience .audience-big,
+    .summary,
+    .audience-big{
+      grid-template-columns:repeat(3,minmax(0,1fr)) !important;
+      gap:clamp(42px,6vw,128px) !important;
+      width:100% !important;
+      justify-items:start !important;
+    }
+    #stats .summary-item:nth-child(3),
+    #audience .audience-big .summary-item:nth-child(3){justify-self:start !important;}
 </style>
 </head>
 <body class="is-loading">
@@ -3630,7 +3632,7 @@
         <div class="summary">
           <div class="summary-item"><div class="big-num count-up" data-live-stat="totals.followers" data-count="10390" data-format="short-plus">0</div><div class="label" data-i18n="totalFollowers">суммарно подписчиков</div></div>
           <div class="summary-item"><div class="big-num" data-live-stat="all.viewsPerDay" data-format="text">3K+</div><div class="label" data-i18n="totalContentViews">просмотров в день</div></div>
-          <div class="summary-item"><div class="big-num count-up" data-count="4" data-format="number">0</div><div class="label">платформы</div></div>
+          <div class="summary-item"><div class="big-num" data-live-stat="audience.engagement" data-format="text">1M+</div><div class="label" data-i18n="engagement">просмотров в год</div></div>
         </div>
         <div class="cards platform-cards">
           <article class="card platform">
@@ -3645,7 +3647,7 @@
             <h3>Instagram</h3>
             <div class="platform-main">
               <div class="platform-row"><span class="platform-label" data-i18n="followers">подписчики</span><b class="platform-value count-up" data-live-stat="instagram.followers" data-count="436" data-format="number">0</b></div>
-              <div class="platform-row"><span class="platform-label" data-i18n="viewsReach">просмотры за 90 дней</span><b class="platform-value count-up" data-live-stat="instagram.viewsReach" data-count="54150" data-format="short">0</b></div>
+              <div class="platform-row"><span class="platform-label" data-i18n="viewsReach">просмотры за 90 дней</span><b class="platform-value count-up" data-live-stat="instagram.viewsReach" data-count="52960" data-format="short">0</b></div>
               <div class="platform-row"><span class="platform-label" data-i18n="interactions">взаимодействия</span><b class="platform-value count-up" data-live-stat="instagram.interactions" data-count="4400" data-format="short-1">0</b></div>
             </div>
           </article>
@@ -3653,7 +3655,7 @@
             <h3>YouTube</h3>
             <div class="platform-main">
               <div class="platform-row"><span class="platform-label" data-i18n="followers">подписчики</span><b class="platform-value count-up" data-live-stat="youtube.followers" data-count="440" data-format="number">0</b></div>
-              <div class="platform-row"><span class="platform-label" data-i18n="channelViews">просмотры канала</span><b class="platform-value count-up" data-live-stat="youtube.channelViews" data-count="250000" data-format="short">0</b></div>
+              <div class="platform-row"><span class="platform-label" data-i18n="channelViews">просмотры за год</span><b class="platform-value count-up" data-live-stat="youtube.channelViews" data-count="70000" data-format="short">0</b></div>
               <div class="platform-row"><span class="platform-label" data-i18n="topShorts">лучшие Shorts</span><b class="platform-value count-up" data-live-stat="youtube.topShorts" data-count="7500" data-format="short-1-plus">0</b></div>
             </div>
           </article>
@@ -3668,7 +3670,7 @@
           <div class="audience-big">
             <div class="summary-item"><div class="big-num count-up" data-live-stat="audience.maleAudience" data-count="81" data-format="percent">0</div><span data-i18n="maleAudience">мужская аудитория</span></div>
             <div class="summary-item"><div class="big-num" data-live-stat="audience.coreAge" data-format="text">18–34</div><span data-i18n="coreAge">основной возраст</span></div>
-            <div class="summary-item"><div class="big-num" data-live-stat="audience.engagement" data-format="text">3,2%</div><span data-i18n="engagement">вовлечённость аудитории</span></div>
+            <div class="summary-item"><div class="big-num count-up" data-count="4" data-format="number">0</div><div class="label">платформы</div></div>
           </div>
         </div>
       </div>
@@ -3887,8 +3889,8 @@ function closeMobileMenu(){
         supportTitle:'Спасибо за поддержку!', supportText:'Благодаря вам выходит\nбольше нового контента', supportButton:'Поддержать',
         heroLead:'Создаю атмосферные видео про ретро-гейминг, старые консоли и ПК.',
         statsTitle:'Цифры', totalFollowers:'суммарно подписчиков', totalContentViews:'просмотров в день', yearViews:'просмотры за год',
-        audienceTitle:'Аудитория', annualReach:'просмотров Instagram в день', maleAudience:'мужская аудитория', coreAge:'основной возраст', engagement:'вовлечённость аудитории',
-        followers:'подписчики', views:'просмотры за год', likesEngagement:'лайки за год', viewsReach:'просмотры за 90 дней', interactions:'взаимодействия', channelViews:'просмотры канала', topShorts:'лучшие Shorts',
+        audienceTitle:'Аудитория', annualReach:'просмотров Instagram в день', maleAudience:'мужская аудитория', coreAge:'основной возраст', engagement:'просмотров в год',
+        followers:'подписчики', views:'просмотры за год', likesEngagement:'лайки за год', viewsReach:'просмотры за 90 дней', interactions:'взаимодействия', channelViews:'просмотры за год', topShorts:'лучшие Shorts',
         formatsTitle:'Форматы', nativeTitle:'Нативная интеграция', nativeText:'Встрою продукт в ролик так, чтобы он смотрелся частью видео, а не отдельной рекламой.',
         unboxTitle:'Распаковка', unboxText:'Сниму распаковку или первое впечатление: игры, техника, мерч и гик-вещи.',
         eventTitle:'Съёмка события', eventText:'Сниму магазин, стенд, запуск, бэкстейдж или атмосферный репортаж на гик-тему.',
@@ -3909,8 +3911,8 @@ function closeMobileMenu(){
         supportTitle:'Thank you for your support!', supportText:'You help me create\nmore new content', supportButton:'Support',
         heroLead:'I create atmospheric videos about retro gaming, old consoles and PCs.',
         statsTitle:'Stats', totalFollowers:'total followers', totalContentViews:'views per day', yearViews:'views per year',
-        audienceTitle:'Audience', annualReach:'Instagram views per day', maleAudience:'male audience', coreAge:'core age', engagement:'audience engagement',
-        followers:'followers', views:'views, last year', likesEngagement:'likes, last year', viewsReach:'views, 90 days', interactions:'interactions', channelViews:'channel views', topShorts:'top Shorts',
+        audienceTitle:'Audience', annualReach:'Instagram views per day', maleAudience:'male audience', coreAge:'core age', engagement:'views per year',
+        followers:'followers', views:'views, last year', likesEngagement:'likes, last year', viewsReach:'views, 90 days', interactions:'interactions', channelViews:'views, last year', topShorts:'top Shorts',
         formatsTitle:'Formats', nativeTitle:'Native integration', nativeText:'I place the product inside the video so it feels like part of the video, not a separate ad.',
         unboxTitle:'Unboxing', unboxText:'I can film an unboxing or first impression: games, tech, merch and geek-culture items.',
         eventTitle:'Event shoot', eventText:'I can film a store, booth, launch, backstage or an atmospheric geek-themed recap.',
@@ -4068,12 +4070,12 @@ function closeMobileMenu(){
       },
       instagram: {
         followers: 436,
-        viewsReach: 54150,
+        viewsReach: 52960,
         interactions: 4400
       },
       youtube: {
         followers: 440,
-        channelViews: 250000,
+        channelViews: 70000,
         topShorts: 7500
       },
       audience: {
