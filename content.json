@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-24",
+  "updatedAt": "2026-11-25",
   "stats": {
     "tiktok": {
       "followers": 9514,
@@ -8,18 +8,18 @@
     },
     "instagram": {
       "followers": 436,
-      "viewsReach": 54150,
+      "viewsReach": 52960,
       "interactions": 4400
     },
     "youtube": {
       "followers": 440,
-      "channelViews": 250000,
+      "channelViews": 70000,
       "topShorts": 7500
     },
     "audience": {
       "maleAudience": 81,
       "coreAge": "18–34",
-      "engagement": "3,2%"
+      "engagement": "1M+"
     },
     "all": {
       "viewsPerDay": "3K+"
@@ -51,7 +51,7 @@
       "likesEngagement": "лайки за год",
       "viewsReach": "просмотры за 90 дней",
       "interactions": "взаимодействия",
-      "channelViews": "просмотры канала",
+      "channelViews": "просмотры за год",
       "topShorts": "лучшие Shorts",
       "formatsTitle": "Форматы",
       "nativeTitle": "Нативная интеграция",
@@ -87,7 +87,7 @@
       "soundOff": "Выключить звук",
       "loading": "Отправляем заявку",
       "formError": "Не получилось отправить. Попробуйте ещё раз или напишите в соцсети.",
-      "engagement": "вовлечённость аудитории"
+      "engagement": "просмотров в год"
     },
     "en": {
       "htmlLang": "en",
@@ -114,7 +114,7 @@
       "likesEngagement": "likes, last year",
       "viewsReach": "views, 90 days",
       "interactions": "interactions",
-      "channelViews": "channel views",
+      "channelViews": "views, last year",
       "topShorts": "top Shorts",
       "formatsTitle": "Formats",
       "nativeTitle": "Native integration",
@@ -150,7 +150,7 @@
       "soundOff": "Turn sound off",
       "loading": "Sending request",
       "formError": "Could not send the request. Try again or message me on social media.",
-      "engagement": "audience engagement"
+      "engagement": "views per year"
     }
   },
   "socials": {
