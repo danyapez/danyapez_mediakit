@@ -3535,8 +3535,13 @@
       .summary,
       .audience-big{
         grid-template-columns:1fr !important;
-        gap:26px !important;
+        gap:44px !important;
         width:100% !important;
+      }
+      #stats .summary-item,
+      #audience .audience-big .summary-item{
+        display:grid !important;
+        gap:12px !important;
       }
       #stats .summary-item .big-num,
       #audience .audience-big .big-num{
@@ -3549,9 +3554,22 @@
       #audience .audience-big .label{
         font-size:15px !important;
         line-height:1.35 !important;
+        margin-top:4px !important;
       }
       #stats .summary-item:nth-child(3),
       #audience .audience-big .summary-item:nth-child(3){padding-left:0 !important;}
+      /* телефон: ровные отступы между разделами */
+      #stats,
+      #audience,
+      #formats,
+      #base{
+        padding-top:30px !important;
+        padding-bottom:30px !important;
+      }
+      #support{
+        padding-top:46px !important;
+        padding-bottom:46px !important;
+      }
     }
 </style>
 </head>
